@@ -4,7 +4,7 @@
 
 <img src="neotext/assets/neotext_logo_256.png" alt="NeoText Logo" width="128" height="128" />
 
-### High-Performance Native Windows Markdown & Document Workspace
+### Simple and Lightweight Text Viewer/Editor for Windows
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![Platform: Windows 10 | 11](https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011%20(x64)-0078D6.svg)](https://microsoft.com)
@@ -84,7 +84,7 @@ NeoText is a lightweight, native Windows document viewer and editor designed wit
 ### Option 1: Microsoft Store (Recommended)
 NeoText is distributed via the Microsoft Store for verified MSIX sandboxing, automatic background updates, and seamless Windows shell integration:
 
-<p align="left">
+<p align="center">
   <a href="https://apps.microsoft.com/detail/9PG680TWN0LC">
     <img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Get it from Microsoft Store" width="160" />
   </a>
