@@ -12,6 +12,13 @@
 [![Zero CDN: 100% Offline](https://img.shields.io/badge/Offline%20First-100%25%20Zero%20CDN-success.svg)](#key-features)
 [![Build: Zero-Config](https://img.shields.io/badge/Build-Zero--Config%20(csc.exe)-brightgreen.svg)](#zero-config-build--compilation)
 [![Support: Buy Me a Coffee](https://img.shields.io/badge/Support-Buy%20Me%20a%20Coffee-FFDD00?logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/atukay)
+[![Microsoft Store](https://img.shields.io/badge/Microsoft%20Store-NeoText-0078D4?logo=microsoft-store&logoColor=white)](https://apps.microsoft.com/detail/9PG680TWN0LC)
+
+<p align="center">
+  <a href="https://apps.microsoft.com/detail/9PG680TWN0LC">
+    <img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Get it from Microsoft Store" width="180" />
+  </a>
+</p>
 
 [Showcase](#interface-showcase) • [Features](#key-features) • [Build & Compilation](#zero-config-build--compilation) • [Shell Integration](#running--shell-integration) • [Support](#support--sponsoring) • [License](#license--copyright)
 
@@ -73,11 +80,24 @@ NeoText is a lightweight, native Windows document viewer and editor designed wit
 
 ---
 
-## Zero-Config Build & Compilation
+## Installation & Getting Started
 
-NeoText is distributed without pre-compiled binaries to maintain a clean, verifiable source tree. Any modern Windows installation with .NET Framework 4.5 or later (pre-installed on Windows 10 and 11) can build the complete project using the native Microsoft C# Compiler (`csc.exe`).
+### Option 1: Microsoft Store (Recommended)
+NeoText is distributed via the Microsoft Store for verified MSIX sandboxing, automatic background updates, and seamless Windows shell integration:
 
-### Building from Source
+<p align="left">
+  <a href="https://apps.microsoft.com/detail/9PG680TWN0LC">
+    <img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Get it from Microsoft Store" width="160" />
+  </a>
+</p>
+
+* Direct Store protocol link: [`ms-windows-store://pdp/?productid=9PG680TWN0LC`](ms-windows-store://pdp/?productid=9PG680TWN0LC)
+
+---
+
+### Option 2: Building from Source (Zero-Config)
+
+NeoText is also distributed as a pure, dependency-free open source codebase. Any modern Windows installation with .NET Framework 4.5 or later (pre-installed on Windows 10 and 11) can build the complete project using the native Microsoft C# Compiler (`csc.exe`).
 
 Execute the build script from Command Prompt or PowerShell:
 
