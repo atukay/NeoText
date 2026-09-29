@@ -12,7 +12,6 @@
 [![Zero CDN: 100% Offline](https://img.shields.io/badge/Offline%20First-100%25%20Zero%20CDN-success.svg)](#key-features)
 [![Build: Zero-Config](https://img.shields.io/badge/Build-Zero--Config%20(csc.exe)-brightgreen.svg)](#zero-config-build--compilation)
 [![Support: Buy Me a Coffee](https://img.shields.io/badge/Support-Buy%20Me%20a%20Coffee-FFDD00?logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/atukay)
-[![Microsoft Store](https://img.shields.io/badge/Microsoft%20Store-NeoText-0078D4?logo=microsoft-store&logoColor=white)](https://apps.microsoft.com/detail/9PG680TWN0LC)
 
 <p align="center">
   <a href="https://apps.microsoft.com/detail/9PG680TWN0LC">
