@@ -10,16 +10,23 @@
 [![Platform: Windows 10 | 11](https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011%20(x64)-0078D6.svg)](https://microsoft.com)
 [![Architecture: Native Host + WebView2](https://img.shields.io/badge/Architecture-WinForms%20%2B%20WebView2-informational.svg)](#about-the-project)
 [![Zero CDN: 100% Offline](https://img.shields.io/badge/Offline%20First-100%25%20Zero%20CDN-success.svg)](#key-features)
-[![Build: Zero-Config](https://img.shields.io/badge/Build-Zero--Config%20(csc.exe)-brightgreen.svg)](#zero-config-build--compilation)
-[![Support: Buy Me a Coffee](https://img.shields.io/badge/Support-Buy%20Me%20a%20Coffee-FFDD00?logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/atukay)
+[![Build: Zero-Config](https://img.shields.io/badge/Build-Zero--Config%20(csc.exe)-brightgreen.svg)](#installation--getting-started)
+
+<br/>
+
+### Support the Developer
 
 <p align="center">
   <a href="https://apps.microsoft.com/detail/9PG680TWN0LC">
-    <img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Get it from Microsoft Store" width="180" />
+    <img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Download from the Microsoft Store" height="48" />
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://buymeacoffee.com/atukay">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="48" />
   </a>
 </p>
 
-[Showcase](#interface-showcase) • [Features](#key-features) • [Build & Compilation](#zero-config-build--compilation) • [Shell Integration](#running--shell-integration) • [Support](#support--sponsoring) • [License](#license--copyright)
+[Showcase](#interface-showcase) • [Features](#key-features) • [Installation & Build](#installation--getting-started) • [Shell Integration](#running--shell-integration) • [License](#license--copyright)
 
 </div>
 
@@ -131,18 +138,6 @@ To associate `.md` files and add "Open with NeoText" to the Windows Explorer rig
 ```powershell
 .\neotext\ConfigureShell.exe
 ```
-
----
-
-## Support & Sponsoring
-
-NeoText is free, open-source software built with an independent engineering discipline. If NeoText streamlines your daily note-taking, markdown rendering, or documentation workflow, you can support its ongoing maintenance and development:
-
-<div align="center">
-
-[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Donate-yellow?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/atukay)
-
-</div>
 
 ---
 
