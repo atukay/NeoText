@@ -12,18 +12,10 @@
 [![Zero CDN: 100% Offline](https://img.shields.io/badge/Offline%20First-100%25%20Zero%20CDN-success.svg)](#key-features)
 [![Build: Zero-Config](https://img.shields.io/badge/Build-Zero--Config%20(csc.exe)-brightgreen.svg)](#installation--getting-started)
 
-<br/>
-
 ### Support the Developer
 
 <p align="center">
-  <a href="https://apps.microsoft.com/detail/9PG680TWN0LC">
-    <img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Download from the Microsoft Store" height="48" />
-  </a>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://buymeacoffee.com/atukay">
-    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="48" />
-  </a>
+  <a href="https://apps.microsoft.com/detail/9PG680TWN0LC"><img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Download from the Microsoft Store" height="48" /></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://buymeacoffee.com/atukay"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="48" /></a>
 </p>
 
 [Showcase](#interface-showcase) • [Features](#key-features) • [Installation & Build](#installation--getting-started) • [Shell Integration](#running--shell-integration) • [License](#license--copyright)
