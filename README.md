@@ -15,7 +15,7 @@
 ### Support the Developer
 
 <p align="center">
-  <a href="https://apps.microsoft.com/detail/9PG680TWN0LC"><img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Download from the Microsoft Store" height="48" /></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://buymeacoffee.com/atukay"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="48" /></a>
+  <a href="https://apps.microsoft.com/detail/9PG680TWN0LC"><img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Download from the Microsoft Store" height="48" /></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://buymeacoffee.com/atukay"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-black.png" alt="Buy Me A Coffee" height="48" /></a>
 </p>
 
 [Showcase](#interface-showcase) • [Features](#key-features) • [Installation & Build](#installation--getting-started) • [Shell Integration](#running--shell-integration) • [License](#license--copyright)
