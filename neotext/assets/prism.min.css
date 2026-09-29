@@ -1,0 +1,148 @@
+/* NeoMD Custom Prism Theme - Dual Light & Dark Mode */
+code[class*="language-"],
+pre[class*="language-"] {
+  font-family: ui-monospace, SFMono-Regular, "Cascadia Code", "Fira Code", "JetBrains Mono", Menlo, Consolas, monospace !important;
+  font-size: 13.5px !important;
+  line-height: 1.6 !important;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  tab-size: 4;
+  hyphens: none;
+  background: none !important;
+  text-shadow: none !important;
+}
+
+/* Light Theme Syntax */
+[data-theme="light"] code[class*="language-"],
+[data-theme="light"] pre[class*="language-"] {
+  color: #24292f;
+}
+
+[data-theme="light"] .token.comment,
+[data-theme="light"] .token.prolog,
+[data-theme="light"] .token.doctype,
+[data-theme="light"] .token.cdata {
+  color: #6e7781;
+  font-style: italic;
+  background: none !important;
+}
+
+[data-theme="light"] .token.punctuation {
+  color: #24292f;
+  background: none !important;
+}
+
+[data-theme="light"] .token.keyword,
+[data-theme="light"] .token.atrule,
+[data-theme="light"] .token.selector,
+[data-theme="light"] .token.important {
+  color: #cf222e;
+  font-weight: 600;
+  background: none !important;
+}
+
+[data-theme="light"] .token.string,
+[data-theme="light"] .token.char,
+[data-theme="light"] .token.attr-value {
+  color: #0a3069;
+  background: none !important;
+}
+
+[data-theme="light"] .token.function,
+[data-theme="light"] .token.class-name {
+  color: #8250df;
+  background: none !important;
+}
+
+[data-theme="light"] .token.number,
+[data-theme="light"] .token.boolean,
+[data-theme="light"] .token.constant {
+  color: #0550ae;
+  background: none !important;
+}
+
+[data-theme="light"] .token.operator,
+[data-theme="light"] .token.entity,
+[data-theme="light"] .token.url {
+  color: #cf222e;
+  background: none !important;
+  text-shadow: none !important;
+}
+
+[data-theme="light"] .token.variable,
+[data-theme="light"] .token.property {
+  color: #953800;
+  background: none !important;
+}
+
+/* Dark Theme Syntax (GitHub Dark / Catppuccin inspired) */
+[data-theme="dark"] code[class*="language-"],
+[data-theme="dark"] pre[class*="language-"] {
+  color: #c9d1d9;
+}
+
+[data-theme="dark"] .token.comment,
+[data-theme="dark"] .token.prolog,
+[data-theme="dark"] .token.doctype,
+[data-theme="dark"] .token.cdata {
+  color: #8b949e;
+  font-style: italic;
+  background: none !important;
+}
+
+[data-theme="dark"] .token.punctuation {
+  color: #c9d1d9;
+  background: none !important;
+}
+
+[data-theme="dark"] .token.keyword,
+[data-theme="dark"] .token.atrule,
+[data-theme="dark"] .token.selector,
+[data-theme="dark"] .token.important {
+  color: #ff7b72;
+  font-weight: 600;
+  background: none !important;
+}
+
+[data-theme="dark"] .token.string,
+[data-theme="dark"] .token.char,
+[data-theme="dark"] .token.attr-value {
+  color: #a5d6ff;
+  background: none !important;
+}
+
+[data-theme="dark"] .token.function,
+[data-theme="dark"] .token.class-name {
+  color: #d2a8ff;
+  background: none !important;
+}
+
+[data-theme="dark"] .token.number,
+[data-theme="dark"] .token.boolean,
+[data-theme="dark"] .token.constant {
+  color: #79c0ff;
+  background: none !important;
+}
+
+[data-theme="dark"] .token.operator,
+[data-theme="dark"] .token.entity,
+[data-theme="dark"] .token.url {
+  color: #ff7b72;
+  background: none !important;
+  text-shadow: none !important;
+}
+
+[data-theme="dark"] .token.variable,
+[data-theme="dark"] .token.property {
+  color: #ffa657;
+  background: none !important;
+}
+
+/* Ensure tokens never inherit backgrounds or text-shadows */
+.token {
+  background: none !important;
+  text-shadow: none !important;
+}

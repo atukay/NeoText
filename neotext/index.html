@@ -1,0 +1,584 @@
+<!--
+  SPDX-License-Identifier: GPL-3.0-or-later
+
+  NeoText - Lightweight, Native Windows Markdown & Document Workspace
+  Copyright (C) 2026 The NeoText Project (atukay) <https://github.com/atukay/NeoText>
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program. If not, see <https://www.gnu.org/licenses/>.
+-->
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    html[data-theme="dark"], html[data-theme="dark"] body, html[data-theme="dark"] #app-container {
+      background-color: #1c1c1c;
+      color-scheme: dark;
+    }
+    html[data-theme="oled"], html[data-theme="oled"] body, html[data-theme="oled"] #app-container {
+      background-color: #000000;
+      color-scheme: dark;
+    }
+    html[data-theme="light"], html[data-theme="light"] body, html[data-theme="light"] #app-container {
+      background-color: #ffffff;
+      color-scheme: light;
+    }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" id="meta-theme-color" content="#1c1c1c">
+  <title>NeoText</title>
+  
+  <!-- Application Icons -->
+  <link rel="icon" type="image/x-icon" href="assets/app.ico">
+  <link rel="icon" type="image/png" sizes="256x256" href="assets/icon-256.png">
+
+  <!-- Immediate Theme Initializer: Always default to dark mode unless explicitly set -->
+  <script>
+    (function() {
+      var t = localStorage.getItem('neotext_theme') || localStorage.getItem('neomd_theme');
+      if (!t || (t !== 'dark' && t !== 'light' && t !== 'oled')) {
+        t = 'dark';
+        localStorage.setItem('neotext_theme', 'dark');
+      }
+      document.documentElement.setAttribute('data-theme', t);
+      document.documentElement.style.colorScheme = (t === 'light') ? 'light' : 'dark';
+    })();
+  </script>
+
+  <!-- Immediate Data & Title Initializer for Instant Window Setup -->
+  <script>
+    (function() {
+      var hash = (window.location.hash || '').replace(/^#/, '');
+      var params = new URLSearchParams(hash || window.location.search);
+      var s = params.get('s');
+      var scriptSrc = (s && /^[a-zA-Z0-9_\-]+$/.test(s)) ? ('sessions/' + s + '.js') : 'active_data.js';
+      document.write('<script src="' + scriptSrc + '"><\/script>');
+    })();
+  </script>
+  <script>
+    try {
+      var d = window.__NEOTEXT_DATA__ || window.__NEOMD_DATA__;
+      if (d && d.fileName) {
+        document.title = d.fileName + ' - NeoText';
+      }
+    } catch(e) {}
+  </script>
+  
+  <!-- Embedded Offline Styles -->
+  <link rel="stylesheet" href="assets/katex.min.css">
+  <link rel="stylesheet" href="assets/prism.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="app-container">
+  <!-- Collapsible Left Sidebar -->
+  <aside id="sidebar">
+    <div class="sidebar-tabs">
+      <button id="tab-btn-files" class="tab-btn" data-tab="files" data-i18n-title="tab_files_title" title="Workspace / Files">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <span class="tab-label" data-i18n="tab_files">Files</span>
+      </button>
+
+      <button id="tab-btn-outline" class="tab-btn active" data-tab="outline" data-i18n-title="tab_outline_title" title="Outline / Headings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="8" y1="6" x2="21" y2="6"></line>
+          <line x1="8" y1="12" x2="21" y2="12"></line>
+          <line x1="8" y1="18" x2="21" y2="18"></line>
+          <line x1="3" y1="6" x2="3.01" y2="6"></line>
+          <line x1="3" y1="12" x2="3.01" y2="12"></line>
+          <line x1="3" y1="18" x2="3.01" y2="18"></line>
+        </svg>
+        <span class="tab-label" data-i18n="tab_outline">Outline</span>
+      </button>
+
+      <button id="tab-btn-search" class="tab-btn" data-tab="search" data-i18n-title="tab_search_title" title="In-document Search (Ctrl+F)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span class="tab-label" data-i18n="tab_search">Search</span>
+      </button>
+    </div>
+
+    <div class="sidebar-content">
+      <!-- Files / Workspace Tree Pane -->
+      <div id="tab-pane-files" class="sidebar-pane">
+        <div class="workspace-header">
+          <div class="workspace-title-box">
+            <span id="workspace-folder-name" class="workspace-folder-name" data-i18n="no_folder_open">No Folder Open</span>
+          </div>
+          <div class="workspace-header-actions">
+            <button id="workspace-open-file-btn" class="workspace-mini-btn" data-i18n-title="open_file_btn" title="Open File">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              <span data-i18n="open_file_btn">Open File</span>
+            </button>
+            <button id="open-workspace-btn" class="workspace-mini-btn" data-i18n-title="open_folder_btn" title="Select Folder">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span data-i18n="open_folder_btn">Select Folder</span>
+            </button>
+          </div>
+        </div>
+        <div id="folder-tree-root" class="folder-tree-root">
+          <div class="folder-tree-empty" data-i18n="folder_tree_empty_hint">Select a folder to view your notes and files as a tree.</div>
+        </div>
+      </div>
+
+      <!-- Outline / Table of Contents Pane (with Integrated Stacked Stats) -->
+      <div id="tab-pane-outline" class="sidebar-pane active">
+        <div id="outline-stats-card" class="outline-stats-card">
+          <div class="outline-stats-header">
+            <span class="outline-stats-title" data-i18n="stat_title">Document Statistics</span>
+          </div>
+          <div class="outline-stats-stacked">
+            <div class="outline-stat-row">
+              <span class="outline-stat-row-lbl" data-i18n="stat_words">Words</span>
+              <span class="outline-stat-row-val" id="stat-words">0</span>
+            </div>
+            <div class="outline-stat-row">
+              <span class="outline-stat-row-lbl" data-i18n="stat_chars">Characters</span>
+              <span class="outline-stat-row-val" id="stat-chars">0</span>
+            </div>
+            <div class="outline-stat-row">
+              <span class="outline-stat-row-lbl" data-i18n="stat_reading_time">Reading Time</span>
+              <span class="outline-stat-row-val" id="stat-time">0 min</span>
+            </div>
+            <div class="outline-stat-row">
+              <span class="outline-stat-row-lbl" data-i18n="stat_path">File Location</span>
+              <span class="outline-stat-row-val stat-path-text" id="stat-path" data-i18n-title="stat_path" title="File Location">-</span>
+            </div>
+          </div>
+        </div>
+        <ul id="toc-list" class="toc-list"></ul>
+      </div>
+
+      <!-- Search Pane with Clickable Snippet List -->
+      <div id="tab-pane-search" class="sidebar-pane">
+        <div class="search-box">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="search-input" class="search-input" placeholder="Search text (Ctrl+F)..." autocomplete="off" spellcheck="false">
+        </div>
+
+        <div class="search-results-info">
+          <span id="search-count" style="font-weight: 500;">0 matches</span>
+          <div style="display: flex; gap: 4px;">
+            <button id="search-prev-btn" class="header-btn" style="padding: 2px 6px;" data-i18n-title="search_prev_title" title="Previous (Shift+Enter)">▲</button>
+            <button id="search-next-btn" class="header-btn" style="padding: 2px 6px;" data-i18n-title="search_next_title" title="Next (Enter)">▼</button>
+          </div>
+        </div>
+
+        <!-- Search Results List Container -->
+        <ul id="search-results-list" class="search-results-list"></ul>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main View Area -->
+  <main id="main-view">
+    <!-- Navbar Header (Locked to Top) -->
+    <header id="top-header">
+      <div class="header-left">
+        <button id="sidebar-toggle-btn" class="sidebar-toggle-btn" data-i18n-title="sidebar_toggle_title" title="Toggle Sidebar (Alt+Shift+B)">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="9" y1="3" x2="9" y2="21"></line>
+          </svg>
+        </button>
+
+        <!-- Dropdown button for all open tabs (visible only when tabs overflow) -->
+        <button id="tabs-dropdown-btn" class="tabs-dropdown-btn" style="display: none;" data-i18n-title="tabs_dropdown_title" title="All Open Tabs">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Center Area: Single Document Title (1 tab) OR Header Tabs Bar (>= 2 tabs) -->
+      <div id="header-center-area" class="header-center-area">
+        <!-- Single Tab Mode: Document Title Badge -->
+        <div id="single-doc-title" class="single-doc-title">
+          <span id="document-title">NeoText</span>
+        </div>
+
+        <!-- Multi Tab Mode: Embedded Tabs Bar with Left/Right Scroll Arrows -->
+        <div id="header-tabs-container" class="header-tabs-container hidden">
+          <button id="tabs-scroll-left-btn" class="tabs-scroll-btn" data-i18n-title="tabs_scroll_left_title" title="Scroll Left">
+            <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <div id="tabs-list" class="tabs-list"></div>
+          <button id="tabs-scroll-right-btn" class="tabs-scroll-btn" data-i18n-title="tabs_scroll_right_title" title="Scroll Right">
+            <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <!-- New Document (+) Button: Positioned immediately left of width selector -->
+        <button id="tab-new-btn" class="tab-new-btn" data-i18n-title="new_tab_title" title="Yeni Belge (Ctrl+N, Ctrl+T)">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+        </button>
+
+        <!-- Reading Width Presets -->
+        <div class="width-selector" data-i18n-title="width_mode" title="Reading Width / Layout">
+          <button class="width-pill" data-width="600px" data-i18n="width_narrow">Compact</button>
+          <button class="width-pill active" data-width="760px" data-i18n="width_readable" data-i18n-title="width_readable_title" title="Optimal line length for reading (~65–75 characters)">Readable</button>
+          <button class="width-pill" data-width="980px" data-i18n="width_comfortable">Relaxed</button>
+          <button class="width-pill" data-width="1240px" data-i18n="width_wide">Wide</button>
+          <button class="width-pill" data-width="100%" data-i18n="width_full">Full</button>
+        </div>
+
+        <!-- Theme Toggle -->
+        <button id="theme-toggle-btn" class="header-btn" data-i18n-title="theme_toggle_title" title="Toggle Dark / Light Theme (Alt+Shift+T)">
+          <svg id="theme-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+
+        <!-- Edit Document Toggle (Pencil Icon) -->
+        <button id="edit-btn" class="header-btn" data-i18n-title="edit_mode" title="Edit Mode (Ctrl+E)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 20h9"></path>
+            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+          </svg>
+        </button>
+
+        <!-- Menu Dropdown -->
+        <div class="dropdown">
+          <button id="menu-btn" class="header-btn" data-i18n-title="menu_more_title" title="More Options">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+
+          <div id="dropdown-menu" class="dropdown-menu">
+            <!-- Language Selector (Custom Rounded Theme-Matched Dropdown) -->
+            <div class="dropdown-setting-row lang-row" style="position: relative;">
+              <span style="font-size: 12px; color: var(--text-secondary);" data-i18n="menu_lang">Language</span>
+              <div id="lang-custom-dropdown" class="custom-dropdown">
+                <button id="lang-dropdown-trigger" class="custom-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false">
+                  <span id="lang-current-label">English</span>
+                  <svg class="custom-dropdown-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                </button>
+                <div id="lang-dropdown-menu" class="custom-dropdown-menu" role="menu">
+                  <div class="custom-dropdown-item" data-lang="az">Azərbaycan dili (Azerbaijani)</div>
+                  <div class="custom-dropdown-item" data-lang="id">Bahasa Indonesia (Indonesian)</div>
+                  <div class="custom-dropdown-item" data-lang="de">Deutsch (German)</div>
+                  <div class="custom-dropdown-item active" data-lang="en">English (English)</div>
+                  <div class="custom-dropdown-item" data-lang="es">Español (Spanish)</div>
+                  <div class="custom-dropdown-item" data-lang="fr">Français (French)</div>
+                  <div class="custom-dropdown-item" data-lang="it">Italiano (Italian)</div>
+                  <div class="custom-dropdown-item" data-lang="nl">Nederlands (Dutch)</div>
+                  <div class="custom-dropdown-item" data-lang="pl">Polski (Polish)</div>
+                  <div class="custom-dropdown-item" data-lang="pt">Português (Portuguese)</div>
+                  <div class="custom-dropdown-item" data-lang="vi">Tiếng Việt (Vietnamese)</div>
+                  <div class="custom-dropdown-item" data-lang="tr">Türkçe (Turkish)</div>
+                  <div class="custom-dropdown-item" data-lang="ru">Русский (Russian)</div>
+                  <div class="custom-dropdown-item" data-lang="uk">Українська (Ukrainian)</div>
+                  <div class="custom-dropdown-item" data-lang="ar">العربية (Arabic)</div>
+                  <div class="custom-dropdown-item" data-lang="hi">हिन्दी (Hindi)</div>
+                  <div class="custom-dropdown-item" data-lang="ja">日本語 (Japanese)</div>
+                  <div class="custom-dropdown-item" data-lang="zh">简体中文 (Simplified Chinese)</div>
+                  <div class="custom-dropdown-item" data-lang="zh-TW">繁體中文 (Traditional Chinese)</div>
+                  <div class="custom-dropdown-item" data-lang="ko">한국어 (Korean)</div>
+                </div>
+              </div>
+              <select id="lang-select" class="lang-dropdown" style="display: none;" aria-hidden="true">
+                <option value="az">Azərbaycan dili (Azerbaijani)</option>
+                <option value="id">Bahasa Indonesia (Indonesian)</option>
+                <option value="de">Deutsch (German)</option>
+                <option value="en" selected>English (English)</option>
+                <option value="es">Español (Spanish)</option>
+                <option value="fr">Français (French)</option>
+                <option value="it">Italiano (Italian)</option>
+                <option value="nl">Nederlands (Dutch)</option>
+                <option value="pl">Polski (Polish)</option>
+                <option value="pt">Português (Portuguese)</option>
+                <option value="vi">Tiếng Việt (Vietnamese)</option>
+                <option value="tr">Türkçe (Turkish)</option>
+                <option value="ru">Русский (Russian)</option>
+                <option value="uk">Українська (Ukrainian)</option>
+                <option value="ar">العربية (Arabic)</option>
+                <option value="hi">हिन्दी (Hindi)</option>
+                <option value="ja">日本語 (Japanese)</option>
+                <option value="zh">简体中文 (Simplified Chinese)</option>
+                <option value="zh-TW">繁體中文 (Traditional Chinese)</option>
+                <option value="ko">한국어 (Korean)</option>
+              </select>
+            </div>
+            <div class="dropdown-divider"></div>
+            <!-- UI Scale Selector -->
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 6px 10px;">
+              <span style="font-size: 12px; color: var(--text-secondary);" data-i18n="menu_scale">UI Scale</span>
+              <div style="display: flex; gap: 4px; align-items: center;">
+                <button id="ui-scale-dec-btn" class="header-btn" style="padding: 2px 7px;" data-i18n-title="menu_scale_dec" title="Zoom Out UI">-</button>
+                <span id="ui-scale-display" style="font-size: 12px; font-weight: 600; min-width: 38px; text-align: center;">100%</span>
+                <button id="ui-scale-inc-btn" class="header-btn" style="padding: 2px 7px;" data-i18n-title="menu_scale_inc" title="Zoom In UI">+</button>
+              </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <!-- Font Size Selector -->
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 6px 10px;">
+              <span style="font-size: 12px; color: var(--text-secondary);" data-i18n="menu_font">Text Size</span>
+              <div style="display: flex; gap: 4px; align-items: center;">
+                <button id="font-dec-btn" class="header-btn" style="padding: 2px 7px;" data-i18n-title="menu_font_dec" title="Decrease Text Size">-</button>
+                <span id="font-size-display" style="font-size: 12px; font-weight: 600; min-width: 32px; text-align: center;">16px</span>
+                <button id="font-inc-btn" class="header-btn" style="padding: 2px 7px;" data-i18n-title="menu_font_inc" title="Increase Text Size">+</button>
+              </div>
+            </div>
+            <div class="dropdown-divider"></div>
+            <!-- External Open Mode Setting Row -->
+            <div id="menu-external-mode-btn" class="dropdown-setting-row" role="button" tabindex="0" title="External Files: Open as new tab">
+              <span style="font-size: 12px; color: var(--text-secondary);" data-i18n="menu_external_mode">External Files</span>
+              <span id="external-mode-badge" class="dropdown-mode-badge" data-i18n="external_mode_badge_tab">New Tab</span>
+            </div>
+            <div class="dropdown-divider"></div>
+            <button id="save-as-btn" class="dropdown-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dropdown-item-icon">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                <polyline points="7 3 7 8 15 8"></polyline>
+              </svg>
+              <span data-i18n="menu_save_as">Save As...</span>
+            </button>
+            <button id="convert-doc-btn" class="dropdown-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dropdown-item-icon">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+              </svg>
+              <span id="convert-doc-label" data-i18n="menu_convert_txt">Convert to TXT...</span>
+            </button>
+            <button id="copy-html-btn" class="dropdown-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dropdown-item-icon">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span data-i18n="menu_copy_html">Copy as Formatted HTML</span>
+            </button>
+            <button id="print-btn" class="dropdown-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dropdown-item-icon">
+                <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                <rect x="6" y="14" width="12" height="8"></rect>
+              </svg>
+              <span data-i18n="menu_print">Print / Export to PDF...</span>
+            </button>
+            <div class="dropdown-divider"></div>
+            <!-- App Info Section -->
+            <div class="dropdown-app-info">
+              <img src="assets/icon-64.png" alt="NeoText Logo" class="app-info-logo">
+              <div class="app-info-right-col">
+                <div class="app-info-name-row">
+                  <span class="app-info-name">NeoText</span>
+                  <span class="app-info-dot">•</span>
+                  <span class="app-info-year">2026</span>
+                </div>
+                <div class="app-info-desc" data-i18n="app_desc">Markdown & Text Viewer</div>
+                <div class="app-info-actions">
+                  <a id="github-link-btn" href="https://github.com/atukay/NeoText" target="_blank" class="github-btn" data-i18n-title="github_link_title" title="GitHub Repository">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                    </svg>
+                    <span>GitHub</span>
+                  </a>
+                  <a id="coffee-link-btn" href="https://buymeacoffee.com/atukay" target="_blank" class="github-btn coffee-btn" data-i18n-title="coffee_link_title" title="Buy Me a Coffee">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                      <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+                      <line x1="6" y1="1" x2="6" y2="4"></line>
+                      <line x1="10" y1="1" x2="10" y2="4"></line>
+                      <line x1="14" y1="1" x2="14" y2="4"></line>
+                    </svg>
+                    <span>Coffee</span>
+                  </a>
+                  <a id="rate-link-btn" href="https://apps.microsoft.com/detail/9PG680TWN0LC" target="_blank" class="github-btn rate-btn" data-i18n-title="rate_link_title" title="Rate on Microsoft Store" style="display: none;">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                    <span data-i18n="app_rate">Rate</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Tabs Dropdown Popover (For searching/selecting tabs when overflowed) -->
+    <div id="tabs-dropdown-popover" class="tabs-dropdown-popover" style="display: none;">
+      <div class="tabs-popover-header">
+        <input type="text" id="tabs-search-input" class="tabs-search-input" placeholder="Search open tabs..." autocomplete="off" spellcheck="false">
+      </div>
+      <div id="tabs-popover-list" class="tabs-popover-list"></div>
+    </div>
+
+    <!-- Floating Edit Formatting Toolbar (Visible during Edit Mode, left of save button) -->
+    <div id="edit-toolbar" class="edit-toolbar">
+      <button id="tool-h1" class="edit-tool-btn" data-tool="h1" data-i18n-title="tool_h1" title="Heading 1 (Ctrl+1)">H1</button>
+      <button id="tool-h2" class="edit-tool-btn" data-tool="h2" data-i18n-title="tool_h2" title="Heading 2 (Ctrl+2)">H2</button>
+      <button id="tool-bold" class="edit-tool-btn" data-tool="bold" data-i18n-title="tool_bold" title="Bold (Ctrl+B)"><strong>B</strong></button>
+      <button id="tool-italic" class="edit-tool-btn" data-tool="italic" data-i18n-title="tool_italic" title="Italic (Ctrl+I)"><em>I</em></button>
+      <div class="edit-toolbar-divider"></div>
+      <div class="tool-dropdown-wrapper">
+        <button id="tool-ul" class="edit-tool-btn" data-tool="ul" data-i18n-title="tool_ul" title="Bulleted List">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <line x1="8" y1="6" x2="21" y2="6"></line>
+            <line x1="8" y1="12" x2="21" y2="12"></line>
+            <line x1="8" y1="18" x2="21" y2="18"></line>
+            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+          </svg>
+        </button>
+        <div id="tool-ul-popover" class="tool-popover-menu">
+          <button type="button" class="tool-popover-item" data-bullet-type="dash">
+            <span class="bullet-symbol">—</span>
+            <span class="bullet-label" data-i18n="tool_bullet_dash">Çizgi</span>
+          </button>
+          <button type="button" class="tool-popover-item" data-bullet-type="dot">
+            <span class="bullet-symbol">•</span>
+            <span class="bullet-label" data-i18n="tool_bullet_dot">Nokta</span>
+          </button>
+          <button type="button" class="tool-popover-item" data-bullet-type="numbered">
+            <span class="bullet-symbol">1.</span>
+            <span class="bullet-label" data-i18n="tool_bullet_numbered">Numaralı</span>
+          </button>
+        </div>
+      </div>
+      <button id="tool-quote" class="edit-tool-btn" data-tool="quote" data-i18n-title="tool_quote" title="Quote / Indent">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+      </button>
+      <button id="tool-code" class="edit-tool-btn" data-tool="code" data-i18n-title="tool_code" title="Code Block">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+      </button>
+      <div class="edit-toolbar-divider"></div>
+      <button id="tool-raw" class="edit-tool-btn edit-tool-raw" data-tool="raw" data-i18n-title="tool_raw" title="Raw Markdown Editor">RAW</button>
+    </div>
+
+    <!-- Floating Save Button (Visible during Edit Mode) -->
+    <button id="floating-save-btn" class="floating-save-btn" data-i18n-title="save_btn_title" title="Save Document (Ctrl+S)">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+        <polyline points="7 3 7 8 15 8"></polyline>
+      </svg>
+    </button>
+
+    <!-- Save Notification Toast -->
+    <div id="save-toast" class="save-toast">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+      <span id="save-toast-msg" data-i18n="saved_toast">Changes saved successfully!</span>
+    </div>
+
+    <!-- Content Viewport -->
+    <div id="content-viewport">
+      <!-- Empty State View (Visible when all tabs are closed) -->
+      <div id="empty-state-view" class="empty-state-view" style="display: none;">
+        <div class="empty-state-card" id="empty-state-card">
+          <div class="empty-state-icon">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="12" y1="18" x2="12" y2="12"></line>
+              <line x1="9" y1="15" x2="15" y2="15"></line>
+            </svg>
+          </div>
+          <h2 class="empty-state-title" data-i18n="empty_title">Getting Started</h2>
+          <p class="empty-state-desc" data-i18n="empty_desc">Create a new document or open an existing file to start writing with zero distractions.</p>
+          <div class="empty-state-actions">
+            <button id="empty-new-btn" class="empty-action-btn primary">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              <span data-i18n="empty_btn_new">New Document (Ctrl+N)</span>
+            </button>
+            <button id="empty-open-btn" class="empty-action-btn secondary">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span data-i18n="empty_btn_open">Open File...</span>
+            </button>
+          </div>
+          <div class="empty-state-hint" data-i18n="empty_hint">
+            💡 Tip: Drag and drop any .md file directly into this window, or pick from the left workspace tree.
+          </div>
+        </div>
+      </div>
+
+      <textarea id="raw-editor" class="raw-editor" spellcheck="false" placeholder="Markdown source code..."></textarea>
+      <article id="markdown-body"></article>
+    </div>
+  </main>
+</div>
+
+<!-- Embedded Offline Libraries -->
+<script src="assets/marked.min.js"></script>
+<script src="assets/prism.min.js"></script>
+<script src="assets/prism-markdown.min.js"></script>
+<script src="assets/prism-python.min.js"></script>
+<script src="assets/prism-bash.min.js"></script>
+<script src="assets/prism-json.min.js"></script>
+<script src="assets/prism-csharp.min.js"></script>
+<script src="assets/prism-typescript.min.js"></script>
+<script src="assets/prism-sql.min.js"></script>
+<script src="assets/katex.min.js"></script>
+
+<!-- Active Session Data -->
+<script src="active_data.js"></script>
+
+<!-- Main App Logic -->
+<script src="app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+# ==============================================================================
+# NeoText Official .gitignore
+# Purpose: Maintain pure source repository (Zero-Binary Invariant)
+# ==============================================================================
+
+# Compiled Binaries & Executables
+*.exe
+*.dll
+*.so
+*.dylib
+*.pdb
+
+# Build & Compilation Artifacts
+bin/
+obj/
+dist/
+temp_pack/
+scratch/
+neotext/packaging/
+sessions/
+neotext/sessions/
+neotext/active_data.js
+*.cache
+
+# Compressed Recovery & Backup Archives
+*.zip
+*.tar.gz
+*.7z
+*.msix
+*.appx
+*.msixbundle
+*.appxbundle
+*.appxsym
+neotext/recovery_points/
+
+# Edge WebView2 Runtime User Data & Caches
+EBWebView/
+*.crswap
+
+# Temporary & Log Files
+*.tmp
+*.temp
+*.log
+*.bak
+neotext/tests/data/stress_*
+
+# Internal Project Governance & Architecture Protocols (Private Local Workspace Only)
+ARCHITECTURE.md
+CONSTRAINTS.md
+ROADMAP.md
+IDEAS.md
+CHANGELOG.md
+RECOVERY_POINTS.md
+SYSTEM_HISTORY.md
+PUBLISHING_STRATEGY.md
+.agents/
+neotext_protocol.md
+
+# IDE & Editor User Settings
+.vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Operating System Files
+desktop.ini
+Thumbs.db
+.DS_Store

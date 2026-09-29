@@ -1,0 +1,32 @@
+name: NeoText Build & Security Verification
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-test:
+    name: Build & Security Audit (Windows Native)
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Compile NeoText Executables (Zero-Config Pipeline)
+        shell: pwsh
+        run: |
+          .\build.ps1
+
+      - name: Compile Automated Test Suite
+        shell: pwsh
+        run: |
+          $cscPath = "$env:WINDIR\Microsoft.NET\Framework64\v4.0.30319\csc.exe"
+          & $cscPath /nologo /target:exe /out:neotext\tests\AutomatedStressAndSecurityRunner.exe neotext\tests\AutomatedStressAndSecurityRunner.cs
+
+      - name: Execute Security & Stress Audit (7-Point Gate)
+        shell: pwsh
+        run: |
+          & ".\neotext\tests\AutomatedStressAndSecurityRunner.exe"

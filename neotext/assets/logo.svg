@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="neotextBg" x1="15%" y1="12%" x2="85%" y2="88%">
+      <stop offset="0%" stop-color="#8e88ac" />
+      <stop offset="100%" stop-color="#aba7c2" />
+    </linearGradient>
+    <linearGradient id="neotextWhite" gradientUnits="userSpaceOnUse" x1="256" y1="140" x2="256" y2="370">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#f4f3f8" />
+    </linearGradient>
+  </defs>
+
+  <!-- Crisp Outer White Squircle Frame (4px margin, rx=124) -->
+  <rect x="4" y="4" width="504" height="504" rx="124" fill="#ffffff" />
+
+  <!-- Inner Slate-Lavender Squircle -->
+  <rect x="44" y="44" width="424" height="424" rx="96" fill="url(#neotextBg)" />
+
+  <!-- N: Bold Original Proportions (X=118..244, Centerlines Y=168..344, Stroke=28, Top visual=154, Bottom visual=358) -->
+  <g fill="none" stroke="url(#neotextWhite)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 118,344 L 118,168 L 244,344 L 244,168" />
+  </g>
+
+  <!-- E: 3 Burger Lines (X=282..398, Stroke=22, Top line centerline=165 -> Top visual=154 FLUSH WITH N) -->
+  <g stroke="url(#neotextWhite)" stroke-width="22" stroke-linecap="round">
+    <line x1="282" y1="165" x2="398" y2="165" />
+    <line x1="282" y1="200" x2="398" y2="200" />
+    <line x1="282" y1="235" x2="398" y2="235" />
+  </g>
+
+  <!-- O: Squarish Squircle (X=282..398, Y=274..346, Stroke=24, Bottom centerline=346 -> Bottom visual=358 FLUSH WITH N) -->
+  <rect x="282" y="274" width="116" height="72" rx="18" fill="none" stroke="url(#neotextWhite)" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
