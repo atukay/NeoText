@@ -16,7 +16,7 @@
 ### Support the Developer
 
 <p align="center">
-  <a href="https://apps.microsoft.com/detail/9PG680TWN0LC"><img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Download from the Microsoft Store" width="184" height="51" /></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://buymeacoffee.com/atukay"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-black.png" alt="Buy Me A Coffee" width="171" height="48" /></a>
+  <a href="https://apps.microsoft.com/detail/9PG680TWN0LC"><img src="docs/images/badge_store.png" alt="Download from the Microsoft Store" height="48" /></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://buymeacoffee.com/atukay"><img src="docs/images/badge_coffee.png" alt="Buy Me A Coffee" height="48" /></a>
 </p>
 
 [Showcase](#interface-showcase) &nbsp;•&nbsp; [Features](#key-features) &nbsp;•&nbsp; [Installation & Build](#installation--getting-started) &nbsp;•&nbsp; [Shell Integration](#running--shell-integration) &nbsp;•&nbsp; [License](#license--copyright)
@@ -84,9 +84,9 @@ NeoText is a lightweight, native Windows document viewer and editor designed wit
 ### Option 1: Microsoft Store (Recommended)
 NeoText is distributed via the Microsoft Store for verified MSIX sandboxing, automatic background updates, and seamless Windows shell integration:
 
-<p align="center">
+<p align="left">
   <a href="https://apps.microsoft.com/detail/9PG680TWN0LC">
-    <img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Get it from Microsoft Store" width="160" />
+    <img src="docs/images/badge_store.png" alt="Get it from Microsoft Store" height="48" />
   </a>
 </p>
 
