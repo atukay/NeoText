@@ -84,7 +84,7 @@ NeoText is a lightweight, native Windows document viewer and editor designed wit
 ### Option 1: Microsoft Store (Recommended)
 NeoText is distributed via the Microsoft Store for verified MSIX sandboxing, automatic background updates, and seamless Windows shell integration:
 
-<p align="left">
+<p align="center">
   <a href="https://apps.microsoft.com/detail/9PG680TWN0LC">
     <img src="docs/images/badge_store.png" alt="Get it from Microsoft Store" height="48" />
   </a>
