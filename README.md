@@ -9,16 +9,17 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 [![Platform: Windows 10 | 11](https://img.shields.io/badge/Platform-Windows%2010%20%7C%2011%20(x64)-0078D6.svg)](https://microsoft.com)
 [![Architecture: Native Host + WebView2](https://img.shields.io/badge/Architecture-WinForms%20%2B%20WebView2-informational.svg)](#about-the-project)
+<br/>
 [![Zero CDN: 100% Offline](https://img.shields.io/badge/Offline%20First-100%25%20Zero%20CDN-success.svg)](#key-features)
 [![Build: Zero-Config](https://img.shields.io/badge/Build-Zero--Config%20(csc.exe)-brightgreen.svg)](#installation--getting-started)
 
 ### Support the Developer
 
 <p align="center">
-  <a href="https://apps.microsoft.com/detail/9PG680TWN0LC"><img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Download from the Microsoft Store" height="48" /></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://buymeacoffee.com/atukay"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-black.png" alt="Buy Me A Coffee" height="48" /></a>
+  <a href="https://apps.microsoft.com/detail/9PG680TWN0LC"><img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Download from the Microsoft Store" height="52" align="middle" /></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://buymeacoffee.com/atukay"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-black.png" alt="Buy Me A Coffee" height="48" align="middle" /></a>
 </p>
 
-[Showcase](#interface-showcase) • [Features](#key-features) • [Installation & Build](#installation--getting-started) • [Shell Integration](#running--shell-integration) • [License](#license--copyright)
+[Showcase](#interface-showcase) &nbsp;•&nbsp; [Features](#key-features) &nbsp;•&nbsp; [Installation & Build](#installation--getting-started) &nbsp;•&nbsp; [Shell Integration](#running--shell-integration) &nbsp;•&nbsp; [License](#license--copyright)
 
 </div>
 
