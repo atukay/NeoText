@@ -46,7 +46,20 @@
   const savedTheme = paramTheme || getStored('theme');
   const initialTheme = (savedTheme === 'light') ? 'light' : (savedTheme === 'oled' ? 'oled' : 'dark');
 
-  const savedLang = paramLang || getStored('lang') || 'en';
+  function detectSystemLanguage() {
+    try {
+      const raw = (navigator.language || navigator.userLanguage || '').toLowerCase().trim();
+      if (!raw) return 'en';
+      if (raw === 'zh-tw' || raw === 'zh-hk' || raw === 'zh-mo') return 'zh-TW';
+      if (raw.startsWith('zh')) return 'zh';
+      const code = raw.split('-')[0];
+      const supported = ['tr', 'en', 'de', 'es', 'fr', 'it', 'pt', 'nl', 'pl', 'ru', 'uk', 'ar', 'hi', 'ja', 'ko', 'id', 'vi', 'az'];
+      if (supported.indexOf(code) !== -1) return code;
+    } catch(e) {}
+    return 'en';
+  }
+
+  const savedLang = paramLang || getStored('lang') || detectSystemLanguage();
 
   // I18N Translation Dictionary (20 Languages: AZ, ID, DE, EN, ES, FR, IT, NL, PL, PT, VI, TR, RU, UK, AR, HI, JA, ZH, ZH-TW, KO)
   const I18N = {
@@ -148,6 +161,7 @@
       github_link_title: "GitHub Deposu",
       app_rate: "Oyla",
       rate_link_title: "Microsoft Store'da Oyla",
+      app_rated_thanks: "Oyladığınız için teşekkürler!",
       toast_image_inserted: "Görsel eklendi: ",
       toast_image_file: "Görsel dosyası: ",
       toast_image_saved: "Görsel kaydedildi: "
@@ -250,6 +264,7 @@
       github_link_title: "GitHub Repository",
       app_rate: "Rate",
       rate_link_title: "Rate on Microsoft Store",
+      app_rated_thanks: "Thanks for rating!",
       toast_image_inserted: "Image inserted: ",
       toast_image_file: "Image file: ",
       toast_image_saved: "Image saved: "
@@ -352,6 +367,7 @@
       github_link_title: "GitHub-Repository",
       app_rate: "Bewerten",
       rate_link_title: "Im Microsoft Store bewerten",
+      app_rated_thanks: "Danke für Ihre Bewertung!",
       toast_image_inserted: "Bild eingefügt: ",
       toast_image_file: "Bilddatei: ",
       toast_image_saved: "Bild gespeichert: "
@@ -454,6 +470,7 @@
       github_link_title: "Repositorio GitHub",
       app_rate: "Valorar",
       rate_link_title: "Valorar en Microsoft Store",
+      app_rated_thanks: "¡Gracias por valorar!",
       toast_image_inserted: "Imagen insertada: ",
       toast_image_file: "Archivo de imagen: ",
       toast_image_saved: "Imagen guardada: "
@@ -556,6 +573,7 @@
       github_link_title: "Dépôt GitHub",
       app_rate: "Évaluer",
       rate_link_title: "Évaluer sur le Microsoft Store",
+      app_rated_thanks: "Merci pour votre avis !",
       toast_image_inserted: "Image insérée : ",
       toast_image_file: "Fichier image : ",
       toast_image_saved: "Image enregistrée : "
@@ -658,6 +676,7 @@
       github_link_title: "Repository GitHub",
       app_rate: "Valuta",
       rate_link_title: "Valuta su Microsoft Store",
+      app_rated_thanks: "Grazie per la recensione!",
       toast_image_inserted: "Immagine inserita: ",
       toast_image_file: "File immagine: ",
       toast_image_saved: "Immagine salvata: "
@@ -760,6 +779,7 @@
       github_link_title: "Repositório GitHub",
       app_rate: "Avaliar",
       rate_link_title: "Avaliar na Microsoft Store",
+      app_rated_thanks: "Obrigado por avaliar!",
       toast_image_inserted: "Imagem inserida: ",
       toast_image_file: "Arquivo de imagem: ",
       toast_image_saved: "Imagem salva: "
@@ -862,6 +882,7 @@
       github_link_title: "GitHub-opslagplaats",
       app_rate: "Beoordelen",
       rate_link_title: "Beoordelen in Microsoft Store",
+      app_rated_thanks: "Bedankt voor je beoordeling!",
       toast_image_inserted: "Afbeelding ingevoegd: ",
       toast_image_file: "Afbeeldingsbestand: ",
       toast_image_saved: "Afbeelding opgeslagen: "
@@ -964,6 +985,7 @@
       github_link_title: "Repozytorium GitHub",
       app_rate: "Oceń",
       rate_link_title: "Oceń w Microsoft Store",
+      app_rated_thanks: "Dziękujemy za ocenę!",
       toast_image_inserted: "Wstawiono obraz: ",
       toast_image_file: "Plik obrazu: ",
       toast_image_saved: "Zapisano obraz: "
@@ -1066,6 +1088,7 @@
       github_link_title: "Репозиторий GitHub",
       app_rate: "Оценить",
       rate_link_title: "Оценить в Microsoft Store",
+      app_rated_thanks: "Спасибо за оценку!",
       toast_image_inserted: "Изображение вставлено: ",
       toast_image_file: "Файл изображения: ",
       toast_image_saved: "Изображение сохранено: "
@@ -1168,6 +1191,7 @@
       github_link_title: "Репозиторій GitHub",
       app_rate: "Оцінити",
       rate_link_title: "Оцінити в Microsoft Store",
+      app_rated_thanks: "Дякуємо за оцінку!",
       toast_image_inserted: "Зображення вставлено: ",
       toast_image_file: "Файл зображення: ",
       toast_image_saved: "Зображення збережено: "
@@ -1270,6 +1294,7 @@
       github_link_title: "مستودع GitHub",
       app_rate: "تقييم",
       rate_link_title: "تقييم في Microsoft Store",
+      app_rated_thanks: "شكرًا لتقييمك!",
       toast_image_inserted: "تم إدراج الصورة: ",
       toast_image_file: "ملف الصورة: ",
       toast_image_saved: "تم حفظ الصورة: "
@@ -1372,6 +1397,7 @@
       github_link_title: "GitHub रिपॉजिटरी",
       app_rate: "रेट करें",
       rate_link_title: "Microsoft Store में रेट करें",
+      app_rated_thanks: "रेट करने के लिए धन्यवाद!",
       toast_image_inserted: "छवि डाली गई: ",
       toast_image_file: "छवि फ़ाइल: ",
       toast_image_saved: "छवि सहेजी गई: "
@@ -1474,6 +1500,7 @@
       github_link_title: "GitHub リポジトリ",
       app_rate: "評価",
       rate_link_title: "Microsoft Storeで評価",
+      app_rated_thanks: "評価ありがとうございます！",
       toast_image_inserted: "画像を挿入しました: ",
       toast_image_file: "画像ファイル: ",
       toast_image_saved: "画像を保存しました: "
@@ -1576,6 +1603,7 @@
       github_link_title: "GitHub 开源仓库",
       app_rate: "评分",
       rate_link_title: "在 Microsoft Store 评分",
+      app_rated_thanks: "感谢您的评分！",
       toast_image_inserted: "已插入图片: ",
       toast_image_file: "图片文件: ",
       toast_image_saved: "图片已保存: "
@@ -1678,6 +1706,7 @@
       github_link_title: "GitHub 儲存庫",
       app_rate: "評分",
       rate_link_title: "在 Microsoft Store 評分",
+      app_rated_thanks: "感謝您的評分！",
       toast_image_inserted: "已插入圖片: ",
       toast_image_file: "圖片檔案: ",
       toast_image_saved: "圖片已儲存: "
@@ -1780,6 +1809,7 @@
       github_link_title: "GitHub 저장소",
       app_rate: "평가",
       rate_link_title: "Microsoft Store에서 평가",
+      app_rated_thanks: "평가해 주셔서 감사합니다!",
       toast_image_inserted: "이미지 삽입됨: ",
       toast_image_file: "이미지 파일: ",
       toast_image_saved: "이미지 저장됨: "
@@ -1882,6 +1912,7 @@
       github_link_title: "Repositori GitHub",
       app_rate: "Beri Nilai",
       rate_link_title: "Beri nilai di Microsoft Store",
+      app_rated_thanks: "Terima kasih telah menilai!",
       toast_image_inserted: "Gambar disisipkan: ",
       toast_image_file: "Berkas gambar: ",
       toast_image_saved: "Gambar disimpan: "
@@ -1984,6 +2015,7 @@
       github_link_title: "Kho lưu trữ GitHub",
       app_rate: "Đánh giá",
       rate_link_title: "Đánh giá trên Microsoft Store",
+      app_rated_thanks: "Cảm ơn bạn đã đánh giá!",
       toast_image_inserted: "Đã chèn hình ảnh: ",
       toast_image_file: "Tệp hình ảnh: ",
       toast_image_saved: "Đã lưu hình ảnh: "
@@ -2086,6 +2118,7 @@
       github_link_title: "GitHub repozitoriyası",
       app_rate: "Qiymətləndir",
       rate_link_title: "Microsoft Store-da qiymətləndir",
+      app_rated_thanks: "Qiymətləndirdiyiniz üçün təşəkkürlər!",
       toast_image_inserted: "Şəkil əlavə edildi: ",
       toast_image_file: "Şəkil faylı: ",
       toast_image_saved: "Şəkil yadda saxlanıldı: "
@@ -2228,8 +2261,11 @@
     // Channel-based UI adaptation (GitHub vs Store)
     const channel = window.__NEOTEXT_CHANNEL__ || 'github';
     if (channel === 'store') {
-      if (el.coffeeBtn) el.coffeeBtn.style.display = 'none';
-      if (el.rateBtn) el.rateBtn.style.display = 'inline-flex';
+      if (el.coffeeBtn) el.coffeeBtn.style.display = 'inline-flex';
+      if (el.rateBtn) {
+        el.rateBtn.style.display = 'inline-flex';
+        updateRateButtonState();
+      }
     } else {
       if (el.coffeeBtn) el.coffeeBtn.style.display = 'inline-flex';
       if (el.rateBtn) el.rateBtn.style.display = 'none';
@@ -2426,11 +2462,37 @@
 
     updateConvertButtonLabel();
     updateExternalModeUI();
+    updateRateButtonState();
+  }
+
+  function updateRateButtonState() {
+    if (!el.rateBtn) return;
+    const hasRated = localStorage.getItem('neotext_has_rated') === 'true';
+    const rateTextEl = el.rateBtn.querySelector('span');
+    if (!rateTextEl) return;
+    const currentLang = state.lang || 'en';
+    const dict = I18N[currentLang] || I18N['en'] || {};
+    if (hasRated) {
+      el.rateBtn.classList.add('has-rated');
+      rateTextEl.textContent = dict.app_rated_thanks || "Thanks for rating!";
+      el.rateBtn.title = dict.app_rated_thanks || "Thanks for rating!";
+    } else {
+      el.rateBtn.classList.remove('has-rated');
+      rateTextEl.textContent = dict.app_rate || "Rate";
+      el.rateBtn.title = dict.rate_link_title || "Rate on Microsoft Store";
+    }
+  }
+
+  // Check if a document is plain text (.txt, .text, .log, etc.)
+  function isPlainTextDoc(fileName) {
+    if (!fileName) return false;
+    const lower = fileName.toLowerCase();
+    return lower.endsWith('.txt') || lower.endsWith('.text') || lower.endsWith('.log') || lower.endsWith('.ini') || lower.endsWith('.cfg');
   }
 
   function updateConvertButtonLabel() {
     if (!el.convertDocLabel) return;
-    const isTxt = (state.fileName || '').toLowerCase().endsWith('.txt');
+    const isTxt = isPlainTextDoc(state.fileName);
     const dict = I18N[state.lang || 'en'] || I18N.en;
     el.convertDocLabel.textContent = isTxt ? (dict.menu_convert_md || "📄 Convert to MD...") : (dict.menu_convert_txt || "📄 Convert to TXT...");
   }
@@ -2752,7 +2814,7 @@
 
   // Render Markdown / Plain Text to DOM
   function renderMarkdown() {
-    const isTxt = (state.fileName || '').toLowerCase().endsWith('.txt');
+    const isTxt = isPlainTextDoc(state.fileName);
     if (isTxt) {
       el.markdownBody.classList.add('is-txt-document');
       el.markdownBody.textContent = state.rawMarkdown;
@@ -3197,6 +3259,41 @@
   let lastVisualScrollTop = 0;
   let lastVisualScrollRatio = 0;
 
+  // Focus helper ensuring instant visible blinking caret in all themes and document modes
+  function focusEditable(elem, atEnd = false) {
+    if (!elem) return;
+    elem.focus({ preventScroll: true });
+
+    try {
+      const sel = window.getSelection();
+      if (!sel) return;
+
+      const range = document.createRange();
+
+      if (elem.childNodes.length === 0 || !elem.textContent.trim()) {
+        if (elem.childNodes.length === 0) {
+          const textNode = document.createTextNode('');
+          elem.appendChild(textNode);
+          range.setStart(textNode, 0);
+        } else {
+          range.selectNodeContents(elem);
+        }
+        range.collapse(true);
+      } else if (atEnd) {
+        range.selectNodeContents(elem);
+        range.collapse(false);
+      } else {
+        range.selectNodeContents(elem);
+        range.collapse(true);
+      }
+
+      sel.removeAllRanges();
+      sel.addRange(range);
+    } catch (e) {
+      console.warn('focusEditable error:', e);
+    }
+  }
+
   // In-place Easy Edit Mode Toggle
   function toggleEditMode(forceState) {
     const next = (typeof forceState === 'boolean') ? forceState : !state.isEditing;
@@ -3204,24 +3301,26 @@
 
     const savedScrollTop = el.viewport ? el.viewport.scrollTop : 0;
     state.isEditing = next;
-    const isTxt = (state.fileName || '').toLowerCase().endsWith('.txt');
+    const isTxt = isPlainTextDoc(state.fileName);
 
     if (state.isEditing) {
       state.originalRaw = state.rawMarkdown;
       if (el.editBtn) el.editBtn.classList.add('active');
       if (el.floatingSaveBtn) el.floatingSaveBtn.classList.add('visible');
-      if (el.editToolbar) el.editToolbar.classList.add('visible');
 
       if (isTxt) {
+        if (el.editToolbar) el.editToolbar.classList.remove('visible');
         el.markdownBody.contentEditable = "plaintext-only";
       } else {
+        if (el.editToolbar) el.editToolbar.classList.add('visible');
         el.markdownBody.contentEditable = "true";
         el.markdownBody.querySelectorAll('.code-header, .callout-title, .math-block, .math-inline').forEach(elem => {
           elem.setAttribute('contenteditable', 'false');
         });
       }
 
-      el.markdownBody.focus({ preventScroll: true });
+      document.body.classList.add('is-editing');
+      focusEditable(el.markdownBody, false);
       if (el.viewport) {
         el.viewport.scrollTop = savedScrollTop;
         requestAnimationFrame(() => {
@@ -3229,6 +3328,7 @@
         });
       }
     } else {
+      document.body.classList.remove('is-editing');
       if (state.isRawMode) {
         toggleRawMode(false);
       }
@@ -3270,7 +3370,7 @@
       lastVisualScrollRatio = (vp && maxScroll > 0) ? (vp.scrollTop / maxScroll) : 0;
 
       // Sync visual DOM to raw editor textarea
-      const isTxt = (state.fileName || '').toLowerCase().endsWith('.txt');
+      const isTxt = isPlainTextDoc(state.fileName);
       if (isTxt) {
         state.rawMarkdown = el.markdownBody.innerText;
       } else {
@@ -3320,7 +3420,7 @@
       if (el.toolRawBtn) el.toolRawBtn.classList.remove('active');
 
       if (state.isEditing && el.markdownBody) {
-        const isTxt = (state.fileName || '').toLowerCase().endsWith('.txt');
+        const isTxt = isPlainTextDoc(state.fileName);
         if (isTxt) {
           el.markdownBody.contentEditable = "plaintext-only";
         } else {
@@ -4293,9 +4393,8 @@
   }
 
   // Save Document to Disk via C# Host
-  // Save Document to Disk via C# Host
   function saveDocument() {
-    const isTxt = (state.fileName || '').toLowerCase().endsWith('.txt');
+    const isTxt = isPlainTextDoc(state.fileName);
     let contentToSave = '';
 
     if (state.isRawMode && el.rawEditor) {
@@ -4326,7 +4425,7 @@
         if (state.filePath) {
           window.chrome.webview.postMessage('save_tab_file:' + state.filePath + '|' + contentToSave);
         } else {
-          const suggested = state.fileName || 'Yeni Belge.md';
+          const suggested = state.fileName || (isTxt ? 'Yeni Belge.txt' : 'Yeni Belge.md');
           window.chrome.webview.postMessage('save_as:' + suggested + '|' + contentToSave);
           return;
         }
@@ -4361,7 +4460,7 @@
   // Bidirectional MD <-> TXT Conversion Handler
   function handleDocumentConversion() {
     if (el.dropdownMenu) el.dropdownMenu.classList.remove('show');
-    const isTxt = (state.fileName || '').toLowerCase().endsWith('.txt');
+    const isTxt = isPlainTextDoc(state.fileName);
     const dict = I18N[state.lang || 'en'] || I18N.en;
 
     if (!isTxt) {
@@ -4400,7 +4499,7 @@
     saveDocument();
   };
   window.__NEOTEXT_GET_CONTENT__ = window.__NEOMD_GET_CONTENT__ = function() {
-    const isTxt = (state.fileName || '').toLowerCase().endsWith('.txt');
+    const isTxt = isPlainTextDoc(state.fileName);
     if (state.isRawMode && el.rawEditor) return el.rawEditor.value;
     return isTxt ? el.markdownBody.innerText : htmlToMarkdown(el.markdownBody);
   };
@@ -4892,7 +4991,7 @@
     updateFloatingSaveButton();
     renderTabsBar();
     calculateStats(state.rawMarkdown);
-    const isTxt = (state.fileName || '').toLowerCase().endsWith('.txt');
+    const isTxt = isPlainTextDoc(state.fileName);
     if (!isTxt) {
       buildTableOfContents();
       requestAnimationFrame(updateHeadingPositions);
@@ -5774,6 +5873,15 @@
       el.markdownBody.addEventListener('mouseup', updateToolbarActiveStates);
     }
 
+    // Viewport background click in edit mode -> focus document body and place caret
+    if (el.viewport) {
+      el.viewport.addEventListener('click', (e) => {
+        if (state.isEditing && !state.isRawMode && (e.target === el.viewport || e.target === el.markdownBody)) {
+          focusEditable(el.markdownBody, true);
+        }
+      });
+    }
+
     document.addEventListener('selectionchange', updateToolbarActiveStates);
 
     // Raw Editor Textarea Events (Tab key support, auto-resize & dirty state)
@@ -5959,6 +6067,10 @@
     if (el.rateBtn) {
       el.rateBtn.addEventListener('click', (e) => {
         e.preventDefault();
+        try {
+          localStorage.setItem('neotext_has_rated', 'true');
+          updateRateButtonState();
+        } catch (_) {}
         const storeUri = 'ms-windows-store://review/?ProductId=9PG680TWN0LC';
         const webUrl = el.rateBtn.getAttribute('href') || 'https://apps.microsoft.com/detail/9PG680TWN0LC';
         if (window.chrome && window.chrome.webview) {
@@ -5999,7 +6111,7 @@
     if (el.saveAsBtn) {
       el.saveAsBtn.addEventListener('click', () => {
         el.dropdownMenu.classList.remove('show');
-        const isTxt = (state.fileName || '').toLowerCase().endsWith('.txt');
+        const isTxt = isPlainTextDoc(state.fileName);
         const suggested = state.fileName || (isTxt ? 'Belge.txt' : 'Belge.md');
         if (window.chrome && window.chrome.webview) {
           window.chrome.webview.postMessage('save_as:' + suggested + '|' + content);

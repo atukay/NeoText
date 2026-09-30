@@ -19,9 +19,10 @@ Write-Host "==================================================================" 
 Write-Host "         NeoText - Microsoft Store MSIX Package Builder           " -ForegroundColor Cyan
 Write-Host "==================================================================" -ForegroundColor Cyan
 
-# 1. Locate MakeAppx.exe
-Write-Host "[1/4] Locating MakeAppx.exe packaging tool..." -ForegroundColor Yellow
+# 1. Locate MakeAppx.exe and MakePri.exe
+Write-Host "[1/4] Locating packaging tools (MakeAppx & MakePri)..." -ForegroundColor Yellow
 $makeappx = $null
+$makepri = $null
 
 $wingetMakeAppx = Get-ChildItem -Path "$env:LOCALAPPDATA\Microsoft\WinGet" -Filter "MakeAppx.exe" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName
 if ($wingetMakeAppx -and (Test-Path $wingetMakeAppx)) {
@@ -42,7 +43,23 @@ if (-not $makeappx -or -not (Test-Path $makeappx)) {
     Write-Error "MakeAppx.exe could not be found. Please ensure Microsoft.MSIX-Toolkit or Windows SDK is installed."
     exit 1
 }
-Write-Host "      Found: $makeappx" -ForegroundColor Green
+
+# Locate MakePri in the same directory or search
+$candidatePri = Join-Path (Split-Path -Parent $makeappx) "MakePri.exe"
+if (Test-Path $candidatePri) {
+    $makepri = $candidatePri
+} else {
+    $wingetMakePri = Get-ChildItem -Path "$env:LOCALAPPDATA\Microsoft\WinGet" -Filter "MakePri.exe" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName
+    if ($wingetMakePri -and (Test-Path $wingetMakePri)) { $makepri = $wingetMakePri }
+}
+
+if (-not $makepri -or -not (Test-Path $makepri)) {
+    Write-Error "MakePri.exe could not be found. Please ensure Microsoft.MSIX-Toolkit or Windows SDK is installed."
+    exit 1
+}
+
+Write-Host "      Found MakeAppx: $makeappx" -ForegroundColor Green
+Write-Host "      Found MakePri:  $makepri" -ForegroundColor Green
 
 # 2. Verify NeoText Core Binaries
 Write-Host "[2/4] Verifying NeoText core binaries..." -ForegroundColor Yellow
@@ -106,17 +123,25 @@ Copy-Item (Join-Path $neotextDir "runtimes") $staging -Recurse -Force
 $storeSettingsPath = Join-Path $staging "app_settings.json"
 Set-Content -Path $storeSettingsPath -Value '{"openExternalInTabs": false, "distribution_channel": "store"}' -Encoding UTF8
 
-Write-Host "      Payload staged successfully (Channel: Store)." -ForegroundColor Green
+# Index resources and build resources.pri
+Write-Host "      Indexing package resources with MakePri..." -ForegroundColor Yellow
+$priConfig = Join-Path $staging "priconfig.xml"
+$priFile = Join-Path $staging "resources.pri"
+& $makepri createconfig /cf "$priConfig" /dq en-US /o | Out-Null
+& $makepri new /pr "$staging" /cf "$priConfig" /of "$priFile" /o | Out-Null
+Remove-Item $priConfig -Force -ErrorAction SilentlyContinue
+
+Write-Host "      Payload and resources.pri staged successfully (Channel: Store)." -ForegroundColor Green
 
 # 4. Compile MSIX Package
-Write-Host "[4/4] Packing MSIX package with MakeAppx..." -ForegroundColor Yellow
-$msixName = "NeoText_v2.0.8_x64.msix"
+Write-Host "[4/4] Packing MSIX package with MakeAppx (strict validation)..." -ForegroundColor Yellow
+$msixName = "NeoText_v2.0.9_x64.msix"
 $msixPath = Join-Path $distDir $msixName
 if (Test-Path $msixPath) {
     Remove-Item $msixPath -Force
 }
 
-& $makeappx pack /d "$staging" /p "$msixPath" /nv /o
+& $makeappx pack /d "$staging" /p "$msixPath" /o
 
 if ($LASTEXITCODE -ne 0 -or -not (Test-Path $msixPath)) {
     Write-Error "MakeAppx failed to produce MSIX package. Exit code: $LASTEXITCODE"
@@ -126,10 +151,15 @@ if ($LASTEXITCODE -ne 0 -or -not (Test-Path $msixPath)) {
 # Clean staging directory
 Remove-Item $staging -Recurse -Force
 
+# Automatically sync to Desktop for easy drag-and-drop
+$desktopPath = "C:\Users\tuna\Desktop\$msixName"
+Copy-Item $msixPath $desktopPath -Force
+
 Write-Host "==================================================================" -ForegroundColor Green
 Write-Host " [SUCCESS] MICROSOFT STORE MSIX PACKAGE READY!                    " -ForegroundColor Green
 Write-Host " Package: $msixName                                               " -ForegroundColor Green
 Write-Host " Location: $msixPath                                              " -ForegroundColor Green
+Write-Host " Desktop:  $desktopPath                                           " -ForegroundColor Green
 Write-Host " Size: $([math]::Round((Get-Item $msixPath).Length / 1MB, 2)) MB  " -ForegroundColor Green
 Write-Host "==================================================================" -ForegroundColor Green
 Write-Host "Ready for upload to Microsoft Partner Center:                     " -ForegroundColor Cyan

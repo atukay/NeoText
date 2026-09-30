@@ -918,10 +918,18 @@ html[data-theme="light"] .dropdown-mode-badge.window-mode {
 
 .app-info-actions {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  margin-top: 2px;
+  margin-top: 4px;
+  width: 100%;
+}
+
+.app-info-actions > .github-btn:not(.store-subrow) {
+  flex: 1 1 calc(50% - 6px);
+  max-width: 82px;
+  box-sizing: border-box;
 }
 
 /* Content Viewport */
@@ -936,32 +944,52 @@ html[data-theme="light"] .dropdown-mode-badge.window-mode {
   contain: paint;
 }
 
-/* Markdown Reading Body: Silky-smooth animated transition across reading widths */
+/* Markdown & Plain Text Reading/Editing Body */
 #markdown-body {
   max-width: var(--content-max-width);
+  min-height: calc(100vh - 180px);
   margin: 0 auto;
   font-size: var(--content-font-size);
   line-height: 1.7;
   word-wrap: break-word;
   color: var(--text-primary);
-  transition: max-width 0.24s cubic-bezier(0.2, 0, 0, 1);
-}
-
-/* In-place Easy Edit Mode */
-#markdown-body[contenteditable="true"] {
-  outline: none !important;
-  cursor: text;
   caret-color: var(--accent-color);
+  transition: max-width 0.24s cubic-bezier(0.2, 0, 0, 1);
+  box-sizing: border-box;
 }
 
-#markdown-body[contenteditable="true"]:focus {
+/* In-place Easy Edit Mode (Supports both rich Markdown and Plaintext-only TXT) */
+#markdown-body[contenteditable],
+#markdown-body[contenteditable="true"],
+#markdown-body[contenteditable="plaintext-only"],
+#markdown-body.is-txt-document[contenteditable] {
   outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  cursor: text;
+  caret-color: var(--accent-color) !important;
 }
 
-#markdown-body[contenteditable="true"] .code-header,
-#markdown-body[contenteditable="true"] .callout-title,
-#markdown-body[contenteditable="true"] .math-block,
-#markdown-body[contenteditable="true"] .math-inline {
+#markdown-body[contenteditable]:focus,
+#markdown-body[contenteditable="true"]:focus,
+#markdown-body[contenteditable="plaintext-only"]:focus,
+#markdown-body.is-txt-document:focus,
+#markdown-body.is-txt-document:focus-visible,
+#markdown-body:focus,
+#markdown-body:focus-visible {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+body.is-editing #content-viewport {
+  cursor: text;
+}
+
+#markdown-body[contenteditable] .code-header,
+#markdown-body[contenteditable] .callout-title,
+#markdown-body[contenteditable] .math-block,
+#markdown-body[contenteditable] .math-inline {
   user-select: none;
 }
 
@@ -1866,12 +1894,53 @@ mark.search-highlight.current {
   color: #ffb900;
 }
 
+.rate-btn.store-subrow {
+  width: 100%;
+  max-width: 165px;
+  margin-top: 2px;
+  font-size: 10.5px;
+  padding: 3px 8px;
+  box-sizing: border-box;
+}
+
+.rate-btn.has-rated {
+  background: var(--bg-tertiary);
+  border-color: var(--border-color);
+  color: var(--text-secondary);
+}
+
+.rate-btn.has-rated:hover {
+  background: var(--border-color);
+  border-color: var(--text-secondary);
+  color: var(--text-primary);
+}
+
+.rate-btn:active,
+.rate-btn.has-rated:active {
+  background: rgba(255, 185, 0, 0.25) !important;
+  border-color: #ffb900 !important;
+  color: #ffb900 !important;
+}
+
 /* Plain Text (.txt) Document Mode */
 #markdown-body.is-txt-document {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Segoe UI Variable Text", system-ui, sans-serif;
   line-height: 1.7;
   white-space: pre-wrap;
   word-break: break-word;
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  caret-color: var(--accent-color) !important;
+  min-height: calc(100vh - 180px);
+  cursor: text;
+}
+
+#markdown-body.is-txt-document:focus,
+#markdown-body.is-txt-document:focus-visible {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 /* Arabic & RTL Language Support */
@@ -1925,7 +1994,7 @@ html[dir="rtl"] .edit-toolbar {
 }
 
 /* ==========================================================================
-   NeoText v2.0.8 - Multi-Tab Document System & Workspace Explorer
+   NeoText v2.0.9 - Multi-Tab Document System & Workspace Explorer
    ========================================================================== */
 
 /* Header Integrated Tabs System */

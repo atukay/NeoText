@@ -37,8 +37,8 @@ using Microsoft.Web.WebView2.WinForms;
 [assembly: AssemblyDescription("NeoText - High-Performance Text and Markdown Workspace")]
 [assembly: AssemblyCompany("The NeoText Project")]
 [assembly: AssemblyCopyright("Copyright © 2026 The NeoText Project (atukay)")]
-[assembly: AssemblyFileVersion("2.0.8.0")]
-[assembly: AssemblyVersion("2.0.8.0")]
+[assembly: AssemblyFileVersion("2.0.9.0")]
+[assembly: AssemblyVersion("2.0.9.0")]
 
 namespace NeoText
 {
@@ -121,6 +121,7 @@ namespace NeoText
                     try
                     {
                         bool openInTabs = true;
+                        string channelVal = "store";
                         if (File.Exists(settingsPath))
                         {
                             string json = File.ReadAllText(settingsPath);
@@ -129,8 +130,13 @@ namespace NeoText
                             {
                                 openInTabs = false;
                             }
+                            if (json.IndexOf("\"distribution_channel\":\"github\"", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                                json.IndexOf("\"distribution_channel\": \"github\"", StringComparison.OrdinalIgnoreCase) >= 0)
+                            {
+                                channelVal = "github";
+                            }
                         }
-                        string newSettings = string.Format("{{\"openExternalInTabs\": {0}, \"hasShownIntroduction\": true}}", openInTabs ? "true" : "false");
+                        string newSettings = string.Format("{{\"openExternalInTabs\": {0}, \"hasShownIntroduction\": true, \"distribution_channel\": \"{1}\"}}", openInTabs ? "true" : "false", channelVal);
                         File.WriteAllText(settingsPath, newSettings, Encoding.UTF8);
                     }
                     catch { }
@@ -1769,6 +1775,7 @@ namespace NeoText
             {
                 string settingsPath = Path.Combine(appDir, "app_settings.json");
                 bool hasShown = false;
+                string channelVal = "store";
                 if (File.Exists(settingsPath))
                 {
                     string existing = File.ReadAllText(settingsPath);
@@ -1777,8 +1784,13 @@ namespace NeoText
                     {
                         hasShown = true;
                     }
+                    if (existing.IndexOf("\"distribution_channel\":\"github\"", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                        existing.IndexOf("\"distribution_channel\": \"github\"", StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        channelVal = "github";
+                    }
                 }
-                string json = string.Format("{{\"openExternalInTabs\": {0}, \"hasShownIntroduction\": {1}}}", inTab ? "true" : "false", hasShown ? "true" : "false");
+                string json = string.Format("{{\"openExternalInTabs\": {0}, \"hasShownIntroduction\": {1}, \"distribution_channel\": \"{2}\"}}", inTab ? "true" : "false", hasShown ? "true" : "false", channelVal);
                 File.WriteAllText(settingsPath, json, Encoding.UTF8);
             }
             catch { }
