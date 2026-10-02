@@ -89,6 +89,29 @@ namespace NeoText
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             Console.WriteLine("Registering NeoText Windows Shell Associations (MD, Markdown, TXT, Generic)...");
 
+            // Create / update Windows Start Menu shortcut
+            try
+            {
+                string programsDir = Environment.GetFolderPath(Environment.SpecialFolder.Programs);
+                string shortcutPath = Path.Combine(programsDir, "NeoText.lnk");
+                Type shellType = Type.GetTypeFromProgID("WScript.Shell");
+                if (shellType != null)
+                {
+                    dynamic shell = Activator.CreateInstance(shellType);
+                    dynamic shortcut = shell.CreateShortcut(shortcutPath);
+                    shortcut.TargetPath = exePath;
+                    shortcut.WorkingDirectory = appDir;
+                    shortcut.Description = "Simple and Lightweight Text Viewer/Editor for Windows";
+                    shortcut.IconLocation = (File.Exists(localAppIco) ? localAppIco : srcAppIco) + ",0";
+                    shortcut.Save();
+                    Console.WriteLine("Start Menu shortcut created: " + shortcutPath);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Notice creating Start Menu shortcut: " + ex.Message);
+            }
+
             // Clean up legacy NeoMD registry entries
             CleanLegacyNeoMDKeys();
 

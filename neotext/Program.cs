@@ -37,8 +37,8 @@ using Microsoft.Web.WebView2.WinForms;
 [assembly: AssemblyDescription("NeoText - High-Performance Text and Markdown Workspace")]
 [assembly: AssemblyCompany("The NeoText Project")]
 [assembly: AssemblyCopyright("Copyright © 2026 The NeoText Project (atukay)")]
-[assembly: AssemblyFileVersion("2.0.9.0")]
-[assembly: AssemblyVersion("2.0.9.0")]
+[assembly: AssemblyFileVersion("2.1.0.0")]
+[assembly: AssemblyVersion("2.1.0.0")]
 
 namespace NeoText
 {
@@ -147,7 +147,12 @@ namespace NeoText
             bool openExternalInTabs = true;
             try
             {
-                string settingsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "app_settings.json");
+                string userSettingsPath = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                    "NeoText_WebView2",
+                    "app_settings.json"
+                );
+                string settingsPath = File.Exists(userSettingsPath) ? userSettingsPath : Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "app_settings.json");
                 if (File.Exists(settingsPath))
                 {
                     string json = File.ReadAllText(settingsPath);
@@ -161,7 +166,7 @@ namespace NeoText
             catch { }
 
             // If an external file is being opened, not forced new window, and setting is on:
-            // Attempt to forward the file to an existing running NeoMD instance via Named Pipe
+            // Attempt to forward the file to an existing running NeoText instance via Named Pipe
             if (!forceNewWindow && openExternalInTabs && !string.IsNullOrEmpty(targetFile))
             {
                 try
@@ -180,6 +185,28 @@ namespace NeoText
                 catch
                 {
                     // No existing instance running or pipe connection timed out; continue and run new MainWindow
+                }
+            }
+            else if (!forceNewWindow && string.IsNullOrEmpty(targetFile) && string.IsNullOrEmpty(session))
+            {
+                // App opened without files (e.g. clicked in Start Menu or Desktop shortcut).
+                // If an instance is already running, activate it and bring to front instead of opening duplicate empty instances!
+                try
+                {
+                    using (NamedPipeClientStream client = new NamedPipeClientStream(".", "NeoText_SingleInstance_Pipe_2026", PipeDirection.Out))
+                    {
+                        client.Connect(350); // timeout 350ms
+                        using (StreamWriter writer = new StreamWriter(client, Encoding.UTF8))
+                        {
+                            writer.WriteLine("ACTIVATE_WINDOW");
+                            writer.Flush();
+                        }
+                        return; // Successfully activated existing instance!
+                    }
+                }
+                catch
+                {
+                    // No existing instance running; continue and run new MainWindow
                 }
             }
 
@@ -336,13 +363,27 @@ namespace NeoText
                             if (read > 0)
                             {
                                 string line = new string(buf, 0, read).Split(new char[] { '\r', '\n' })[0].Trim();
-                                if (!string.IsNullOrEmpty(line) && line.StartsWith("OPEN_FILE:"))
+                                if (!string.IsNullOrEmpty(line))
                                 {
-                                    string filePath = line.Substring("OPEN_FILE:".Length).Trim();
-                                    if (filePath.Length > 0 && filePath.Length < 1024 && !filePath.Contains("\0"))
+                                    if (line.StartsWith("OPEN_FILE:"))
+                                    {
+                                        string filePath = line.Substring("OPEN_FILE:".Length).Trim();
+                                        if (filePath.Length > 0 && filePath.Length < 1024 && !filePath.Contains("\0"))
+                                        {
+                                            this.BeginInvoke(new Action(delegate {
+                                                OpenExternalFile(filePath);
+                                            }));
+                                        }
+                                    }
+                                    else if (line == "ACTIVATE_WINDOW")
                                     {
                                         this.BeginInvoke(new Action(delegate {
-                                            OpenExternalFile(filePath);
+                                            if (this.WindowState == FormWindowState.Minimized)
+                                            {
+                                                this.WindowState = FormWindowState.Normal;
+                                            }
+                                            this.Activate();
+                                            ForceForegroundWindow(this.Handle);
                                         }));
                                     }
                                 }
@@ -700,38 +741,46 @@ namespace NeoText
 
         private void InitializeData()
         {
-            string sessionsDir = Path.Combine(appDir, "sessions");
-            if (!Directory.Exists(sessionsDir))
+            try
             {
-                Directory.CreateDirectory(sessionsDir);
-            }
-
-            if (string.IsNullOrEmpty(sessionId))
-            {
-                sessionId = Guid.NewGuid().ToString("N").Substring(0, 8);
-            }
-            sessionJs = Path.Combine(sessionsDir, sessionId + ".js");
-            activeDataJs = Path.Combine(appDir, "active_data.js");
-
-            if (!string.IsNullOrEmpty(targetFile) && File.Exists(targetFile))
-            {
-                UpdateDataFiles(false);
-                SetupWatcher();
-            }
-            else if (!string.IsNullOrEmpty(sessionId) && File.Exists(sessionJs))
-            {
+                string sessionsDir = Path.Combine(profileDir, "sessions");
                 try
                 {
-                    string sText = File.ReadAllText(sessionJs);
-                    string fPath = ExtractJsonField(sText, "filePath");
-                    if (!string.IsNullOrEmpty(fPath) && File.Exists(fPath))
+                    if (!Directory.Exists(sessionsDir))
                     {
-                        this.targetFile = fPath;
-                        SetupWatcher();
+                        Directory.CreateDirectory(sessionsDir);
                     }
                 }
                 catch { }
+
+                if (string.IsNullOrEmpty(sessionId))
+                {
+                    sessionId = Guid.NewGuid().ToString("N").Substring(0, 8);
+                }
+                sessionJs = Path.Combine(sessionsDir, sessionId + ".js");
+                activeDataJs = Path.Combine(profileDir, "active_data.js");
+
+                if (!string.IsNullOrEmpty(targetFile) && File.Exists(targetFile))
+                {
+                    UpdateDataFiles(false);
+                    SetupWatcher();
+                }
+                else if (!string.IsNullOrEmpty(sessionId) && File.Exists(sessionJs))
+                {
+                    try
+                    {
+                        string sText = File.ReadAllText(sessionJs);
+                        string fPath = ExtractJsonField(sText, "filePath");
+                        if (!string.IsNullOrEmpty(fPath) && File.Exists(fPath))
+                        {
+                            this.targetFile = fPath;
+                            SetupWatcher();
+                        }
+                    }
+                    catch { }
+                }
             }
+            catch { }
         }
 
         private async void InitializeWebView()
@@ -744,7 +793,8 @@ namespace NeoText
                 string distChannel = "github";
                 try
                 {
-                    string settingsPath = Path.Combine(appDir, "app_settings.json");
+                    string userSettings = Path.Combine(profileDir, "app_settings.json");
+                    string settingsPath = File.Exists(userSettings) ? userSettings : Path.Combine(appDir, "app_settings.json");
                     if (File.Exists(settingsPath))
                     {
                         string rawCfg = File.ReadAllText(settingsPath);
@@ -762,6 +812,44 @@ namespace NeoText
                 catch { }
 
                 await webView.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync("window.__NEOTEXT_CHANNEL__ = '" + distChannel + "';");
+
+                // In-memory document data injection:
+                // If targetFile or session data exists, inject window.__NEOTEXT_DATA__ directly into DOM before scripts run.
+                // 100% offline, zero disk permissions latency, works seamlessly in Microsoft Store (WindowsApps) and Portable modes.
+                if (!string.IsNullOrEmpty(targetFile) && File.Exists(targetFile))
+                {
+                    try
+                    {
+                        string content = "";
+                        using (FileStream fs = new FileStream(targetFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                        using (StreamReader sr = new StreamReader(fs, Encoding.UTF8))
+                        {
+                            content = sr.ReadToEnd();
+                        }
+                        FileInfo fi = new FileInfo(targetFile);
+                        string escapedContent = EscapeJson(content);
+                        string escapedPath = targetFile.Replace("\\", "\\\\");
+                        string escapedName = EscapeJson(fi.Name);
+                        string initScript = string.Format(
+                            "window.__NEOTEXT_DATA__ = window.__NEOMD_DATA__ = {{ filePath: \"{0}\", fileName: \"{1}\", content: \"{2}\", rawMarkdown: \"{2}\", lastModified: {3}, isDirty: false }};",
+                            escapedPath, escapedName, escapedContent, fi.LastWriteTimeUtc.Ticks
+                        );
+                        await webView.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(initScript);
+                    }
+                    catch { }
+                }
+                else if (!string.IsNullOrEmpty(sessionId) && File.Exists(sessionJs))
+                {
+                    try
+                    {
+                        string sText = File.ReadAllText(sessionJs);
+                        if (!string.IsNullOrEmpty(sText))
+                        {
+                            await webView.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(sText);
+                        }
+                    }
+                    catch { }
+                }
 
                 webView.CoreWebView2.Settings.IsStatusBarEnabled = false;
                 webView.CoreWebView2.Settings.AreDevToolsEnabled = false;
@@ -1024,6 +1112,7 @@ namespace NeoText
                     {
                         if (!string.IsNullOrEmpty(targetFile) && File.Exists(targetFile))
                         {
+                            ReadAndSendFileContent(targetFile);
                             string dir = Path.GetDirectoryName(targetFile);
                             if (!string.IsNullOrEmpty(dir) && Directory.Exists(dir))
                             {
@@ -1395,8 +1484,27 @@ namespace NeoText
                 }
 
                 UTF8Encoding utf8WithoutBom = new UTF8Encoding(false);
-                File.WriteAllText(sessionJs, sb.ToString(), utf8WithoutBom);
-                File.WriteAllText(activeDataJs, sb.ToString(), utf8WithoutBom);
+                try
+                {
+                    if (!string.IsNullOrEmpty(sessionJs))
+                    {
+                        string sDir = Path.GetDirectoryName(sessionJs);
+                        if (!Directory.Exists(sDir)) Directory.CreateDirectory(sDir);
+                        File.WriteAllText(sessionJs, sb.ToString(), utf8WithoutBom);
+                    }
+                }
+                catch { }
+
+                try
+                {
+                    if (!string.IsNullOrEmpty(activeDataJs))
+                    {
+                        string aDir = Path.GetDirectoryName(activeDataJs);
+                        if (!Directory.Exists(aDir)) Directory.CreateDirectory(aDir);
+                        File.WriteAllText(activeDataJs, sb.ToString(), utf8WithoutBom);
+                    }
+                }
+                catch { }
             }
             catch { }
         }
@@ -1737,8 +1845,8 @@ namespace NeoText
                 if (string.IsNullOrEmpty(tearName)) tearName = "Yeni Belge.md";
 
                 string sessionId = "tear_" + DateTime.Now.Ticks.ToString("x");
-                string sessionDir = Path.Combine(appDir, "sessions");
-                if (!Directory.Exists(sessionDir)) Directory.CreateDirectory(sessionDir);
+                string sessionDir = Path.Combine(profileDir, "sessions");
+                try { if (!Directory.Exists(sessionDir)) Directory.CreateDirectory(sessionDir); } catch { }
                 string sessionFile = Path.Combine(sessionDir, sessionId + ".js");
 
                 string escapedContent = EscapeJson(tearContent);
@@ -1773,9 +1881,10 @@ namespace NeoText
         {
             try
             {
-                string settingsPath = Path.Combine(appDir, "app_settings.json");
+                string userSettings = Path.Combine(profileDir, "app_settings.json");
+                string settingsPath = File.Exists(userSettings) ? userSettings : Path.Combine(appDir, "app_settings.json");
                 bool hasShown = false;
-                string channelVal = "store";
+                string channelVal = (appDir.IndexOf("WindowsApps", StringComparison.OrdinalIgnoreCase) >= 0) ? "store" : "store";
                 if (File.Exists(settingsPath))
                 {
                     string existing = File.ReadAllText(settingsPath);
@@ -1790,8 +1899,11 @@ namespace NeoText
                         channelVal = "github";
                     }
                 }
+                string targetSavePath = (appDir.IndexOf("WindowsApps", StringComparison.OrdinalIgnoreCase) >= 0) ? userSettings : settingsPath;
                 string json = string.Format("{{\"openExternalInTabs\": {0}, \"hasShownIntroduction\": {1}, \"distribution_channel\": \"{2}\"}}", inTab ? "true" : "false", hasShown ? "true" : "false", channelVal);
-                File.WriteAllText(settingsPath, json, Encoding.UTF8);
+                string dir = Path.GetDirectoryName(targetSavePath);
+                if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+                File.WriteAllText(targetSavePath, json, Encoding.UTF8);
             }
             catch { }
         }

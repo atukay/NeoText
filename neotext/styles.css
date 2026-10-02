@@ -857,8 +857,19 @@ html[data-theme="light"] .dropdown-mode-badge.window-mode {
   display: flex;
   align-items: center;
   gap: calc(10px * var(--ui-scale));
-  padding: calc(8px * var(--ui-scale)) calc(8px * var(--ui-scale)) calc(4px * var(--ui-scale)) calc(8px * var(--ui-scale));
+  padding: calc(8px * var(--ui-scale)) calc(8px * var(--ui-scale)) calc(6px * var(--ui-scale)) calc(8px * var(--ui-scale));
   user-select: none;
+}
+
+.app-info-left-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(5px * var(--ui-scale));
+  width: calc(40px * var(--ui-scale));
+  flex-shrink: 0;
+  align-self: center;
 }
 
 .app-info-logo {
@@ -866,7 +877,21 @@ html[data-theme="light"] .dropdown-mode-badge.window-mode {
   height: calc(40px * var(--ui-scale));
   border-radius: calc(8px * var(--ui-scale));
   flex-shrink: 0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.22);
+  display: block;
+}
+
+.app-info-version {
+  width: 100%;
+  display: block;
+  font-size: calc(9.5px * var(--ui-scale));
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0;
+  line-height: 1.2;
+  text-align: center;
+  user-select: none;
+  transform: translateX(calc(-2.5px * var(--ui-scale)));
 }
 
 .app-info-right-col {
@@ -1994,7 +2019,7 @@ html[dir="rtl"] .edit-toolbar {
 }
 
 /* ==========================================================================
-   NeoText v2.0.9 - Multi-Tab Document System & Workspace Explorer
+   NeoText v2.1.0 - Multi-Tab Document System & Workspace Explorer
    ========================================================================== */
 
 /* Header Integrated Tabs System */

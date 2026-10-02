@@ -59,7 +59,7 @@ Copy-Item -Path (Join-Path $rootDir "THIRD_PARTY_LICENSES.md") -Destination $sta
 Copy-Item -Path (Join-Path $rootDir "README.md") -Destination $staging -Force
 
 # 4. Create Final Archive
-$zipName = "NeoText_v2.0.9_x64_Portable.zip"
+$zipName = "NeoText_v2.1.0_x64_Portable.zip"
 $zipPath = Join-Path $distDir $zipName
 if (Test-Path $zipPath) {
     Remove-Item $zipPath -Force

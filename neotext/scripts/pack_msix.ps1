@@ -87,6 +87,7 @@ if (Test-Path $staging) {
 }
 New-Item -ItemType Directory -Path $staging | Out-Null
 New-Item -ItemType Directory -Path (Join-Path $staging "Assets") | Out-Null
+New-Item -ItemType Directory -Path (Join-Path $staging "sessions") | Out-Null
 
 # Copy AppxManifest.xml
 Copy-Item (Join-Path $packagingDir "AppxManifest.xml") $staging -Force
@@ -135,7 +136,7 @@ Write-Host "      Payload and resources.pri staged successfully (Channel: Store)
 
 # 4. Compile MSIX Package
 Write-Host "[4/4] Packing MSIX package with MakeAppx (strict validation)..." -ForegroundColor Yellow
-$msixName = "NeoText_v2.0.9_x64.msix"
+$msixName = "NeoText_v2.1.0_x64.msix"
 $msixPath = Join-Path $distDir $msixName
 if (Test-Path $msixPath) {
     Remove-Item $msixPath -Force
@@ -151,15 +152,19 @@ if ($LASTEXITCODE -ne 0 -or -not (Test-Path $msixPath)) {
 # Clean staging directory
 Remove-Item $staging -Recurse -Force
 
-# Automatically sync to Desktop for easy drag-and-drop
-$desktopPath = "C:\Users\tuna\Desktop\$msixName"
-Copy-Item $msixPath $desktopPath -Force
+# Automatically sync to root store_releases archive
+$storeReleasesDir = Join-Path $rootDir "store_releases"
+if (-not (Test-Path $storeReleasesDir)) {
+    New-Item -ItemType Directory -Path $storeReleasesDir -Force | Out-Null
+}
+$storePackagePath = Join-Path $storeReleasesDir $msixName
+Copy-Item $msixPath $storePackagePath -Force
 
 Write-Host "==================================================================" -ForegroundColor Green
 Write-Host " [SUCCESS] MICROSOFT STORE MSIX PACKAGE READY!                    " -ForegroundColor Green
 Write-Host " Package: $msixName                                               " -ForegroundColor Green
 Write-Host " Location: $msixPath                                              " -ForegroundColor Green
-Write-Host " Desktop:  $desktopPath                                           " -ForegroundColor Green
+Write-Host " Archive:  $storePackagePath                                      " -ForegroundColor Green
 Write-Host " Size: $([math]::Round((Get-Item $msixPath).Length / 1MB, 2)) MB  " -ForegroundColor Green
 Write-Host "==================================================================" -ForegroundColor Green
 Write-Host "Ready for upload to Microsoft Partner Center:                     " -ForegroundColor Cyan
