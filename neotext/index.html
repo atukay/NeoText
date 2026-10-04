@@ -60,6 +60,7 @@
   <!-- Immediate Data & Title Initializer for Instant Window Setup -->
   <script>
     (function() {
+      if (window.__NEOTEXT_DATA__ || window.__NEOMD_DATA__) return;
       var hash = (window.location.hash || '').replace(/^#/, '');
       var params = new URLSearchParams(hash || window.location.search);
       var s = params.get('s');

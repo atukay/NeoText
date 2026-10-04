@@ -2149,8 +2149,22 @@
     activeTabId: null,
     draggedTabId: null,
     workspaceTree: null,
-    workspaceFolderPath: getStored('workspace_folder', ''),
-    workspaceFolderName: getStored('workspace_folder_name', '') || (getStored('workspace_folder', '') ? (getStored('workspace_folder', '').split(/[/\\]/).filter(Boolean).pop() || '') : ''),
+    workspaceFolderPath: (function() {
+      const f = getStored('workspace_folder', '');
+      if (f && (f.indexOf('WindowsApps') !== -1 || f.toLowerCase().endsWith('\\neotext') || f.toLowerCase().endsWith('/neotext'))) {
+        setStored('workspace_folder', '');
+        setStored('workspace_folder_name', '');
+        return '';
+      }
+      return f;
+    })(),
+    workspaceFolderName: (function() {
+      const f = getStored('workspace_folder', '');
+      if (f && (f.indexOf('WindowsApps') !== -1 || f.toLowerCase().endsWith('\\neotext') || f.toLowerCase().endsWith('/neotext'))) {
+        return '';
+      }
+      return getStored('workspace_folder_name', '') || (f ? (f.split(/[/\\]/).filter(Boolean).pop() || '') : '');
+    })(),
     openExternalInTabs: getStored('external_open_mode', 'tab') !== 'window'
   };
 
@@ -2235,6 +2249,7 @@
     githubBtn: document.getElementById('github-link-btn'),
     coffeeBtn: document.getElementById('coffee-link-btn'),
     rateBtn: document.getElementById('rate-link-btn'),
+    appInfoVersion: document.getElementById('app-info-version'),
     fontDecBtn: document.getElementById('font-dec-btn'),
     fontIncBtn: document.getElementById('font-inc-btn'),
     fontSizeDisplay: document.getElementById('font-size-display'),
@@ -2625,12 +2640,18 @@
 
   // Load Document (Multi-window & Session Support)
   function loadDocument() {
+    // 1. In-memory data injected by C# host takes absolute priority (100% offline, zero disk lag)
+    if ((window.__NEOTEXT_DATA__ || window.__NEOMD_DATA__) && (typeof (window.__NEOTEXT_DATA__ || window.__NEOMD_DATA__).content === 'string' || typeof (window.__NEOTEXT_DATA__ || window.__NEOMD_DATA__).rawMarkdown === 'string')) {
+      renderData((window.__NEOTEXT_DATA__ || window.__NEOMD_DATA__));
+      return;
+    }
+
     const hash = (window.location.hash || '').replace(/^#/, '');
     const hashParams = new URLSearchParams(hash);
     const urlParams = new URLSearchParams(window.location.search);
     const sessionParam = hashParams.get('s') || urlParams.get('s');
 
-    // 1. If specific session ID is in URL, fetch its dedicated session data
+    // 2. If specific session ID is in URL, fetch its dedicated session data
     if (sessionParam) {
       const scriptUrl = 'sessions/' + sessionParam + '.js?t=' + Date.now();
       const s = document.createElement('script');
@@ -2646,12 +2667,6 @@
         loadFallback();
       };
       document.head.appendChild(s);
-      return;
-    }
-
-    // 2. Global data check
-    if ((window.__NEOTEXT_DATA__ || window.__NEOMD_DATA__) && (typeof (window.__NEOTEXT_DATA__ || window.__NEOMD_DATA__).content === 'string' || typeof (window.__NEOTEXT_DATA__ || window.__NEOMD_DATA__).rawMarkdown === 'string')) {
-      renderData((window.__NEOTEXT_DATA__ || window.__NEOMD_DATA__));
       return;
     }
 

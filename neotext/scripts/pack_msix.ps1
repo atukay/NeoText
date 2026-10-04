@@ -122,7 +122,7 @@ Copy-Item (Join-Path $neotextDir "runtimes") $staging -Recurse -Force
 
 # Configure Store Distribution Channel (Swaps Coffee button with localized Rate button)
 $storeSettingsPath = Join-Path $staging "app_settings.json"
-Set-Content -Path $storeSettingsPath -Value '{"openExternalInTabs": false, "distribution_channel": "store"}' -Encoding UTF8
+Set-Content -Path $storeSettingsPath -Value '{"openExternalInTabs": true, "distribution_channel": "store", "hasShownIntroduction": false}' -Encoding UTF8
 
 # Index resources and build resources.pri
 Write-Host "      Indexing package resources with MakePri..." -ForegroundColor Yellow

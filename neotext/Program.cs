@@ -97,15 +97,21 @@ namespace NeoText
 
             if (string.IsNullOrEmpty(targetFile) && string.IsNullOrEmpty(session))
             {
-                string introPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Introduction.md");
-                string settingsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "app_settings.json");
-                bool hasShownIntro = false;
+                string profileDir = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                    "NeoText_WebView2"
+                );
+                string userSettingsPath = Path.Combine(profileDir, "app_settings.json");
+                string appDir = AppDomain.CurrentDomain.BaseDirectory.TrimEnd('\\');
+                string baseSettingsPath = Path.Combine(appDir, "app_settings.json");
+                string settingsToRead = File.Exists(userSettingsPath) ? userSettingsPath : baseSettingsPath;
 
+                bool hasShownIntro = false;
                 try
                 {
-                    if (File.Exists(settingsPath))
+                    if (File.Exists(settingsToRead))
                     {
-                        string json = File.ReadAllText(settingsPath);
+                        string json = File.ReadAllText(settingsToRead);
                         if (json.IndexOf("\"hasShownIntroduction\":true", StringComparison.OrdinalIgnoreCase) >= 0 ||
                             json.IndexOf("\"hasShownIntroduction\": true", StringComparison.OrdinalIgnoreCase) >= 0)
                         {
@@ -115,6 +121,7 @@ namespace NeoText
                 }
                 catch { }
 
+                string introPath = Path.Combine(appDir, "Introduction.md");
                 if (!hasShownIntro && File.Exists(introPath))
                 {
                     targetFile = introPath;
@@ -122,9 +129,9 @@ namespace NeoText
                     {
                         bool openInTabs = true;
                         string channelVal = "store";
-                        if (File.Exists(settingsPath))
+                        if (File.Exists(settingsToRead))
                         {
-                            string json = File.ReadAllText(settingsPath);
+                            string json = File.ReadAllText(settingsToRead);
                             if (json.IndexOf("\"openExternalInTabs\":false", StringComparison.OrdinalIgnoreCase) >= 0 ||
                                 json.IndexOf("\"openExternalInTabs\": false", StringComparison.OrdinalIgnoreCase) >= 0)
                             {
@@ -136,8 +143,18 @@ namespace NeoText
                                 channelVal = "github";
                             }
                         }
+                        if (appDir.IndexOf("WindowsApps", StringComparison.OrdinalIgnoreCase) >= 0)
+                        {
+                            channelVal = "store";
+                        }
                         string newSettings = string.Format("{{\"openExternalInTabs\": {0}, \"hasShownIntroduction\": true, \"distribution_channel\": \"{1}\"}}", openInTabs ? "true" : "false", channelVal);
-                        File.WriteAllText(settingsPath, newSettings, Encoding.UTF8);
+                        
+                        // Save to user profile (always writable in both Store and Portable)
+                        if (!Directory.Exists(profileDir)) Directory.CreateDirectory(profileDir);
+                        File.WriteAllText(userSettingsPath, newSettings, Encoding.UTF8);
+
+                        // Also attempt base directory if writable
+                        try { File.WriteAllText(baseSettingsPath, newSettings, Encoding.UTF8); } catch { }
                     }
                     catch { }
                 }
@@ -415,6 +432,12 @@ namespace NeoText
                 ReadAndSendFileContent(filePath);
 
                 string dir = Path.GetDirectoryName(filePath);
+                if (Path.GetFileName(filePath).Equals("Introduction.md", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(dir, appDir, StringComparison.OrdinalIgnoreCase) ||
+                    (dir != null && dir.IndexOf("WindowsApps", StringComparison.OrdinalIgnoreCase) >= 0))
+                {
+                    dir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                }
                 if (!string.IsNullOrEmpty(dir) && Directory.Exists(dir) && !string.Equals(currentWorkspaceDir, dir, StringComparison.OrdinalIgnoreCase))
                 {
                     currentWorkspaceDir = dir;
@@ -1110,14 +1133,29 @@ namespace NeoText
                     }
                     try
                     {
+                        string desktopDir = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
                         if (!string.IsNullOrEmpty(targetFile) && File.Exists(targetFile))
                         {
                             ReadAndSendFileContent(targetFile);
                             string dir = Path.GetDirectoryName(targetFile);
-                            if (!string.IsNullOrEmpty(dir) && Directory.Exists(dir))
+                            if (Path.GetFileName(targetFile).Equals("Introduction.md", StringComparison.OrdinalIgnoreCase) ||
+                                string.Equals(dir, appDir, StringComparison.OrdinalIgnoreCase) ||
+                                (dir != null && dir.IndexOf("WindowsApps", StringComparison.OrdinalIgnoreCase) >= 0))
                             {
+                                currentWorkspaceDir = desktopDir;
+                                ScanAndSendWorkspaceTree(desktopDir);
+                            }
+                            else if (!string.IsNullOrEmpty(dir) && Directory.Exists(dir))
+                            {
+                                currentWorkspaceDir = dir;
                                 ScanAndSendWorkspaceTree(dir);
                             }
+                        }
+                        else
+                        {
+                            // Launched without a file: default workspace to Desktop!
+                            currentWorkspaceDir = desktopDir;
+                            ScanAndSendWorkspaceTree(desktopDir);
                         }
                     }
                     catch { }

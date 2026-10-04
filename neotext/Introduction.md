@@ -1,4 +1,4 @@
-# NeoText — High-Performance Native Markdown Workspace
+# Welcome to NeoText — Workspace & Interactive Guide
 
 <div align="center">
   <img src="assets/neotext_logo_256.png" alt="NeoText Logo" width="96" height="96" style="margin-bottom: 8px; border-radius: 18px; box-shadow: 0 8px 24px rgba(0,0,0,0.35);" />
@@ -15,7 +15,95 @@
 - ⚡ **Instant Launch:** Native WinForms host initializes Microsoft Edge WebView2 in under ~180 ms.
 - 🍃 **Minimal Resource Footprint:** Operates on ~15-25 MB of RAM during typical documentation workflows.
 - 🛡️ **Hardened Multi-Layer Security:** AST HTML sanitization, bounded IPC buffers, and protocol whitelisting.
-- 📐 **Subpixel Mathematical Precision:** Bundled local KaTeX math typesetting and vector-rendered Mermaid diagrams.
+- 📐 **Subpixel Mathematical Precision:** Bundled local KaTeX math typesetting and vector rendering.
+
+---
+
+## 🚀 Quick Start & Interactive User Guide
+
+### 1. Document Reading & Visual Layouts
+- **Reading Width Selector (Top Header):**
+  - **Compact (600px):** Ultra-concentrated column for rapid scanning.
+  - **Readable (760px) [Default]:** Scientifically optimal line length (~65–75 characters per line) to prevent eye fatigue.
+  - **Relaxed (980px):** Balanced layout for documents containing diagrams and tables.
+  - **Wide (1240px):** Expansive canvas for multi-column tables and code snippets.
+  - **Full (100%):** Borderless edge-to-edge view utilizing your entire monitor width.
+- **Theme Switcher (`Alt + Shift + T` or Header Icon):**
+  - **Dark Mode:** Windows 11 Fluent anthracite palette (`#1c1c1c`).
+  - **OLED Mode:** Pure pitch-black background (`#000000`) for OLED panels and maximum battery life.
+  - **Light Mode:** Crisp, high-contrast daylight paper aesthetic.
+  - *Native Windows Title Bar Synchronization:* Title bar, borders, and caption buttons dynamically sync with your active theme using Windows DWM API.
+
+### 2. Multi-Tab Workspace & Window Management
+- **Embedded Header Tabs:** Single document view displays a clean title badge; opening multiple documents seamlessly reveals the top tab strip without sacrificing vertical reading height.
+- **Tab Operations:**
+  - **New Document:** Press `Ctrl + N` or `Ctrl + T` (or click `+` in header) to create a scratchpad document.
+  - **Close Tab:** Press `Ctrl + W` (or click `×` on any tab).
+  - **Switch Tabs:** Press `Ctrl + Tab` or `Ctrl + Shift + Tab`.
+  - **Drag-and-Drop Reordering:** Click and drag any tab horizontally to rearrange your workspace.
+  - **Window Tear-Off:** Drag a tab outside the window to detach it into an independent, floating NeoText window.
+  - **Overflow Navigation:** When many tabs are open, use the left (`<`) and right (`>`) scroll arrows, horizontal mouse wheel scroll, or click the tabs dropdown (`▼`) to search and jump to any open tab.
+- **External File Behavior:** In the Options menu (`⋮`), configure whether opening files from File Explorer opens them as a **New Tab** or in a **New Window**.
+- **Unsaved Changes Guard:** Closing a modified tab or exiting the application prompts a safety dialog to Save, Discard, or Cancel.
+
+### 3. In-Place Editing Mode (`Ctrl + E`)
+Click the pencil icon in the top header or press `Ctrl + E` to toggle live editing mode:
+- **Floating Formatting Toolbar:**
+  - **Headings:** Heading 1 (`Ctrl + 1`), Heading 2 (`Ctrl + 2`).
+  - **Inline Styles:** Bold (`Ctrl + B`), Italic (`Ctrl + I`).
+  - **Lists:** Bulleted list with sub-menu options for Dash (`—`), Dot (`•`), or Numbered (`1.`).
+  - **Quotes & Code Blocks:** One-click blockquote and pre-formatted code block insertion.
+  - **RAW Editor:** Click **RAW** on the toolbar to switch between WYSIWYG rendered editing and the raw Markdown source code editor.
+- **Saving Your Work:** Press `Ctrl + S` or click the floating save button in the bottom right corner. A confirmation toast will notify you of the successful save.
+- **Clipboard Image Pasting (`Ctrl + V`):** Copy an image from anywhere (web, screenshot tool, Paint) and press `Ctrl + V` in edit mode. NeoText automatically saves the image as a local PNG in your document's folder and inserts the clean Markdown syntax `![image](filename.png)`.
+- **Seamless Plain Text (.txt) Editing:** TXT files open in a full-height, borderless editor with an electric blue caret. Click anywhere on the viewport to place your cursor and start typing.
+
+### 4. Collapsible Left Sidebar (`Alt + Shift + B`)
+Click the sidebar icon in the top-left or press `Alt + Shift + B` to toggle the navigation panel:
+- 📁 **Files / Workspace Tree:**
+  - Browse your active folder, expand subdirectories, and open documents.
+  - Use **Select Folder** to set your project workspace (defaults to Desktop on clean launch).
+  - Built-in `FileSystemWatcher` auto-refreshes the tree when files are created, renamed, or deleted.
+- 📑 **Outline & Real-Time Document Statistics:**
+  - **Live Metrics:** Word count, character count, estimated reading time, and full file path.
+  - **Interactive Table of Contents (TOC):** Click any heading (H1–H6) to smoothly jump to that section.
+  - **ScrollSpy:** The outline highlights your current reading position as you scroll through the document.
+- 🔍 **In-Document Search (`Ctrl + F`):**
+  - Instant text search across the active document with real-time match counter.
+  - Navigate matches with `Enter` (Next) and `Shift + Enter` (Previous).
+  - Click any search snippet in the sidebar list to jump directly to that occurrence.
+
+### 5. Options Menu & Document Tools (Top-Right `⋮`)
+- 🌐 **20 Languages Localization:** Full native interface translation in English, Turkish, German, French, Spanish, Italian, Portuguese, Dutch, Polish, Russian, Ukrainian, Arabic, Hindi, Japanese, Chinese (Simplified & Traditional), Korean, Vietnamese, Indonesian, and Azerbaijani. Automatically matches your Windows display language.
+- 🔍 **UI Scaling & Typography Size:** Independently adjust UI Scale (80% to 150%) and Text Font Size (12px to 24px) to match your monitor and eyesight.
+- 💾 **Save As... (`Ctrl + Shift + S`):** Save a copy of your document with custom formatting.
+- 🔄 **Document Conversion:**
+  - Convert Markdown (.md) to clean plain text (.txt).
+  - Convert Plain Text (.txt) to Markdown (.md).
+- 📋 **Copy as Formatted HTML:** Copies rendered HTML markup to Windows clipboard for pasting into emails, web editors, or Word.
+- 🖨️ **Print & PDF Export (`Ctrl + P`):** Print your document or save it as a high-quality PDF using dedicated print CSS styles.
+
+---
+
+## ⌨️ Keyboard Shortcuts Cheat Sheet
+
+| Category | Shortcut | Description |
+| :--- | :--- | :--- |
+| **Workspace** | `Ctrl + N` / `Ctrl + T` | Create new scratchpad document |
+| **Workspace** | `Ctrl + W` | Close active document tab |
+| **Workspace** | `Ctrl + Tab` | Switch to next open tab |
+| **Workspace** | `Ctrl + Shift + Tab` | Switch to previous open tab |
+| **Navigation** | `Alt + Shift + B` | Toggle left navigation sidebar |
+| **Search** | `Ctrl + F` | Focus in-document search box |
+| **Search** | `Enter` / `Shift + Enter` | Jump to next / previous search match |
+| **View** | `Alt + Shift + T` | Cycle theme (Dark ➔ OLED ➔ Light) |
+| **Edit Mode** | `Ctrl + E` | Toggle Edit Mode on/off |
+| **Editing** | `Ctrl + S` | Save active document changes |
+| **Editing** | `Ctrl + V` | Paste image from clipboard as local file |
+| **Formatting** | `Ctrl + 1` / `Ctrl + 2` | Heading 1 / Heading 2 |
+| **Formatting** | `Ctrl + B` / `Ctrl + I` | Bold / Italic text |
+| **Export** | `Ctrl + Shift + S` | Save As (open native save dialog) |
+| **Export** | `Ctrl + P` | Print or export document to PDF |
 
 ---
 
@@ -33,9 +121,6 @@ NeoText effortlessly handles high-resolution web graphics as well as local appli
   <p><em>Bundled Geometric Vector Icon (Assets Directory)</em></p>
 </div>
 
-> [!TIP]
-> **Clipboard Image Paste:** While editing in Edit Mode (`Ctrl+E`), simply press `Ctrl+V` to paste an image from your clipboard. NeoText automatically saves the PNG file into your workspace and inserts clean Markdown syntax!
-
 ---
 
 ## 📐 Mathematical Precision (KaTeX)
@@ -49,24 +134,6 @@ $$e^{i\pi} + 1 = 0 \quad \Longleftrightarrow \quad \mathcal{F}\left\{ \frac{d^n 
 $$\oint_{\partial \Sigma} \mathbf{B} \cdot d\mathbf{l} = \mu_0 \iint_{\Sigma} \mathbf{J} \cdot d\mathbf{A} + \mu_0 \varepsilon_0 \frac{d}{dt}\iint_{\Sigma} \mathbf{E} \cdot d\mathbf{A}$$
 
 $$\nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t}, \quad \nabla \cdot \mathbf{B} = 0$$
-
----
-
-## 📊 Flowcharts & System Architecture (Mermaid.js)
-
-Complex system graphs, sequence diagrams, and class hierarchies are rendered into crisp SVG vectors:
-
-```mermaid
-graph TD
-    A[User Opens .md File] --> B{Single Instance Active?}
-    B -->|Yes| C[Named Pipe Client Connects]
-    C --> D[4096-Byte Bounded IPC Buffer]
-    D --> E[Deliver Tab to Existing Window]
-    B -->|No| F[Launch New NeoText Host Process]
-    F --> G[Initialize WebView2 Core]
-    G --> H[Render Local Markdown AST]
-    H --> I[KaTeX / Prism / Mermaid Engine]
-```
 
 ---
 
@@ -116,23 +183,18 @@ def solve_linear_system(A, B, u0, x0, t):
 | **Startup Latency** | ~180 ms | Sub-200ms warm and cold initialization |
 | **Memory Footprint** | ~15 – 25 MB RAM | Highly optimized memory consumption |
 | **Window Management** | Multi-Tab & Tear-Off Processes | Independent OS processes per torn window |
-| **Asset Delivery** | 100% Offline (Zero CDN) | KaTeX, Prism, Mermaid, and fonts bundled locally |
+| **Asset Delivery** | 100% Offline (Zero CDN) | KaTeX, Prism, and fonts bundled locally |
 | **Large File Protection** | >2 MB Safety Guard | Switches to optimized pre-viewer to avoid freezes |
 
 ---
 
-## 🛡️ Enterprise Security & Callouts
+## 🛡️ Enterprise Security & Callout Showcase
 
 > [!NOTE]
 > **Zero External Telemetry:** NeoText does not make outbound network requests, ping telemetry servers, or send analytics. Your technical documents stay strictly on your local disk.
 
 > [!TIP]
-> **Keyboard Productivity Shortcuts:**
-> - `Ctrl + Tab`: Cycle forward through open workspace tabs
-> - `Ctrl + W`: Close active tab
-> - `Ctrl + N`: Create a new scratchpad document
-> - `Alt + Shift + B`: Toggle collapsible left sidebar
-> - `Alt + Shift + T`: Cycle Dark, OLED Black, and Light themes
+> **Clipboard Image Paste:** While editing in Edit Mode (`Ctrl+E`), simply press `Ctrl+V` to paste an image from your clipboard. NeoText automatically saves the PNG file into your workspace and inserts clean Markdown syntax!
 
 > [!IMPORTANT]
 > **AST DOM Cleaner:** Every rendered HTML node passes through an aggressive client-side sanitizer that eliminates 100% of `<script>`, `<iframe>`, inline `onload`/`onerror`, and `javascript:` URIs.
