@@ -2586,21 +2586,35 @@
               quoteHtml = String(token || '');
             }
 
-            const calloutRegex = /<p>\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\](?:\s*<br>)?\s*([\s\S]*?)<\/p>/i;
+            const calloutRegex = /<p>\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION|NOT|İPUCU|IPUCU|ÖNEMLİ|ONEMLI|UYARI|DİKKAT|DIKKAT)\](?:\s*<br>)?\s*([\s\S]*?)<\/p>/i;
             const match = quoteHtml.match(calloutRegex);
 
             if (match) {
-              const type = match[1].toUpperCase();
+              const rawTag = match[1].toUpperCase();
               const content = match[2];
-              const titles = { NOTE: 'NOT', TIP: 'İPUCU', IMPORTANT: 'ÖNEMLİ', WARNING: 'UYARI', CAUTION: 'DİKKAT' };
-              const icons = { NOTE: 'ℹ️', TIP: '💡', IMPORTANT: '📌', WARNING: '⚠️', CAUTION: '🚨' };
+              const calloutMap = {
+                'NOTE': { class: 'note', title: 'Note', icon: 'ℹ️' },
+                'TIP': { class: 'tip', title: 'Tip', icon: '💡' },
+                'IMPORTANT': { class: 'important', title: 'Important', icon: '📌' },
+                'WARNING': { class: 'warning', title: 'Warning', icon: '⚠️' },
+                'CAUTION': { class: 'caution', title: 'Caution', icon: '🚨' },
+                'NOT': { class: 'note', title: 'Not', icon: 'ℹ️' },
+                'İPUCU': { class: 'tip', title: 'İpucu', icon: '💡' },
+                'IPUCU': { class: 'tip', title: 'İpucu', icon: '💡' },
+                'ÖNEMLİ': { class: 'important', title: 'Önemli', icon: '📌' },
+                'ONEMLI': { class: 'important', title: 'Önemli', icon: '📌' },
+                'UYARI': { class: 'warning', title: 'Uyarı', icon: '⚠️' },
+                'DİKKAT': { class: 'caution', title: 'Dikkat', icon: '🚨' },
+                'DIKKAT': { class: 'caution', title: 'Dikkat', icon: '🚨' }
+              };
+              const def = calloutMap[rawTag] || { class: 'note', title: rawTag, icon: 'ℹ️' };
               const rest = quoteHtml.replace(match[0], `<p>${content}</p>`);
 
               return `
-                <div class="callout callout-${type.toLowerCase()}">
+                <div class="callout callout-${def.class}">
                   <div class="callout-title">
-                    <span>${icons[type] || 'ℹ️'}</span>
-                    <span>${titles[type] || type}</span>
+                    <span>${def.icon}</span>
+                    <span>${def.title}</span>
                   </div>
                   ${rest}
                 </div>

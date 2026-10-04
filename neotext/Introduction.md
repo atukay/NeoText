@@ -17,11 +17,24 @@
 - 🛡️ **Hardened Multi-Layer Security:** AST HTML sanitization, bounded IPC buffers, and protocol whitelisting.
 - 📐 **Subpixel Mathematical Precision:** Bundled local KaTeX math typesetting and vector rendering.
 
+<div align="center" style="margin: 20px 0;">
+  <img src="assets/guide/workspace_overview.png" alt="NeoText Workspace Overview" style="border-radius: 10px; border: 1px solid var(--border-color); max-width: 100%; box-shadow: 0 8px 24px rgba(0,0,0,0.35);" />
+  <p><em>The NeoText Environment: Fluent Windows typography with distraction-free layout.</em></p>
+</div>
+
 ---
 
 ## 🚀 Quick Start & Interactive User Guide
 
 ### 1. Document Reading & Visual Layouts
+
+Customize your reading experience using the controls in the top-right header:
+
+<div align="center" style="margin: 16px 0;">
+  <img src="assets/guide/header_controls.png" alt="Header Reading Width and Theme Controls" style="border-radius: 8px; border: 1px solid var(--border-color); max-width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.25);" />
+  <p><em>Header toolbar: One-click reading width presets, theme switcher, and in-place editor.</em></p>
+</div>
+
 - **Reading Width Selector (Top Header):**
   - **Compact (600px):** Ultra-concentrated column for rapid scanning.
   - **Readable (760px) [Default]:** Scientifically optimal line length (~65–75 characters per line) to prevent eye fatigue.
@@ -34,8 +47,25 @@
   - **Light Mode:** Crisp, high-contrast daylight paper aesthetic.
   - *Native Windows Title Bar Synchronization:* Title bar, borders, and caption buttons dynamically sync with your active theme using Windows DWM API.
 
+<div align="center" style="margin: 16px 0; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+  <img src="assets/guide/theme_light.png" alt="Light Theme" width="48%" style="border-radius: 8px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+  <img src="assets/guide/theme_oled.png" alt="OLED Pure Black Theme" width="48%" style="border-radius: 8px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
+</div>
+<div align="center">
+  <p><em>High-contrast themes: Daylight Paper Mode (left) and OLED Pure Black Mode (right).</em></p>
+</div>
+
+---
+
 ### 2. Multi-Tab Workspace & Window Management
-- **Embedded Header Tabs:** Single document view displays a clean title badge; opening multiple documents seamlessly reveals the top tab strip without sacrificing vertical reading height.
+
+NeoText includes a high-performance tabbed workflow integrated into the window title strip:
+
+<div align="center" style="margin: 16px 0;">
+  <img src="assets/guide/tabs_strip.png" alt="Multi-Tab Workspace Strip" style="border-radius: 8px; border: 1px solid var(--border-color); max-width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.25);" />
+  <p><em>Multi-Tab Strip: Embedded document tabs with drag-and-drop reordering and window tear-off.</em></p>
+</div>
+
 - **Tab Operations:**
   - **New Document:** Press `Ctrl + N` or `Ctrl + T` (or click `+` in header) to create a scratchpad document.
   - **Close Tab:** Press `Ctrl + W` (or click `×` on any tab).
@@ -46,8 +76,17 @@
 - **External File Behavior:** In the Options menu (`⋮`), configure whether opening files from File Explorer opens them as a **New Tab** or in a **New Window**.
 - **Unsaved Changes Guard:** Closing a modified tab or exiting the application prompts a safety dialog to Save, Discard, or Cancel.
 
+---
+
 ### 3. In-Place Editing Mode (`Ctrl + E`)
+
 Click the pencil icon in the top header or press `Ctrl + E` to toggle live editing mode:
+
+<div align="center" style="margin: 16px 0;">
+  <img src="assets/guide/edit_toolbar.png" alt="Floating Formatting Toolbar" style="border-radius: 8px; border: 1px solid var(--border-color); max-width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.25);" />
+  <p><em>In-Place Edit Toolbar: Quick formatting tools, RAW mode toggle, and floating save button.</em></p>
+</div>
+
 - **Floating Formatting Toolbar:**
   - **Headings:** Heading 1 (`Ctrl + 1`), Heading 2 (`Ctrl + 2`).
   - **Inline Styles:** Bold (`Ctrl + B`), Italic (`Ctrl + I`).
@@ -58,8 +97,17 @@ Click the pencil icon in the top header or press `Ctrl + E` to toggle live editi
 - **Clipboard Image Pasting (`Ctrl + V`):** Copy an image from anywhere (web, screenshot tool, Paint) and press `Ctrl + V` in edit mode. NeoText automatically saves the image as a local PNG in your document's folder and inserts the clean Markdown syntax `![image](filename.png)`.
 - **Seamless Plain Text (.txt) Editing:** TXT files open in a full-height, borderless editor with an electric blue caret. Click anywhere on the viewport to place your cursor and start typing.
 
+---
+
 ### 4. Collapsible Left Sidebar (`Alt + Shift + B`)
+
 Click the sidebar icon in the top-left or press `Alt + Shift + B` to toggle the navigation panel:
+
+<div align="center" style="margin: 16px 0;">
+  <img src="assets/guide/sidebar_navigation.png" alt="Sidebar Navigation and Live Statistics" width="280" style="border-radius: 8px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.25);" />
+  <p><em>Collapsible Sidebar: Workspace folder tree, document statistics, and ScrollSpy Table of Contents.</em></p>
+</div>
+
 - 📁 **Files / Workspace Tree:**
   - Browse your active folder, expand subdirectories, and open documents.
   - Use **Select Folder** to set your project workspace (defaults to Desktop on clean launch).
@@ -73,7 +121,17 @@ Click the sidebar icon in the top-left or press `Alt + Shift + B` to toggle the 
   - Navigate matches with `Enter` (Next) and `Shift + Enter` (Previous).
   - Click any search snippet in the sidebar list to jump directly to that occurrence.
 
+---
+
 ### 5. Options Menu & Document Tools (Top-Right `⋮`)
+
+Access the main options dropdown by clicking the three-dots icon in the top-right:
+
+<div align="center" style="margin: 16px 0;">
+  <img src="assets/guide/options_menu.png" alt="Options Menu & 20 Languages Dropdown" width="260" style="border-radius: 8px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.25);" />
+  <p><em>Options Dropdown: 20-language localized selector, UI zoom sliders, and quick export utilities.</em></p>
+</div>
+
 - 🌐 **20 Languages Localization:** Full native interface translation in English, Turkish, German, French, Spanish, Italian, Portuguese, Dutch, Polish, Russian, Ukrainian, Arabic, Hindi, Japanese, Chinese (Simplified & Traditional), Korean, Vietnamese, Indonesian, and Azerbaijani. Automatically matches your Windows display language.
 - 🔍 **UI Scaling & Typography Size:** Independently adjust UI Scale (80% to 150%) and Text Font Size (12px to 24px) to match your monitor and eyesight.
 - 💾 **Save As... (`Ctrl + Shift + S`):** Save a copy of your document with custom formatting.
