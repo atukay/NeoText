@@ -119,6 +119,21 @@
     <div class="sidebar-content">
       <!-- Files / Workspace Tree Pane -->
       <div id="tab-pane-files" class="sidebar-pane">
+        <!-- Recent Files Hub (Max 10 rows, dynamic height) -->
+        <div id="recent-files-section" class="recent-files-section" style="display: none;">
+          <div class="recent-files-header">
+            <div class="recent-files-title-box">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="recent-files-header-icon">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <span class="recent-files-title" data-i18n="recent_files_title">RECENT FILES</span>
+            </div>
+            <button id="recent-files-clear-btn" class="recent-files-clear-btn" data-i18n="recent_files_clear" title="Clear All">Clear All</button>
+          </div>
+          <div id="recent-files-list" class="recent-files-list"></div>
+        </div>
+
         <div class="workspace-header">
           <div class="workspace-title-box">
             <span id="workspace-folder-name" class="workspace-folder-name" data-i18n="no_folder_open">No Folder Open</span>
@@ -179,7 +194,17 @@
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
-          <input type="text" id="search-input" class="search-input" placeholder="Search text (Ctrl+F)..." autocomplete="off" spellcheck="false">
+          <input type="text" id="search-input" class="search-input" placeholder="Search text (Ctrl+F)..." autocomplete="off" spellcheck="false" data-i18n-placeholder="search_placeholder">
+        </div>
+
+        <div class="search-box replace-box" style="margin-top: 6px;">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="17 1 21 5 17 9"></polyline>
+            <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+            <polyline points="7 23 3 19 7 15"></polyline>
+            <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+          </svg>
+          <input type="text" id="replace-input" class="search-input" placeholder="Replace (Ctrl+H)..." autocomplete="off" spellcheck="false" data-i18n-placeholder="replace_placeholder">
         </div>
 
         <div class="search-results-info">
@@ -188,6 +213,15 @@
             <button id="search-prev-btn" class="header-btn" style="padding: 2px 6px;" data-i18n-title="search_prev_title" title="Previous (Shift+Enter)">▲</button>
             <button id="search-next-btn" class="header-btn" style="padding: 2px 6px;" data-i18n-title="search_next_title" title="Next (Enter)">▼</button>
           </div>
+        </div>
+
+        <div class="search-actions-bar" style="display: flex; gap: 6px; margin-bottom: 10px;">
+          <button id="replace-single-btn" class="header-btn search-action-btn" style="flex: 1; padding: 4px 8px; font-size: 11.5px; justify-content: center;" data-i18n-title="replace_single_title" title="Replace Current Match (Enter)">
+            <span data-i18n="replace_btn">Replace</span>
+          </button>
+          <button id="replace-all-btn" class="header-btn search-action-btn" style="flex: 1; padding: 4px 8px; font-size: 11.5px; justify-content: center;" data-i18n-title="replace_all_title" title="Replace All Matches (Ctrl+Enter)">
+            <span data-i18n="replace_all_btn">Replace All</span>
+          </button>
         </div>
 
         <!-- Search Results List Container -->
@@ -349,7 +383,7 @@
             </div>
             <div class="dropdown-divider"></div>
             <!-- UI Scale Selector -->
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 6px 10px;">
+            <div class="dropdown-setting-row">
               <span style="font-size: 12px; color: var(--text-secondary);" data-i18n="menu_scale">UI Scale</span>
               <div style="display: flex; gap: 4px; align-items: center;">
                 <button id="ui-scale-dec-btn" class="header-btn" style="padding: 2px 7px;" data-i18n-title="menu_scale_dec" title="Zoom Out UI">-</button>
@@ -359,19 +393,13 @@
             </div>
             <div class="dropdown-divider"></div>
             <!-- Font Size Selector -->
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 6px 10px;">
+            <div class="dropdown-setting-row">
               <span style="font-size: 12px; color: var(--text-secondary);" data-i18n="menu_font">Text Size</span>
               <div style="display: flex; gap: 4px; align-items: center;">
                 <button id="font-dec-btn" class="header-btn" style="padding: 2px 7px;" data-i18n-title="menu_font_dec" title="Decrease Text Size">-</button>
                 <span id="font-size-display" style="font-size: 12px; font-weight: 600; min-width: 32px; text-align: center;">16px</span>
                 <button id="font-inc-btn" class="header-btn" style="padding: 2px 7px;" data-i18n-title="menu_font_inc" title="Increase Text Size">+</button>
               </div>
-            </div>
-            <div class="dropdown-divider"></div>
-            <!-- External Open Mode Setting Row -->
-            <div id="menu-external-mode-btn" class="dropdown-setting-row" role="button" tabindex="0" title="External Files: Open as new tab">
-              <span style="font-size: 12px; color: var(--text-secondary);" data-i18n="menu_external_mode">External Files</span>
-              <span id="external-mode-badge" class="dropdown-mode-badge" data-i18n="external_mode_badge_tab">New Tab</span>
             </div>
             <div class="dropdown-divider"></div>
             <button id="save-as-btn" class="dropdown-item">
@@ -407,11 +435,19 @@
               <span data-i18n="menu_print">Print / Export to PDF...</span>
             </button>
             <div class="dropdown-divider"></div>
+            <button id="menu-settings-btn" class="dropdown-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="dropdown-item-icon">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+              <span data-i18n="menu_settings">Settings...</span>
+            </button>
+            <div class="dropdown-divider"></div>
             <!-- App Info Section -->
             <div class="dropdown-app-info">
               <div class="app-info-left-col">
                 <img src="assets/icon-64.png" alt="NeoText Logo" class="app-info-logo">
-                <span class="app-info-version" id="app-info-version">v2.1.1</span>
+                <span class="app-info-version" id="app-info-version">v2.2.0</span>
               </div>
               <div class="app-info-right-col">
                 <div class="app-info-name-row">
@@ -503,6 +539,29 @@
           <polyline points="8 6 2 12 8 18"></polyline>
         </svg>
       </button>
+      <div class="edit-toolbar-item" style="position: relative;">
+        <button id="tool-table" class="edit-tool-btn" data-tool="table" data-i18n-title="tool_table" title="Insert Table">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="3" y1="9" x2="21" y2="9"></line>
+            <line x1="3" y1="15" x2="21" y2="15"></line>
+            <line x1="9" y1="3" x2="9" y2="21"></line>
+            <line x1="15" y1="3" x2="15" y2="21"></line>
+          </svg>
+        </button>
+        <div id="tool-table-popover" class="tool-popover-menu table-popover">
+          <div class="table-popover-title" data-i18n="table_insert_title">Insert Table</div>
+          <div class="table-popover-row">
+            <label for="table-cols-input" data-i18n="table_cols">Columns</label>
+            <input type="number" id="table-cols-input" min="1" max="10" value="3">
+          </div>
+          <div class="table-popover-row">
+            <label for="table-rows-input" data-i18n="table_rows">Rows</label>
+            <input type="number" id="table-rows-input" min="1" max="25" value="3">
+          </div>
+          <button type="button" id="table-confirm-btn" class="table-insert-btn" data-i18n="table_insert_btn">Insert</button>
+        </div>
+      </div>
       <div class="edit-toolbar-divider"></div>
       <button id="tool-raw" class="edit-tool-btn edit-tool-raw" data-tool="raw" data-i18n-title="tool_raw" title="Raw Markdown Editor">RAW</button>
     </div>
@@ -560,10 +619,109 @@
         </div>
       </div>
 
+      <div id="line-numbers-gutter" class="line-numbers-gutter" style="display: none;"></div>
       <textarea id="raw-editor" class="raw-editor" spellcheck="false" placeholder="Markdown source code..."></textarea>
       <article id="markdown-body"></article>
     </div>
+
+    <!-- Drag & Drop Visual Overlay -->
+    <div id="drag-drop-overlay" class="drag-drop-overlay" style="display: none;">
+      <div class="drag-drop-modal">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="17 8 12 3 7 8"></polyline>
+          <line x1="12" y1="3" x2="12" y2="15"></line>
+        </svg>
+        <div class="drag-drop-text" data-i18n="drag_drop_text">Drop files here to open</div>
+      </div>
+    </div>
   </main>
+</div>
+
+<!-- Dedicated Settings Modal -->
+<div id="settings-modal" class="modal-backdrop" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="settings-modal-title">
+  <div class="settings-modal-dialog">
+    <div class="settings-modal-header">
+      <div class="settings-modal-title-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="settings-modal-icon">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+        <h3 id="settings-modal-title" data-i18n="settings_title">Settings</h3>
+      </div>
+      <button id="settings-close-btn" class="settings-close-btn" aria-label="Close" title="Close (Esc)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="settings-modal-body">
+      <!-- Setting Row: External Files Mode -->
+      <div class="settings-item">
+        <div class="settings-item-info">
+          <div class="settings-item-title" data-i18n="settings_ext_mode">External Files Opening</div>
+          <div class="settings-item-desc" data-i18n="settings_ext_desc">Choose whether external files open in a new tab or a separate window.</div>
+        </div>
+        <div class="settings-item-control">
+          <div class="settings-pill-group">
+            <button type="button" id="settings-ext-tab-btn" class="settings-pill-btn active" data-mode="tab" data-i18n="settings_ext_tab">Open as Tab</button>
+            <button type="button" id="settings-ext-window-btn" class="settings-pill-btn" data-mode="window" data-i18n="settings_ext_window">Open as New Window</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Setting Row: Typewriter Scrolling -->
+      <div class="settings-item">
+        <div class="settings-item-info">
+          <div class="settings-item-title" data-i18n="settings_typewriter">Typewriter Scrolling</div>
+          <div class="settings-item-desc" data-i18n="settings_typewriter_desc">Keep the active line vertically centered in the viewport while typing.</div>
+        </div>
+        <div class="settings-item-control">
+          <label class="toggle-switch">
+            <input type="checkbox" id="settings-toggle-typewriter">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Setting Row: Auto-Save -->
+      <div class="settings-item">
+        <div class="settings-item-info">
+          <div class="settings-item-title" data-i18n="settings_autosave">Auto-Save</div>
+          <div class="settings-item-desc" data-i18n="settings_autosave_desc">Automatically save changes to existing files without prompting.</div>
+        </div>
+        <div class="settings-item-control">
+          <select id="settings-autosave-select" class="settings-select">
+            <option value="off" data-i18n="autosave_off">Off</option>
+            <option value="inactivity" data-i18n="autosave_inactivity">On Inactivity (~2.5s)</option>
+            <option value="1m" data-i18n="autosave_1m">Every 1 minute</option>
+            <option value="5m" data-i18n="autosave_5m">Every 5 minutes</option>
+            <option value="15m" data-i18n="autosave_15m">Every 15 minutes</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Setting Row: Line Numbers -->
+      <div class="settings-item">
+        <div class="settings-item-info">
+          <div class="settings-item-title" data-i18n="settings_linenums">Line Numbers</div>
+          <div class="settings-item-desc" data-i18n="settings_linenums_desc">Show line numbers gutter in the editor.</div>
+        </div>
+        <div class="settings-item-control">
+          <label class="toggle-switch">
+            <input type="checkbox" id="settings-toggle-linenums">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-modal-footer">
+      <button type="button" id="settings-done-btn" class="settings-done-btn" data-i18n="settings_done">Done</button>
+    </div>
+  </div>
 </div>
 
 <!-- Embedded Offline Libraries -->

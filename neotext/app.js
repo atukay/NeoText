@@ -164,8 +164,43 @@
       app_rated_thanks: "Oyladığınız için teşekkürler!",
       toast_image_inserted: "Görsel eklendi: ",
       toast_image_file: "Görsel dosyası: ",
-      toast_image_saved: "Görsel kaydedildi: "
-    },
+      toast_image_saved: "Görsel kaydedildi: ",
+      menu_settings: "Ayarlar...",
+      settings_title: "Ayarlar",
+      settings_ext_mode: "Harici Dosya Açılışı",
+      settings_ext_desc: "Dosya Gezgini'nden açılan belgelerin nasıl açılacağını seçin.",
+      settings_ext_tab: "Sekme Olarak Aç",
+      settings_ext_window: "Yeni Pencerede Aç",
+      settings_typewriter: "Daktilo Kaydırma",
+      settings_typewriter_desc: "Yazarken aktif satırı dikey merkezde tutar.",
+      settings_autosave: "Otomatik Kaydetme",
+      settings_autosave_desc: "Mevcut dosyalardaki değişiklikleri otomatik olarak arka planda kaydeder.",
+      autosave_off: "Kapalı",
+      autosave_inactivity: "Boşta Kalınca (~2.5 sn)",
+      autosave_1m: "Dakikada 1",
+      autosave_5m: "5 dakikada 1",
+      autosave_15m: "15 dakikada 1",
+      settings_linenums: "Satır Numaraları",
+      settings_linenums_desc: "Düzenleme modunda sol kenarda satır numaralarını gösterir.",
+      settings_done: "Tamam",
+      recent_files_title: "SON DOSYALAR",
+      recent_files_clear: "Tümünü Temizle",
+      recent_files_remove_tip: "Listeden Çıkar",
+      tool_table: "Tablo Ekle",
+      table_insert_title: "Tablo Ekle",
+      table_cols: "Sütun",
+      table_rows: "Satır",
+      table_insert_btn: "Ekle",
+      drag_drop_text: "Açmak için dosyaları buraya bırakın",
+      autoSavedStatus: "Otomatik kaydedildi:"
+    ,
+      replace_placeholder: "Değiştir (Ctrl+H)...",
+      replace_btn: "Değiştir",
+      replace_all_btn: "Tümünü Değiştir",
+      replace_single_title: "Geçerli Eşleşmeyi Değiştir (Enter)",
+      replace_all_title: "Tüm Eşleşmeleri Değiştir (Ctrl+Enter)",
+      replace_count_toast: "eşleşme değiştirildi"
+},
     "en": {
       tab_files: "Files",
       tab_files_title: "Workspace / Files",
@@ -267,8 +302,43 @@
       app_rated_thanks: "Thanks for rating!",
       toast_image_inserted: "Image inserted: ",
       toast_image_file: "Image file: ",
-      toast_image_saved: "Image saved: "
-    },
+      toast_image_saved: "Image saved: ",
+      menu_settings: "Settings...",
+      settings_title: "Settings",
+      settings_ext_mode: "External Files Opening",
+      settings_ext_desc: "Choose whether external files open in a new tab or a separate window.",
+      settings_ext_tab: "Open as Tab",
+      settings_ext_window: "Open as New Window",
+      settings_typewriter: "Typewriter Scrolling",
+      settings_typewriter_desc: "Keep the active line vertically centered in the viewport while typing.",
+      settings_autosave: "Auto-Save",
+      settings_autosave_desc: "Automatically save changes to existing files in the background.",
+      autosave_off: "Off",
+      autosave_inactivity: "On Inactivity (~2.5s)",
+      autosave_1m: "Every 1 minute",
+      autosave_5m: "Every 5 minutes",
+      autosave_15m: "Every 15 minutes",
+      settings_linenums: "Line Numbers",
+      settings_linenums_desc: "Show line numbers gutter in the editor.",
+      settings_done: "Done",
+      recent_files_title: "RECENT FILES",
+      recent_files_clear: "Clear All",
+      recent_files_remove_tip: "Remove from List",
+      tool_table: "Insert Table",
+      table_insert_title: "Insert Table",
+      table_cols: "Columns",
+      table_rows: "Rows",
+      table_insert_btn: "Insert",
+      drag_drop_text: "Drop files here to open",
+      autoSavedStatus: "Auto-saved at"
+    ,
+      replace_placeholder: "Replace (Ctrl+H)...",
+      replace_btn: "Replace",
+      replace_all_btn: "Replace All",
+      replace_single_title: "Replace Current Match (Enter)",
+      replace_all_title: "Replace All Matches (Ctrl+Enter)",
+      replace_count_toast: "matches replaced"
+},
     "de": {
       tab_files: "Dateien",
       tab_files_title: "Arbeitsbereich / Dateien",
@@ -370,8 +440,43 @@
       app_rated_thanks: "Danke für Ihre Bewertung!",
       toast_image_inserted: "Bild eingefügt: ",
       toast_image_file: "Bilddatei: ",
-      toast_image_saved: "Bild gespeichert: "
-    },
+      toast_image_saved: "Bild gespeichert: ",
+      menu_settings: "Einstellungen...",
+      settings_title: "Einstellungen",
+      settings_ext_mode: "Öffnen externer Dateien",
+      settings_ext_desc: "Wählen Sie, ob externe Dateien in einem neuen Tab oder separaten Fenster geöffnet werden.",
+      settings_ext_tab: "Als Tab öffnen",
+      settings_ext_window: "In neuem Fenster öffnen",
+      settings_typewriter: "Schreibmaschinen-Bildlauf",
+      settings_typewriter_desc: "Hält die aktive Zeile beim Tippen vertikal zentriert.",
+      settings_autosave: "Automatisches Speichern",
+      settings_autosave_desc: "Änderungen an vorhandenen Dateien automatisch im Hintergrund speichern.",
+      autosave_off: "Aus",
+      autosave_inactivity: "Bei Inaktivität (~2,5s)",
+      autosave_1m: "Jede Minute",
+      autosave_5m: "Alle 5 Minuten",
+      autosave_15m: "Alle 15 Minuten",
+      settings_linenums: "Zeilennummern",
+      settings_linenums_desc: "Zeigt Zeilennummern im Editor an.",
+      settings_done: "Fertig",
+      recent_files_title: "ZULETZT GEÖFFNET",
+      recent_files_clear: "Alle löschen",
+      recent_files_remove_tip: "Aus Liste entfernen",
+      tool_table: "Tabelle einfügen",
+      table_insert_title: "Tabelle einfügen",
+      table_cols: "Spalten",
+      table_rows: "Zeilen",
+      table_insert_btn: "Einfügen",
+      drag_drop_text: "Dateien hier ablegen zum Öffnen",
+      autoSavedStatus: "Automatisch gespeichert um"
+    ,
+      replace_placeholder: "Ersetzen (Strg+H)...",
+      replace_btn: "Ersetzen",
+      replace_all_btn: "Alle ersetzen",
+      replace_single_title: "Aktuellen Treffer ersetzen (Enter)",
+      replace_all_title: "Alle Treffer ersetzen (Ctrl+Enter)",
+      replace_count_toast: "Treffer ersetzt"
+},
     "es": {
       tab_files: "Archivos",
       tab_files_title: "Área de trabajo / Archivos",
@@ -473,8 +578,43 @@
       app_rated_thanks: "¡Gracias por valorar!",
       toast_image_inserted: "Imagen insertada: ",
       toast_image_file: "Archivo de imagen: ",
-      toast_image_saved: "Imagen guardada: "
-    },
+      toast_image_saved: "Imagen guardada: ",
+      menu_settings: "Configuración...",
+      settings_title: "Configuración",
+      settings_ext_mode: "Apertura de archivos externos",
+      settings_ext_desc: "Elija si los archivos externos se abren en una nueva pestaña o en una ventana separada.",
+      settings_ext_tab: "Abrir como pestaña",
+      settings_ext_window: "Abrir en nueva ventana",
+      settings_typewriter: "Desplazamiento estilo máquina de escribir",
+      settings_typewriter_desc: "Mantiene la línea activa centrada verticalmente al escribir.",
+      settings_autosave: "Guardado automático",
+      settings_autosave_desc: "Guardar automáticamente los cambios en archivos existentes en segundo plano.",
+      autosave_off: "Desactivado",
+      autosave_inactivity: "Por inactividad (~2.5s)",
+      autosave_1m: "Cada 1 minuto",
+      autosave_5m: "Cada 5 minutos",
+      autosave_15m: "Cada 15 minutos",
+      settings_linenums: "Números de línea",
+      settings_linenums_desc: "Mostrar números de línea en el editor.",
+      settings_done: "Listo",
+      recent_files_title: "ARCHIVOS RECIENTES",
+      recent_files_clear: "Borrar todo",
+      recent_files_remove_tip: "Eliminar de la lista",
+      tool_table: "Insertar tabla",
+      table_insert_title: "Insertar tabla",
+      table_cols: "Columnas",
+      table_rows: "Filas",
+      table_insert_btn: "Insertar",
+      drag_drop_text: "Suelte los archivos aquí para abrirlos",
+      autoSavedStatus: "Guardado automáticamente a las"
+    ,
+      replace_placeholder: "Reemplazar (Ctrl+H)...",
+      replace_btn: "Reemplazar",
+      replace_all_btn: "Reemplazar todo",
+      replace_single_title: "Reemplazar coincidencia actual (Enter)",
+      replace_all_title: "Reemplazar todas las coincidencias (Ctrl+Enter)",
+      replace_count_toast: "coincidencias reemplazadas"
+},
     "fr": {
       tab_files: "Fichiers",
       tab_files_title: "Espace de travail / Fichiers",
@@ -576,8 +716,43 @@
       app_rated_thanks: "Merci pour votre avis !",
       toast_image_inserted: "Image insérée : ",
       toast_image_file: "Fichier image : ",
-      toast_image_saved: "Image enregistrée : "
-    },
+      toast_image_saved: "Image enregistrée : ",
+      menu_settings: "Paramètres...",
+      settings_title: "Paramètres",
+      settings_ext_mode: "Ouverture des fichiers externes",
+      settings_ext_desc: "Choisissez si les fichiers externes s'ouvrent dans un nouvel onglet ou une fenêtre séparée.",
+      settings_ext_tab: "Ouvrir comme onglet",
+      settings_ext_window: "Ouvrir dans une nouvelle fenêtre",
+      settings_typewriter: "Défilement machine à écrire",
+      settings_typewriter_desc: "Garde la ligne active centrée verticalement pendant la saisie.",
+      settings_autosave: "Enregistrement automatique",
+      settings_autosave_desc: "Enregistrer automatiquement les modifications apportées aux fichiers existants.",
+      autosave_off: "Désactivé",
+      autosave_inactivity: "En cas d'inactivité (~2,5s)",
+      autosave_1m: "Toutes les minutes",
+      autosave_5m: "Toutes les 5 minutes",
+      autosave_15m: "Toutes les 15 minutes",
+      settings_linenums: "Numéros de ligne",
+      settings_linenums_desc: "Afficher les numéros de ligne dans l'éditeur.",
+      settings_done: "Terminé",
+      recent_files_title: "FICHIERS RÉCENTS",
+      recent_files_clear: "Tout effacer",
+      recent_files_remove_tip: "Retirer de la liste",
+      tool_table: "Insérer un tableau",
+      table_insert_title: "Insérer un tableau",
+      table_cols: "Colonnes",
+      table_rows: "Lignes",
+      table_insert_btn: "Insérer",
+      drag_drop_text: "Déposez les fichiers ici pour les ouvrir",
+      autoSavedStatus: "Enregistré automatiquement à"
+    ,
+      replace_placeholder: "Remplacer (Ctrl+H)...",
+      replace_btn: "Remplacer",
+      replace_all_btn: "Tout remplacer",
+      replace_single_title: "Remplacer l'occurrence actuelle (Enter)",
+      replace_all_title: "Remplacer toutes les occurrences (Ctrl+Enter)",
+      replace_count_toast: "occurrences remplacées"
+},
     "it": {
       tab_files: "File",
       tab_files_title: "Spazio di lavoro / File",
@@ -679,8 +854,43 @@
       app_rated_thanks: "Grazie per la recensione!",
       toast_image_inserted: "Immagine inserita: ",
       toast_image_file: "File immagine: ",
-      toast_image_saved: "Immagine salvata: "
-    },
+      toast_image_saved: "Immagine salvata: ",
+      menu_settings: "Impostazioni...",
+      settings_title: "Impostazioni",
+      settings_ext_mode: "Apertura file esterni",
+      settings_ext_desc: "Scegli se i file esterni si aprono in una nuova scheda o in una finestra separata.",
+      settings_ext_tab: "Apri come scheda",
+      settings_ext_window: "Apri in una nuova finestra",
+      settings_typewriter: "Scorrimento macchina da scrivere",
+      settings_typewriter_desc: "Mantiene la riga attiva centrata verticalmente durante la digitazione.",
+      settings_autosave: "Salvataggio automatico",
+      settings_autosave_desc: "Salva automaticamente le modifiche ai file esistenti in background.",
+      autosave_off: "Disattivato",
+      autosave_inactivity: "Su inattività (~2,5s)",
+      autosave_1m: "Ogni minuto",
+      autosave_5m: "Ogni 5 minuti",
+      autosave_15m: "Ogni 15 minuti",
+      settings_linenums: "Numeri di riga",
+      settings_linenums_desc: "Mostra la barra dei numeri di riga nell'editor.",
+      settings_done: "Fine",
+      recent_files_title: "FILE RECENTI",
+      recent_files_clear: "Cancella tutto",
+      recent_files_remove_tip: "Rimuovi dall'elenco",
+      tool_table: "Inserisci tabella",
+      table_insert_title: "Inserisci tabella",
+      table_cols: "Colonne",
+      table_rows: "Righe",
+      table_insert_btn: "Inserisci",
+      drag_drop_text: "Rilascia i file qui per aprirli",
+      autoSavedStatus: "Salvataggio automatico alle"
+    ,
+      replace_placeholder: "Sostituisci (Ctrl+H)...",
+      replace_btn: "Sostituisci",
+      replace_all_btn: "Sostituisci tutto",
+      replace_single_title: "Sostituisci corrispondenza corrente (Enter)",
+      replace_all_title: "Sostituisci tutte le corrispondenze (Ctrl+Enter)",
+      replace_count_toast: "corrispondenze sostituite"
+},
     "pt": {
       tab_files: "Arquivos",
       tab_files_title: "Espaço de trabalho / Arquivos",
@@ -782,8 +992,43 @@
       app_rated_thanks: "Obrigado por avaliar!",
       toast_image_inserted: "Imagem inserida: ",
       toast_image_file: "Arquivo de imagem: ",
-      toast_image_saved: "Imagem salva: "
-    },
+      toast_image_saved: "Imagem salva: ",
+      menu_settings: "Configurações...",
+      settings_title: "Configurações",
+      settings_ext_mode: "Abertura de arquivos externos",
+      settings_ext_desc: "Escolha se os arquivos externos abrem em uma nova aba ou em uma janela separada.",
+      settings_ext_tab: "Abrir como aba",
+      settings_ext_window: "Abrir em nova janela",
+      settings_typewriter: "Rolagem estilo máquina de escrever",
+      settings_typewriter_desc: "Mantém a linha ativa centralizada verticalmente ao digitar.",
+      settings_autosave: "Salvamento automático",
+      settings_autosave_desc: "Salvar automaticamente alterações em arquivos existentes em segundo plano.",
+      autosave_off: "Desativado",
+      autosave_inactivity: "Por inatividade (~2,5s)",
+      autosave_1m: "A cada 1 minuto",
+      autosave_5m: "A cada 5 minutos",
+      autosave_15m: "A cada 15 minutos",
+      settings_linenums: "Números de linha",
+      settings_linenums_desc: "Exibir números de linha no editor.",
+      settings_done: "Concluído",
+      recent_files_title: "ARQUIVOS RECENTES",
+      recent_files_clear: "Limpar tudo",
+      recent_files_remove_tip: "Remover da lista",
+      tool_table: "Inserir tabela",
+      table_insert_title: "Inserir tabela",
+      table_cols: "Colunas",
+      table_rows: "Linhas",
+      table_insert_btn: "Inserir",
+      drag_drop_text: "Solte os arquivos aqui para abrir",
+      autoSavedStatus: "Salvo automaticamente às"
+    ,
+      replace_placeholder: "Substituir (Ctrl+H)...",
+      replace_btn: "Substituir",
+      replace_all_btn: "Substituir tudo",
+      replace_single_title: "Substituir correspondência atual (Enter)",
+      replace_all_title: "Substituir todas as correspondências (Ctrl+Enter)",
+      replace_count_toast: "ocorrências substituídas"
+},
     "nl": {
       tab_files: "Bestanden",
       tab_files_title: "Werkruimte / Bestanden",
@@ -885,8 +1130,43 @@
       app_rated_thanks: "Bedankt voor je beoordeling!",
       toast_image_inserted: "Afbeelding ingevoegd: ",
       toast_image_file: "Afbeeldingsbestand: ",
-      toast_image_saved: "Afbeelding opgeslagen: "
-    },
+      toast_image_saved: "Afbeelding opgeslagen: ",
+      menu_settings: "Instellingen...",
+      settings_title: "Instellingen",
+      settings_ext_mode: "Externe bestanden openen",
+      settings_ext_desc: "Kies of externe bestanden in een nieuw tabblad of apart venster worden geopend.",
+      settings_ext_tab: "Openen als tabblad",
+      settings_ext_window: "Openen in nieuw venster",
+      settings_typewriter: "Typemachine scrollen",
+      settings_typewriter_desc: "Houdt de actieve regel verticaal gecentreerd tijdens het typen.",
+      settings_autosave: "Automatisch opslaan",
+      settings_autosave_desc: "Wijzigingen in bestaande bestanden automatisch op de achtergrond opslaan.",
+      autosave_off: "Uit",
+      autosave_inactivity: "Bij inactiviteit (~2,5s)",
+      autosave_1m: "Elke minuut",
+      autosave_5m: "Elke 5 minuten",
+      autosave_15m: "Elke 15 minuten",
+      settings_linenums: "Regelnummers",
+      settings_linenums_desc: "Regelnummers weergeven in de editor.",
+      settings_done: "Klaar",
+      recent_files_title: "RECENTE BESTANDEN",
+      recent_files_clear: "Alles wissen",
+      recent_files_remove_tip: "Uit lijst verwijderen",
+      tool_table: "Tabel invoegen",
+      table_insert_title: "Tabel invoegen",
+      table_cols: "Kolommen",
+      table_rows: "Rijen",
+      table_insert_btn: "Invoegen",
+      drag_drop_text: "Sleep bestanden hierheen om te openen",
+      autoSavedStatus: "Automatisch opgeslagen om"
+    ,
+      replace_placeholder: "Vervangen (Ctrl+H)...",
+      replace_btn: "Vervangen",
+      replace_all_btn: "Alles vervangen",
+      replace_single_title: "Huidige overeenkomst vervangen (Enter)",
+      replace_all_title: "Alle overeenkomsten vervangen (Ctrl+Enter)",
+      replace_count_toast: "overeenkomsten vervangen"
+},
     "pl": {
       tab_files: "Pliki",
       tab_files_title: "Obszar roboczy / Pliki",
@@ -988,8 +1268,43 @@
       app_rated_thanks: "Dziękujemy za ocenę!",
       toast_image_inserted: "Wstawiono obraz: ",
       toast_image_file: "Plik obrazu: ",
-      toast_image_saved: "Zapisano obraz: "
-    },
+      toast_image_saved: "Zapisano obraz: ",
+      menu_settings: "Ustawienia...",
+      settings_title: "Ustawienia",
+      settings_ext_mode: "Otwieranie plików zewnętrznych",
+      settings_ext_desc: "Wybierz, czy pliki zewnętrzne mają być otwierane w nowej karcie, czy w osobnym oknie.",
+      settings_ext_tab: "Otwórz jako kartę",
+      settings_ext_window: "Otwórz w nowym oknie",
+      settings_typewriter: "Przewijanie maszynowe",
+      settings_typewriter_desc: "Utrzymuje aktywną linię pionowo wyśrodkowaną podczas pisania.",
+      settings_autosave: "Automatyczne zapisywanie",
+      settings_autosave_desc: "Automatycznie zapisuj zmiany w istniejących plikach w tle.",
+      autosave_off: "Wyłączone",
+      autosave_inactivity: "Przy braku aktywności (~2.5s)",
+      autosave_1m: "Co 1 minutę",
+      autosave_5m: "Co 5 minut",
+      autosave_15m: "Co 15 minut",
+      settings_linenums: "Numery linii",
+      settings_linenums_desc: "Pokaż numery linii w edytorze.",
+      settings_done: "Gotowe",
+      recent_files_title: "OSTATNIE PLIKI",
+      recent_files_clear: "Wyczyść wszystko",
+      recent_files_remove_tip: "Usuń z listy",
+      tool_table: "Wstaw tabelę",
+      table_insert_title: "Wstaw tabelę",
+      table_cols: "Kolumny",
+      table_rows: "Wiersze",
+      table_insert_btn: "Wstaw",
+      drag_drop_text: "Upuść pliki tutaj, aby otworzyć",
+      autoSavedStatus: "Zapisano automatycznie o"
+    ,
+      replace_placeholder: "Zastąp (Ctrl+H)...",
+      replace_btn: "Zastąp",
+      replace_all_btn: "Zastąp wszystko",
+      replace_single_title: "Zastąp bieżące dopasowanie (Enter)",
+      replace_all_title: "Zastąp wszystkie dopasowania (Ctrl+Enter)",
+      replace_count_toast: "dopasowań zastąpionych"
+},
     "ru": {
       tab_files: "Файлы",
       tab_files_title: "Рабочая область / Файлы",
@@ -1091,8 +1406,43 @@
       app_rated_thanks: "Спасибо за оценку!",
       toast_image_inserted: "Изображение вставлено: ",
       toast_image_file: "Файл изображения: ",
-      toast_image_saved: "Изображение сохранено: "
-    },
+      toast_image_saved: "Изображение сохранено: ",
+      menu_settings: "Настройки...",
+      settings_title: "Настройки",
+      settings_ext_mode: "Открытие внешних файлов",
+      settings_ext_desc: "Выберите, открывать ли внешние файлы в новой вкладке или в отдельном окне.",
+      settings_ext_tab: "В новой вкладке",
+      settings_ext_window: "В новом окне",
+      settings_typewriter: "Режим пишущей машинки",
+      settings_typewriter_desc: "Удерживает активную строку по центру экрана при вводе текста.",
+      settings_autosave: "Автосохранение",
+      settings_autosave_desc: "Автоматически сохранять изменения в существующих файлах в фоновом режиме.",
+      autosave_off: "Выключено",
+      autosave_inactivity: "При бездействии (~2.5с)",
+      autosave_1m: "Каждую минуту",
+      autosave_5m: "Каждые 5 минут",
+      autosave_15m: "Каждые 15 минут",
+      settings_linenums: "Номера строк",
+      settings_linenums_desc: "Отображать номера строк в редакторе.",
+      settings_done: "Готово",
+      recent_files_title: "НЕДАВНИЕ ФАЙЛЫ",
+      recent_files_clear: "Очистить всё",
+      recent_files_remove_tip: "Удалить из списка",
+      tool_table: "Вставить таблицу",
+      table_insert_title: "Вставить таблицу",
+      table_cols: "Столбцы",
+      table_rows: "Строки",
+      table_insert_btn: "Вставить",
+      drag_drop_text: "Перетащите файлы сюда, чтобы открыть",
+      autoSavedStatus: "Автосохранено в"
+    ,
+      replace_placeholder: "Заменить (Ctrl+H)...",
+      replace_btn: "Заменить",
+      replace_all_btn: "Заменить все",
+      replace_single_title: "Заменить текущее совпадение (Enter)",
+      replace_all_title: "Заменить все совпадения (Ctrl+Enter)",
+      replace_count_toast: "совпадений заменено"
+},
     "uk": {
       tab_files: "Файли",
       tab_files_title: "Робоча область / Файли",
@@ -1194,8 +1544,43 @@
       app_rated_thanks: "Дякуємо за оцінку!",
       toast_image_inserted: "Зображення вставлено: ",
       toast_image_file: "Файл зображення: ",
-      toast_image_saved: "Зображення збережено: "
-    },
+      toast_image_saved: "Зображення збережено: ",
+      menu_settings: "Налаштування...",
+      settings_title: "Налаштування",
+      settings_ext_mode: "Відкриття зовнішніх файлів",
+      settings_ext_desc: "Виберіть, відкривати зовнішні файли у новій вкладці чи в окремому вікні.",
+      settings_ext_tab: "Як вкладку",
+      settings_ext_window: "У новому вікні",
+      settings_typewriter: "Режим друкарської машинки",
+      settings_typewriter_desc: "Утримує активний рядок по центру екрана під час введення тексту.",
+      settings_autosave: "Автозбереження",
+      settings_autosave_desc: "Автоматично зберігати зміни в наявних файлах у фоновому режимі.",
+      autosave_off: "Вимкнено",
+      autosave_inactivity: "При неактивності (~2.5с)",
+      autosave_1m: "Щохвилини",
+      autosave_5m: "Кожні 5 хвилин",
+      autosave_15m: "Кожні 15 хвилин",
+      settings_linenums: "Номери рядків",
+      settings_linenums_desc: "Показувати номери рядків у редакторі.",
+      settings_done: "Готово",
+      recent_files_title: "НЕДАВНІ ФАЙЛИ",
+      recent_files_clear: "Очистити все",
+      recent_files_remove_tip: "Видалити зі списку",
+      tool_table: "Вставити таблицю",
+      table_insert_title: "Вставити таблицю",
+      table_cols: "Стовпці",
+      table_rows: "Рядки",
+      table_insert_btn: "Вставити",
+      drag_drop_text: "Перетягніть файли сюди, щоб відкрити",
+      autoSavedStatus: "Автозбережено о"
+    ,
+      replace_placeholder: "Замінити (Ctrl+H)...",
+      replace_btn: "Замінити",
+      replace_all_btn: "Замінити все",
+      replace_single_title: "Замінити поточний збіг (Enter)",
+      replace_all_title: "Замінити всі збіги (Ctrl+Enter)",
+      replace_count_toast: "збігів замінено"
+},
     "ar": {
       tab_files: "الملفات",
       tab_files_title: "مساحة العمل / الملفات",
@@ -1297,8 +1682,43 @@
       app_rated_thanks: "شكرًا لتقييمك!",
       toast_image_inserted: "تم إدراج الصورة: ",
       toast_image_file: "ملف الصورة: ",
-      toast_image_saved: "تم حفظ الصورة: "
-    },
+      toast_image_saved: "تم حفظ الصورة: ",
+      menu_settings: "...الإعدادات",
+      settings_title: "الإعدادات",
+      settings_ext_mode: "فتح الملفات الخارجية",
+      settings_ext_desc: "اختر ما إذا كان سيتم فتح الملفات الخارجية في علامة تبويب جديدة أو نافذة منفصلة.",
+      settings_ext_tab: "فتح كعلامة تبويب",
+      settings_ext_window: "فتح في نافذة جديدة",
+      settings_typewriter: "تمرير الآلة الكاتبة",
+      settings_typewriter_desc: "يبقي السطر النشط متمركزًا رأسيًا أثناء الكتابة.",
+      settings_autosave: "الحفظ التلقائي",
+      settings_autosave_desc: "حفظ التغييرات في الملفات الموجودة تلقائيًا في الخلفية.",
+      autosave_off: "معطل",
+      autosave_inactivity: "عند الخمول (~2.5 ثانية)",
+      autosave_1m: "كل دقيقة",
+      autosave_5m: "كل 5 دقائق",
+      autosave_15m: "كل 15 دقيقة",
+      settings_linenums: "أرقام الأسطر",
+      settings_linenums_desc: "إظهار أرقام الأسطر في المحرر.",
+      settings_done: "تم",
+      recent_files_title: "الملفات الأخيرة",
+      recent_files_clear: "مسح الكل",
+      recent_files_remove_tip: "إزالة من القائمة",
+      tool_table: "إدراج جدول",
+      table_insert_title: "إدراج جدول",
+      table_cols: "الأعمدة",
+      table_rows: "الصفوف",
+      table_insert_btn: "إدراج",
+      drag_drop_text: "أفلت الملفات هنا لفتحها",
+      autoSavedStatus: "تم الحفظ تلقائيًا في"
+    ,
+      replace_placeholder: "استبدال (Ctrl+H)...",
+      replace_btn: "استبدال",
+      replace_all_btn: "استبدال الكل",
+      replace_single_title: "استبدال التطابق الحالي (Enter)",
+      replace_all_title: "استبدال جميع التطابقات (Ctrl+Enter)",
+      replace_count_toast: "تم استبدال التطابقات"
+},
     "hi": {
       tab_files: "फ़ाइलें",
       tab_files_title: "कार्यस्थान / फ़ाइलें",
@@ -1400,8 +1820,43 @@
       app_rated_thanks: "रेट करने के लिए धन्यवाद!",
       toast_image_inserted: "छवि डाली गई: ",
       toast_image_file: "छवि फ़ाइल: ",
-      toast_image_saved: "छवि सहेजी गई: "
-    },
+      toast_image_saved: "छवि सहेजी गई: ",
+      menu_settings: "सेटिंग्स...",
+      settings_title: "सेटिंग्स",
+      settings_ext_mode: "बाहरी फ़ाइलें खोलना",
+      settings_ext_desc: "चुनें कि बाहरी फ़ाइलें नए टैब में खुलें या अलग विंडो में।",
+      settings_ext_tab: "टैब के रूप में खोलें",
+      settings_ext_window: "नई विंडो में खोलें",
+      settings_typewriter: "टाइपराइटर स्क्रॉलिंग",
+      settings_typewriter_desc: "टाइप करते समय सक्रिय पंक्ति को लंबवत केंद्र में रखता है।",
+      settings_autosave: "स्वतः सहेजना",
+      settings_autosave_desc: "मौजूदा फ़ाइलों में परिवर्तनों को पृष्ठभूमि में स्वचालित रूप से सहेजें।",
+      autosave_off: "बंद",
+      autosave_inactivity: "निष्क्रियता पर (~2.5 से)",
+      autosave_1m: "हर 1 मिनट",
+      autosave_5m: "हर 5 मिनट",
+      autosave_15m: "हर 15 मिनट",
+      settings_linenums: "पंक्ति संख्याएँ",
+      settings_linenums_desc: "संपादक में पंक्ति संख्याएँ दिखाएं।",
+      settings_done: "पूर्ण",
+      recent_files_title: "हाल की फ़ाइलें",
+      recent_files_clear: "सभी साफ़ करें",
+      recent_files_remove_tip: "सूची से हटाएं",
+      tool_table: "तालिका डालें",
+      table_insert_title: "तालिका डालें",
+      table_cols: "कॉलम",
+      table_rows: "पंक्तियाँ",
+      table_insert_btn: "डालें",
+      drag_drop_text: "खोलने के लिए फ़ाइलें यहाँ छोड़ें",
+      autoSavedStatus: "स्वतः सहेजा गया:"
+    ,
+      replace_placeholder: "बदलें (Ctrl+H)...",
+      replace_btn: "बदलें",
+      replace_all_btn: "सभी बदलें",
+      replace_single_title: "वर्तमान मिलान बदलें (Enter)",
+      replace_all_title: "सभी मिलान बदलें (Ctrl+Enter)",
+      replace_count_toast: "मिलान बदले गए"
+},
     "ja": {
       tab_files: "ファイル",
       tab_files_title: "ワークスペース / ファイル",
@@ -1503,8 +1958,43 @@
       app_rated_thanks: "評価ありがとうございます！",
       toast_image_inserted: "画像を挿入しました: ",
       toast_image_file: "画像ファイル: ",
-      toast_image_saved: "画像を保存しました: "
-    },
+      toast_image_saved: "画像を保存しました: ",
+      menu_settings: "設定...",
+      settings_title: "設定",
+      settings_ext_mode: "外部ファイルを開く",
+      settings_ext_desc: "外部ファイルを新しいタブで開くか、別のウィンドウで開くかを選択します。",
+      settings_ext_tab: "タブとして開く",
+      settings_ext_window: "新しいウィンドウで開く",
+      settings_typewriter: "タイプライタースクロール",
+      settings_typewriter_desc: "入力中、アクティブな行を画面の中央に保ちます。",
+      settings_autosave: "自動保存",
+      settings_autosave_desc: "既存のファイルへの変更をバックグラウンドで自動的に保存します。",
+      autosave_off: "オフ",
+      autosave_inactivity: "アイドル時 (~2.5秒)",
+      autosave_1m: "1分ごと",
+      autosave_5m: "5分ごと",
+      autosave_15m: "15分ごと",
+      settings_linenums: "行番号",
+      settings_linenums_desc: "エディターに行番号を表示します。",
+      settings_done: "完了",
+      recent_files_title: "最近のファイル",
+      recent_files_clear: "すべてクリア",
+      recent_files_remove_tip: "リストから削除",
+      tool_table: "表を挿入",
+      table_insert_title: "表を挿入",
+      table_cols: "列",
+      table_rows: "行",
+      table_insert_btn: "挿入",
+      drag_drop_text: "開くにはここにファイルをドロップ",
+      autoSavedStatus: "自動保存時刻:"
+    ,
+      replace_placeholder: "置換 (Ctrl+H)...",
+      replace_btn: "置換",
+      replace_all_btn: "すべて置換",
+      replace_single_title: "現在の一致を置換 (Enter)",
+      replace_all_title: "すべての一致を置換 (Ctrl+Enter)",
+      replace_count_toast: "件の置換が完了しました"
+},
     "zh": {
       tab_files: "文件",
       tab_files_title: "工作区 / 文件",
@@ -1606,8 +2096,43 @@
       app_rated_thanks: "感谢您的评分！",
       toast_image_inserted: "已插入图片: ",
       toast_image_file: "图片文件: ",
-      toast_image_saved: "图片已保存: "
-    },
+      toast_image_saved: "图片已保存: ",
+      menu_settings: "设置...",
+      settings_title: "设置",
+      settings_ext_mode: "外部文件打开方式",
+      settings_ext_desc: "选择外部文件是在新标签页中打开还是在独立窗口中打开。",
+      settings_ext_tab: "作为标签页打开",
+      settings_ext_window: "在新窗口中打开",
+      settings_typewriter: "打字机滚动",
+      settings_typewriter_desc: "打字时将活动行保持在视口垂直居中位置。",
+      settings_autosave: "自动保存",
+      settings_autosave_desc: "在后台自动保存对现有文件的更改。",
+      autosave_off: "关闭",
+      autosave_inactivity: "空闲时 (~2.5秒)",
+      autosave_1m: "每1分钟",
+      autosave_5m: "每5分钟",
+      autosave_15m: "每15分钟",
+      settings_linenums: "行号",
+      settings_linenums_desc: "在编辑器中显示行号。",
+      settings_done: "完成",
+      recent_files_title: "最近使用的文件",
+      recent_files_clear: "清除全部",
+      recent_files_remove_tip: "从列表中移除",
+      tool_table: "插入表格",
+      table_insert_title: "插入表格",
+      table_cols: "列数",
+      table_rows: "行数",
+      table_insert_btn: "插入",
+      drag_drop_text: "拖放文件到此处打开",
+      autoSavedStatus: "自动保存于"
+    ,
+      replace_placeholder: "替换 (Ctrl+H)...",
+      replace_btn: "替换",
+      replace_all_btn: "全部替换",
+      replace_single_title: "替换当前匹配 (Enter)",
+      replace_all_title: "替换全部匹配 (Ctrl+Enter)",
+      replace_count_toast: "处匹配已替换"
+},
     "zh-TW": {
       tab_files: "檔案",
       tab_files_title: "工作區 / 檔案",
@@ -1709,8 +2234,43 @@
       app_rated_thanks: "感謝您的評分！",
       toast_image_inserted: "已插入圖片: ",
       toast_image_file: "圖片檔案: ",
-      toast_image_saved: "圖片已儲存: "
-    },
+      toast_image_saved: "圖片已儲存: ",
+      menu_settings: "設定...",
+      settings_title: "設定",
+      settings_ext_mode: "外部檔案開啟方式",
+      settings_ext_desc: "選擇外部檔案是在新分頁中開啟還是在獨立視窗中開啟。",
+      settings_ext_tab: "作為分頁開啟",
+      settings_ext_window: "在新視窗中開啟",
+      settings_typewriter: "打字機滾動",
+      settings_typewriter_desc: "打字時將使用中行保持在視窗垂直居中位置。",
+      settings_autosave: "自動儲存",
+      settings_autosave_desc: "在背景自動儲存對現有檔案的變更。",
+      autosave_off: "關閉",
+      autosave_inactivity: "閒置時 (~2.5秒)",
+      autosave_1m: "每1分鐘",
+      autosave_5m: "每5分鐘",
+      autosave_15m: "每15分鐘",
+      settings_linenums: "行號",
+      settings_linenums_desc: "在編輯器中顯示行號。",
+      settings_done: "完成",
+      recent_files_title: "最近使用的檔案",
+      recent_files_clear: "清除全部",
+      recent_files_remove_tip: "從清單中移除",
+      tool_table: "插入表格",
+      table_insert_title: "插入表格",
+      table_cols: "欄數",
+      table_rows: "列數",
+      table_insert_btn: "插入",
+      drag_drop_text: "拖放檔案至此處開啟",
+      autoSavedStatus: "自動儲存於"
+    ,
+      replace_placeholder: "取代 (Ctrl+H)...",
+      replace_btn: "取代",
+      replace_all_btn: "全部取代",
+      replace_single_title: "取代目前符合項目 (Enter)",
+      replace_all_title: "取代所有符合項目 (Ctrl+Enter)",
+      replace_count_toast: "處符合項目已取代"
+},
     "ko": {
       tab_files: "파일",
       tab_files_title: "작업 공간 / 파일",
@@ -1812,8 +2372,43 @@
       app_rated_thanks: "평가해 주셔서 감사합니다!",
       toast_image_inserted: "이미지 삽입됨: ",
       toast_image_file: "이미지 파일: ",
-      toast_image_saved: "이미지 저장됨: "
-    },
+      toast_image_saved: "이미지 저장됨: ",
+      menu_settings: "설정...",
+      settings_title: "설정",
+      settings_ext_mode: "외부 파일 열기",
+      settings_ext_desc: "외부 파일을 새 탭에서 열지 별도의 창에서 열지 선택합니다.",
+      settings_ext_tab: "탭으로 열기",
+      settings_ext_window: "새 창으로 열기",
+      settings_typewriter: "타자기 스크롤",
+      settings_typewriter_desc: "입력하는 동안 활성 줄을 화면 세로 중앙에 고정합니다.",
+      settings_autosave: "자동 저장",
+      settings_autosave_desc: "기존 파일의 변경 사항을 백그라운드에서 자동으로 저장합니다.",
+      autosave_off: "끔",
+      autosave_inactivity: "입력 멈춤 시 (~2.5초)",
+      autosave_1m: "1분마다",
+      autosave_5m: "5분마다",
+      autosave_15m: "15분마다",
+      settings_linenums: "줄 번호",
+      settings_linenums_desc: "편집기에서 줄 번호를 표시합니다.",
+      settings_done: "완료",
+      recent_files_title: "최근 파일",
+      recent_files_clear: "모두 지우기",
+      recent_files_remove_tip: "목록에서 제거",
+      tool_table: "표 삽입",
+      table_insert_title: "표 삽입",
+      table_cols: "열",
+      table_rows: "행",
+      table_insert_btn: "삽입",
+      drag_drop_text: "열려면 여기에 파일을 드롭하세요",
+      autoSavedStatus: "자동 저장됨:"
+    ,
+      replace_placeholder: "바꾸기 (Ctrl+H)...",
+      replace_btn: "바꾸기",
+      replace_all_btn: "모두 바꾸기",
+      replace_single_title: "현재 일치 항목 바꾸기 (Enter)",
+      replace_all_title: "모든 일치 항목 바꾸기 (Ctrl+Enter)",
+      replace_count_toast: "개 일치 항목 바꿈"
+},
     "id": {
       tab_files: "Berkas",
       tab_files_title: "Ruang Kerja / Berkas",
@@ -1915,8 +2510,43 @@
       app_rated_thanks: "Terima kasih telah menilai!",
       toast_image_inserted: "Gambar disisipkan: ",
       toast_image_file: "Berkas gambar: ",
-      toast_image_saved: "Gambar disimpan: "
-    },
+      toast_image_saved: "Gambar disimpan: ",
+      menu_settings: "Pengaturan...",
+      settings_title: "Pengaturan",
+      settings_ext_mode: "Membuka Berkas Eksternal",
+      settings_ext_desc: "Pilih apakah berkas eksternal dibuka di tab baru atau jendela terpisah.",
+      settings_ext_tab: "Buka sebagai Tab",
+      settings_ext_window: "Buka di Jendela Baru",
+      settings_typewriter: "Gulir Mesin Tik",
+      settings_typewriter_desc: "Menjaga baris aktif tetap di tengah vertikal saat mengetik.",
+      settings_autosave: "Simpan Otomatis",
+      settings_autosave_desc: "Secara otomatis menyimpan perubahan pada berkas yang ada di latar belakang.",
+      autosave_off: "Mati",
+      autosave_inactivity: "Saat Tidak Aktif (~2,5d)",
+      autosave_1m: "Setiap 1 menit",
+      autosave_5m: "Setiap 5 menit",
+      autosave_15m: "Setiap 15 menit",
+      settings_linenums: "Nomor Baris",
+      settings_linenums_desc: "Tampilkan nomor baris di editor.",
+      settings_done: "Selesai",
+      recent_files_title: "BERKAS TERBARU",
+      recent_files_clear: "Hapus Semua",
+      recent_files_remove_tip: "Hapus dari Daftar",
+      tool_table: "Sisipkan Tabel",
+      table_insert_title: "Sisipkan Tabel",
+      table_cols: "Kolom",
+      table_rows: "Baris",
+      table_insert_btn: "Sisipkan",
+      drag_drop_text: "Lepaskan berkas di sini untuk membuka",
+      autoSavedStatus: "Disimpan otomatis pada"
+    ,
+      replace_placeholder: "Ganti (Ctrl+H)...",
+      replace_btn: "Ganti",
+      replace_all_btn: "Ganti Semua",
+      replace_single_title: "Ganti kecocokan saat ini (Enter)",
+      replace_all_title: "Ganti semua kecocokan (Ctrl+Enter)",
+      replace_count_toast: "kecocokan diganti"
+},
     "vi": {
       tab_files: "Tệp tin",
       tab_files_title: "Không gian làm việc / Tệp tin",
@@ -2018,8 +2648,43 @@
       app_rated_thanks: "Cảm ơn bạn đã đánh giá!",
       toast_image_inserted: "Đã chèn hình ảnh: ",
       toast_image_file: "Tệp hình ảnh: ",
-      toast_image_saved: "Đã lưu hình ảnh: "
-    },
+      toast_image_saved: "Đã lưu hình ảnh: ",
+      menu_settings: "Cài đặt...",
+      settings_title: "Cài đặt",
+      settings_ext_mode: "Mở tệp bên ngoài",
+      settings_ext_desc: "Chọn mở tệp bên ngoài trong tab mới hay cửa sổ riêng biệt.",
+      settings_ext_tab: "Mở dưới dạng tab",
+      settings_ext_window: "Mở trong cửa sổ mới",
+      settings_typewriter: "Cuộn kiểu máy đánh chữ",
+      settings_typewriter_desc: "Giữ dòng đang nhập ở giữa màn hình theo chiều dọc.",
+      settings_autosave: "Tự động lưu",
+      settings_autosave_desc: "Tự động lưu các thay đổi đối với tệp hiện có trong nền.",
+      autosave_off: "Tắt",
+      autosave_inactivity: "Khi không hoạt động (~2.5s)",
+      autosave_1m: "Mỗi 1 phút",
+      autosave_5m: "Mỗi 5 phút",
+      autosave_15m: "Mỗi 15 phút",
+      settings_linenums: "Số dòng",
+      settings_linenums_desc: "Hiển thị số dòng trong trình chỉnh sửa.",
+      settings_done: "Xong",
+      recent_files_title: "TỆP GẦN ĐÂY",
+      recent_files_clear: "Xóa tất cả",
+      recent_files_remove_tip: "Xóa khỏi danh sách",
+      tool_table: "Chèn bảng",
+      table_insert_title: "Chèn bảng",
+      table_cols: "Cột",
+      table_rows: "Hàng",
+      table_insert_btn: "Chèn",
+      drag_drop_text: "Thả tệp vào đây để mở",
+      autoSavedStatus: "Đã tự động lưu lúc"
+    ,
+      replace_placeholder: "Thay thế (Ctrl+H)...",
+      replace_btn: "Thay thế",
+      replace_all_btn: "Thay thế tất cả",
+      replace_single_title: "Thay thế kết quả hiện tại (Enter)",
+      replace_all_title: "Thay thế tất cả kết quả (Ctrl+Enter)",
+      replace_count_toast: "kết quả đã được thay thế"
+},
     "az": {
       tab_files: "Fayllar",
       tab_files_title: "İş sahəsi / Fayllar",
@@ -2121,8 +2786,43 @@
       app_rated_thanks: "Qiymətləndirdiyiniz üçün təşəkkürlər!",
       toast_image_inserted: "Şəkil əlavə edildi: ",
       toast_image_file: "Şəkil faylı: ",
-      toast_image_saved: "Şəkil yadda saxlanıldı: "
-    }
+      toast_image_saved: "Şəkil yadda saxlanıldı: ",
+      menu_settings: "Tənzimləmələr...",
+      settings_title: "Tənzimləmələr",
+      settings_ext_mode: "Xarici Faylların Açılması",
+      settings_ext_desc: "Xarici faylların yeni tabda və ya ayrı pəncərədə açılacağını seçin.",
+      settings_ext_tab: "Tab kimi aç",
+      settings_ext_window: "Yeni pəncərədə aç",
+      settings_typewriter: "Yazı makinası sürüşdürməsi",
+      settings_typewriter_desc: "Yazarkən aktiv sətri şaquli mərkəzdə saxlayır.",
+      settings_autosave: "Avtomatik Saxlama",
+      settings_autosave_desc: "Mövcud fayllardakı dəyişiklikləri fonda avtomatik saxlayır.",
+      autosave_off: "Söndürülüb",
+      autosave_inactivity: "Boş dayananda (~2.5 san)",
+      autosave_1m: "Hər 1 dəqiqə",
+      autosave_5m: "Hər 5 dəqiqə",
+      autosave_15m: "Hər 15 dəqiqə",
+      settings_linenums: "Sətir nömrələri",
+      settings_linenums_desc: "Redaktorda sətir nömrələrini göstərin.",
+      settings_done: "Hazırdır",
+      recent_files_title: "SON FAYLLAR",
+      recent_files_clear: "Hamısını təmizlə",
+      recent_files_remove_tip: "Siyahıdan çıxar",
+      tool_table: "Cədvəl əlavə et",
+      table_insert_title: "Cədvəl əlavə et",
+      table_cols: "Sütun",
+      table_rows: "Sətir",
+      table_insert_btn: "Əlavə et",
+      drag_drop_text: "Açmaq üçün faylları bura atın",
+      autoSavedStatus: "Avtomatik saxlanıldı:"
+    ,
+      replace_placeholder: "Əvəz et (Ctrl+H)...",
+      replace_btn: "Əvəz et",
+      replace_all_btn: "Hamısını əvəz et",
+      replace_single_title: "Cari uyğunluğu əvəz et (Enter)",
+      replace_all_title: "Bütün uyğunluqları əvəz et (Ctrl+Enter)",
+      replace_count_toast: "uyğunluq əvəz edildi"
+}
   };
 
   // State
@@ -2165,7 +2865,19 @@
       }
       return getStored('workspace_folder_name', '') || (f ? (f.split(/[/\\]/).filter(Boolean).pop() || '') : '');
     })(),
-    openExternalInTabs: getStored('external_open_mode', 'tab') !== 'window'
+    openExternalInTabs: getStored('external_open_mode', 'tab') !== 'window',
+    recentFiles: (function() {
+      try {
+        const raw = getStored('recent_files', '[]');
+        return JSON.parse(raw) || [];
+      } catch (e) {
+        return [];
+      }
+    })(),
+    typewriterScrolling: getStored('typewriter_scrolling', 'false') === 'true',
+    autoSaveInterval: getStored('autosave_interval', 'off'),
+    showLineNumbers: getStored('line_numbers', 'false') === 'true',
+    userRequestedFolderSelection: false
   };
 
   window.state = state;
@@ -2232,8 +2944,11 @@
     statChars: document.getElementById('stat-chars'),
     statTime: document.getElementById('stat-time'),
     statPath: document.getElementById('stat-path'),
-    // Search
+    // Search & Replace
     searchInput: document.getElementById('search-input'),
+    replaceInput: document.getElementById('replace-input'),
+    replaceSingleBtn: document.getElementById('replace-single-btn'),
+    replaceAllBtn: document.getElementById('replace-all-btn'),
     searchCount: document.getElementById('search-count'),
     searchPrevBtn: document.getElementById('search-prev-btn'),
     searchNextBtn: document.getElementById('search-next-btn'),
@@ -2258,6 +2973,29 @@
     uiScaleDisplay: document.getElementById('ui-scale-display'),
     saveAsBtn: document.getElementById('save-as-btn'),
     convertDocBtn: document.getElementById('convert-doc-btn'),
+    // Recent Files Hub
+    recentFilesSection: document.getElementById('recent-files-section'),
+    recentFilesClearBtn: document.getElementById('recent-files-clear-btn'),
+    recentFilesList: document.getElementById('recent-files-list'),
+    // Settings Modal
+    menuSettingsBtn: document.getElementById('menu-settings-btn'),
+    settingsModal: document.getElementById('settings-modal'),
+    settingsCloseBtn: document.getElementById('settings-close-btn'),
+    settingsDoneBtn: document.getElementById('settings-done-btn'),
+    settingsExtTabBtn: document.getElementById('settings-ext-tab-btn'),
+    settingsExtWindowBtn: document.getElementById('settings-ext-window-btn'),
+    settingsToggleTypewriter: document.getElementById('settings-toggle-typewriter'),
+    settingsAutoSaveSelect: document.getElementById('settings-autosave-select'),
+    settingsToggleLineNums: document.getElementById('settings-toggle-linenums'),
+    // Table Inserter
+    toolTableBtn: document.getElementById('tool-table'),
+    toolTablePopover: document.getElementById('tool-table-popover'),
+    tableColsInput: document.getElementById('table-cols-input'),
+    tableRowsInput: document.getElementById('table-rows-input'),
+    tableConfirmBtn: document.getElementById('table-confirm-btn'),
+    // Line Numbers & Drag-Drop
+    lineNumbersGutter: document.getElementById('line-numbers-gutter'),
+    dragDropOverlay: document.getElementById('drag-drop-overlay'),
     convertDocLabel: document.getElementById('convert-doc-label'),
     printBtn: document.getElementById('print-btn'),
     copyHtmlBtn: document.getElementById('copy-html-btn'),
@@ -2449,6 +3187,9 @@
     if (el.searchInput) {
       el.searchInput.placeholder = dict.search_placeholder || 'Metin ara (Ctrl+F)...';
     }
+    if (el.replaceInput) {
+      el.replaceInput.placeholder = dict.replace_placeholder || 'Değiştir (Ctrl+H)...';
+    }
     if (el.searchPrevBtn) el.searchPrevBtn.title = dict.search_prev_title || 'Önceki (Shift+Enter)';
     if (el.searchNextBtn) el.searchNextBtn.title = dict.search_next_title || 'Sonraki (Enter)';
     if (el.sidebarToggleBtn) el.sidebarToggleBtn.title = dict.sidebar_toggle_title || 'Kenar Çubuğunu Aç/Kapat (Alt+Shift+B)';
@@ -2477,6 +3218,7 @@
 
     updateConvertButtonLabel();
     updateExternalModeUI();
+    renderRecentFiles();
     updateRateButtonState();
   }
 
@@ -2772,6 +3514,9 @@
     state.fileName = data.fileName || 'Belge.md';
     state.originalRaw = state.rawMarkdown;
     state.lastModified = data.lastModified || Date.now();
+    if (state.filePath && state.filePath !== 'Introduction.md') {
+      addRecentFile(state.filePath, state.fileName);
+    }
     if (data.sessionId) {
       state.sessionId = data.sessionId;
       const currentHash = (window.location.hash || '').replace(/^#/, '');
@@ -2881,6 +3626,13 @@
 
       // Pass rendered HTML through DOM Sanitizer before setting innerHTML
       el.markdownBody.innerHTML = sanitizeRenderedHtml(html);
+
+      // Interactive GFM Tasklists in Preview Mode (2C)
+      const taskCheckboxes = el.markdownBody.querySelectorAll('.task-list-item input[type="checkbox"]');
+      taskCheckboxes.forEach((cb, idx) => {
+        cb.removeAttribute('disabled');
+        cb.dataset.taskIndex = idx;
+      });
     }
 
     // Build Table of Contents & Stats
@@ -2992,12 +3744,18 @@
     updateHeadingPositions();
   });
 
-  // Lag-Free Scroll Handler
+  // Lag-Free Scroll Handler & Continuous Tab Scroll Tracking
   let isScrollingTicking = false;
   el.viewport.addEventListener('scroll', () => {
     if (!isScrollingTicking) {
       window.requestAnimationFrame(() => {
         handleScrollSpy();
+        if (state.activeTabId && el.viewport) {
+          const curTab = state.tabs.find(t => t.id === state.activeTabId);
+          if (curTab && !curTab.isRawMode) {
+            curTab.scrollTop = el.viewport.scrollTop;
+          }
+        }
         isScrollingTicking = false;
       });
       isScrollingTicking = true;
@@ -3380,6 +4138,8 @@
       }
     }
     updateToolbarActiveStates();
+    applyTypewriterMode();
+    updateLineNumbers();
   }
 
   // Raw Markdown Source Code Editor Toggle
@@ -3473,6 +4233,8 @@
       }
     }
     updateToolbarActiveStates();
+    applyTypewriterMode();
+    updateLineNumbers();
   }
 
   function autoResizeRawEditor() {
@@ -4646,13 +5408,170 @@
     }
   }
 
+
+  // Interactive Task List Toggle (Preview Mode - 2C)
+  function toggleMarkdownTaskItem(taskIndex, isChecked) {
+    let content = state.rawMarkdown || '';
+    if (!content) return;
+
+    const lines = content.split('\n');
+    let currentTaskIdx = 0;
+    let inCodeBlock = false;
+    let modified = false;
+
+    for (let i = 0; i < lines.length; i++) {
+      const trimmed = lines[i].trim();
+      if (trimmed.startsWith('```') || trimmed.startsWith('~~~')) {
+        inCodeBlock = !inCodeBlock;
+        continue;
+      }
+      if (inCodeBlock) continue;
+
+      const match = lines[i].match(/^(\s*(?:>\s*)*(?:[-*+]|\d+[.)])\s+\[)([ xX])(\]\s*.*)$/);
+      if (match) {
+        if (currentTaskIdx === taskIndex) {
+          const newMark = isChecked ? 'x' : ' ';
+          lines[i] = match[1] + newMark + match[3];
+          modified = true;
+          break;
+        }
+        currentTaskIdx++;
+      }
+    }
+
+    if (modified) {
+      const newContent = lines.join('\n');
+      state.rawMarkdown = newContent;
+      state.originalRaw = newContent;
+
+      if (state.activeTabId) {
+        const active = state.tabs.find(t => t.id === state.activeTabId);
+        if (active) {
+          active.rawMarkdown = newContent;
+          active.originalRaw = newContent;
+        }
+      }
+
+      if (state.filePath && window.chrome && window.chrome.webview) {
+        try {
+          window.chrome.webview.postMessage('save_tab_file:' + state.filePath + '|' + newContent);
+        } catch (err) {
+          console.warn('Auto-saving task item failed:', err);
+        }
+      }
+
+      calculateStats(newContent);
+    }
+  }
+
+  // Replace & Replace All in Document (2D)
+  function performReplace(isAll) {
+    const query = (el.searchInput ? el.searchInput.value : '').trim();
+    const replaceText = el.replaceInput ? el.replaceInput.value : '';
+    const dict = I18N[state.lang || 'en'] || I18N.en;
+
+    if (!query) {
+      showToast(dict.search_no_match || 'No query specified');
+      return;
+    }
+
+    const isTxt = isPlainTextDoc(state.fileName);
+    let originalText = '';
+
+    if (state.isRawMode && el.rawEditor) {
+      originalText = el.rawEditor.value;
+    } else if (isTxt) {
+      originalText = el.markdownBody.innerText;
+    } else {
+      originalText = state.rawMarkdown || '';
+    }
+
+    if (!originalText) return;
+
+    const regex = new RegExp(escapeRegExp(query), isAll ? 'gi' : 'i');
+    const matchCount = (originalText.match(regex) || []).length;
+
+    if (matchCount === 0) {
+      showToast(dict.search_no_match || 'No matches found');
+      return;
+    }
+
+    let updatedText = '';
+    let replacedCount = 0;
+
+    if (isAll) {
+      updatedText = originalText.replace(regex, replaceText);
+      replacedCount = matchCount;
+    } else {
+      let count = 0;
+      let replaced = false;
+      const targetIdx = (state.currentSearchIdx >= 0) ? state.currentSearchIdx : 0;
+      const regAll = new RegExp(escapeRegExp(query), 'gi');
+
+      updatedText = originalText.replace(regAll, (match) => {
+        if (count === targetIdx && !replaced) {
+          replaced = true;
+          replacedCount = 1;
+          count++;
+          return replaceText;
+        }
+        count++;
+        return match;
+      });
+
+      if (!replaced && matchCount > 0) {
+        updatedText = originalText.replace(new RegExp(escapeRegExp(query), 'i'), replaceText);
+        replacedCount = 1;
+      }
+    }
+
+    if (replacedCount === 0) return;
+
+    state.rawMarkdown = updatedText;
+    state.originalRaw = updatedText;
+
+    if (state.activeTabId) {
+      const active = state.tabs.find(t => t.id === state.activeTabId);
+      if (active) {
+        active.rawMarkdown = updatedText;
+        active.originalRaw = updatedText;
+      }
+    }
+
+    if (state.isRawMode && el.rawEditor) {
+      el.rawEditor.value = updatedText;
+    } else if (isTxt) {
+      el.markdownBody.innerText = updatedText;
+    } else {
+      renderMarkdown();
+    }
+
+    if (state.filePath && window.chrome && window.chrome.webview) {
+      try {
+        window.chrome.webview.postMessage('save_tab_file:' + state.filePath + '|' + updatedText);
+      } catch (e) {
+        console.warn('Saving after replace failed:', e);
+      }
+    }
+
+    calculateStats(updatedText);
+    performSearch(query);
+
+    const toastMsg = replacedCount + ' ' + (dict.replace_count_toast || 'matches replaced');
+    showToast(toastMsg);
+  }
+
   // Focus Search Tab
-  function openSearchTab() {
+  function openSearchTab(focusReplace = false) {
+    state.userRequestedFolderSelection = false;
     applySidebar(true);
     const searchTabBtn = document.querySelector('.tab-btn[data-tab="search"]');
     if (searchTabBtn) searchTabBtn.click();
     setTimeout(() => {
-      if (el.searchInput) {
+      if (focusReplace && el.replaceInput) {
+        el.replaceInput.focus();
+        el.replaceInput.select();
+      } else if (el.searchInput) {
         el.searchInput.focus();
         el.searchInput.select();
       }
@@ -4814,8 +5733,10 @@
       });
     }
 
-    // External Open Mode toggle
-    initExternalModeToggle();
+    // Settings, Table, Drag-Drop, Recent Files
+    initSettingsModal();
+    initTableInserter();
+    initDragAndDrop();
 
     // Global file drag-and-drop & Chrome-like tab tear-off on window/viewport
     window.addEventListener('dragover', (e) => {
@@ -4903,38 +5824,530 @@
     };
   }
 
-  function initExternalModeToggle() {
-    updateExternalModeUI();
-    if (el.menuExternalModeBtn) {
-      el.menuExternalModeBtn.addEventListener('click', () => {
-        state.openExternalInTabs = !state.openExternalInTabs;
-        setStored('external_open_mode', state.openExternalInTabs ? 'tab' : 'window');
-        if (window.chrome && window.chrome.webview) {
-          window.chrome.webview.postMessage('set_external_open_mode:' + (state.openExternalInTabs ? 'tab' : 'window'));
-        }
-        updateExternalModeUI();
-        const dict = I18N[state.lang || 'en'] || I18N.en;
-        const msg = state.openExternalInTabs
-          ? (dict.external_mode_tab || 'External files open in tabs')
-          : (dict.external_mode_window || 'External files open in new windows');
-        showToast(msg);
+  // ==========================================
+  // Recent Files Hub (v2.2.0-beta)
+  // ==========================================
+  function renderRecentFiles() {
+    if (!el.recentFilesSection || !el.recentFilesList) return;
+    if (!state.recentFiles || state.recentFiles.length === 0) {
+      el.recentFilesSection.style.display = 'none';
+      el.recentFilesList.innerHTML = '';
+      return;
+    }
+    el.recentFilesSection.style.display = 'flex';
+    el.recentFilesList.innerHTML = '';
+
+    const dict = I18N[state.lang || 'en'] || I18N.en;
+    const removeTip = dict.recent_files_remove_tip || 'Remove from List';
+
+    state.recentFiles.slice(0, 10).forEach(item => {
+      const row = document.createElement('div');
+      row.className = 'recent-file-item';
+      row.title = item.path;
+
+      const main = document.createElement('div');
+      main.className = 'recent-file-main';
+
+      const icon = document.createElement('div');
+      icon.className = 'recent-file-icon';
+      icon.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>';
+
+      const name = document.createElement('span');
+      name.className = 'recent-file-name';
+      name.textContent = item.name || (item.path.split(/[\\/]/).filter(Boolean).pop() || item.path);
+
+      main.appendChild(icon);
+      main.appendChild(name);
+
+      const removeBtn = document.createElement('button');
+      removeBtn.className = 'recent-file-remove';
+      removeBtn.title = removeTip;
+      removeBtn.innerHTML = '&times;';
+      removeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        removeRecentFile(item.path);
+      });
+
+      row.appendChild(main);
+      row.appendChild(removeBtn);
+
+      row.addEventListener('click', () => {
+        openRecentFile(item.path);
+      });
+
+      el.recentFilesList.appendChild(row);
+    });
+  }
+
+  function addRecentFile(filePath, fileName) {
+    if (!filePath || typeof filePath !== 'string') return;
+    if (!fileName) {
+      fileName = filePath.split(/[\\/]/).filter(Boolean).pop() || filePath;
+    }
+    state.recentFiles = state.recentFiles.filter(item => item.path.toLowerCase() !== filePath.toLowerCase());
+    state.recentFiles.unshift({ path: filePath, name: fileName });
+    if (state.recentFiles.length > 10) {
+      state.recentFiles = state.recentFiles.slice(0, 10);
+    }
+    setStored('recent_files', JSON.stringify(state.recentFiles));
+    renderRecentFiles();
+  }
+
+  function removeRecentFile(filePath) {
+    state.recentFiles = state.recentFiles.filter(item => item.path.toLowerCase() !== filePath.toLowerCase());
+    setStored('recent_files', JSON.stringify(state.recentFiles));
+    renderRecentFiles();
+  }
+
+  function clearRecentFiles() {
+    state.recentFiles = [];
+    setStored('recent_files', JSON.stringify([]));
+    renderRecentFiles();
+  }
+
+  function openRecentFile(filePath) {
+    const existingTab = state.tabs.find(t => t.filePath && t.filePath.toLowerCase() === filePath.toLowerCase());
+    if (existingTab) {
+      switchTab(existingTab.id);
+    } else {
+      if (window.chrome && window.chrome.webview) {
+        window.chrome.webview.postMessage('read_file_content:' + filePath);
+      }
+    }
+  }
+
+  // ==========================================
+  // Dedicated Settings Modal & Controls (v2.2.0-beta)
+  // ==========================================
+  function openSettingsModal() {
+    if (el.dropdownMenu) el.dropdownMenu.classList.remove('show');
+    if (!el.settingsModal) return;
+    updateSettingsControls();
+    el.settingsModal.style.display = 'flex';
+  }
+
+  function closeSettingsModal() {
+    if (!el.settingsModal) return;
+    el.settingsModal.style.display = 'none';
+  }
+
+  function updateSettingsControls() {
+    if (el.settingsExtTabBtn && el.settingsExtWindowBtn) {
+      el.settingsExtTabBtn.classList.toggle('active', state.openExternalInTabs);
+      el.settingsExtWindowBtn.classList.toggle('active', !state.openExternalInTabs);
+    }
+    if (el.settingsToggleTypewriter) {
+      el.settingsToggleTypewriter.checked = !!state.typewriterScrolling;
+    }
+    if (el.settingsAutoSaveSelect) {
+      el.settingsAutoSaveSelect.value = state.autoSaveInterval || 'off';
+    }
+    if (el.settingsToggleLineNums) {
+      el.settingsToggleLineNums.checked = !!state.showLineNumbers;
+    }
+  }
+
+  function initSettingsModal() {
+    if (el.menuSettingsBtn) {
+      el.menuSettingsBtn.addEventListener('click', openSettingsModal);
+    }
+    if (el.settingsCloseBtn) {
+      el.settingsCloseBtn.addEventListener('click', closeSettingsModal);
+    }
+    if (el.settingsDoneBtn) {
+      el.settingsDoneBtn.addEventListener('click', closeSettingsModal);
+    }
+    if (el.settingsModal) {
+      el.settingsModal.addEventListener('click', (e) => {
+        if (e.target === el.settingsModal) closeSettingsModal();
+      });
+    }
+
+    // External Files Mode Pill Buttons
+    if (el.settingsExtTabBtn) {
+      el.settingsExtTabBtn.addEventListener('click', () => {
+        setExternalOpenMode(true);
+      });
+    }
+    if (el.settingsExtWindowBtn) {
+      el.settingsExtWindowBtn.addEventListener('click', () => {
+        setExternalOpenMode(false);
+      });
+    }
+
+    // Typewriter Toggle
+    if (el.settingsToggleTypewriter) {
+      el.settingsToggleTypewriter.addEventListener('change', (e) => {
+        state.typewriterScrolling = e.target.checked;
+        setStored('typewriter_scrolling', state.typewriterScrolling ? 'true' : 'false');
+        applyTypewriterMode();
+      });
+    }
+
+    // Auto-Save Select
+    if (el.settingsAutoSaveSelect) {
+      el.settingsAutoSaveSelect.addEventListener('change', (e) => {
+        state.autoSaveInterval = e.target.value;
+        setStored('autosave_interval', state.autoSaveInterval);
+        initAutoSaveTimer();
+      });
+    }
+
+    // Line Numbers Toggle
+    if (el.settingsToggleLineNums) {
+      el.settingsToggleLineNums.addEventListener('change', (e) => {
+        state.showLineNumbers = e.target.checked;
+        setStored('line_numbers', state.showLineNumbers ? 'true' : 'false');
+        updateLineNumbers();
+      });
+    }
+
+    if (el.recentFilesClearBtn) {
+      el.recentFilesClearBtn.addEventListener('click', clearRecentFiles);
+    }
+
+    // Listen to ESC to close settings
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && el.settingsModal && el.settingsModal.style.display !== 'none') {
+        closeSettingsModal();
+      }
+    });
+
+    applyTypewriterMode();
+    updateLineNumbers();
+    initAutoSaveTimer();
+    renderRecentFiles();
+    updateSettingsControls();
+  }
+
+  function setExternalOpenMode(inTabs) {
+    state.openExternalInTabs = inTabs;
+    setStored('external_open_mode', state.openExternalInTabs ? 'tab' : 'window');
+    if (window.chrome && window.chrome.webview) {
+      window.chrome.webview.postMessage('set_external_open_mode:' + (state.openExternalInTabs ? 'tab' : 'window'));
+    }
+    updateSettingsControls();
+  }
+
+  function updateExternalModeUI() {
+    updateSettingsControls();
+  }
+
+  // ==========================================
+  // Typewriter Scrolling Engine (v2.2.0-beta)
+  // ==========================================
+  function applyTypewriterMode() {
+    const isTypewriter = !!state.typewriterScrolling;
+    if (el.markdownBody) {
+      el.markdownBody.classList.toggle('typewriter-mode', isTypewriter && state.isEditing);
+    }
+    if (el.rawEditor) {
+      el.rawEditor.classList.toggle('typewriter-mode', isTypewriter && state.isRawMode);
+    }
+  }
+
+  function triggerTypewriterScroll() {
+    if (!state.typewriterScrolling || !state.isEditing || !el.viewport) return;
+
+    if (state.isRawMode && el.rawEditor) {
+      const textBeforeCaret = el.rawEditor.value.substring(0, el.rawEditor.selectionStart);
+      const lineIndex = textBeforeCaret.split('\n').length - 1;
+      const lineHeight = 22;
+      const caretY = lineIndex * lineHeight;
+      const targetScroll = caretY - (el.viewport.clientHeight * 0.45);
+      el.viewport.scrollTo({
+        top: Math.max(0, targetScroll),
+        behavior: 'smooth'
+      });
+      return;
+    }
+
+    const selection = window.getSelection();
+    if (!selection || !selection.rangeCount) return;
+    const range = selection.getRangeAt(0);
+    const rect = range.getBoundingClientRect();
+    if (!rect || rect.height === 0) return;
+
+    const vpRect = el.viewport.getBoundingClientRect();
+    const targetY = vpRect.top + (vpRect.height * 0.45);
+    const delta = rect.top - targetY;
+    if (Math.abs(delta) > 5) {
+      el.viewport.scrollBy({
+        top: delta,
+        behavior: 'smooth'
       });
     }
   }
 
-  function updateExternalModeUI() {
+  // ==========================================
+  // Auto-Save Engine (v2.2.0-beta)
+  // ==========================================
+  let autoSaveIntervalTimer = null;
+  let autoSaveDebounceTimer = null;
+
+  function initAutoSaveTimer() {
+    if (autoSaveIntervalTimer) {
+      clearInterval(autoSaveIntervalTimer);
+      autoSaveIntervalTimer = null;
+    }
+    const mode = state.autoSaveInterval || 'off';
+    let ms = 0;
+    if (mode === '1m') ms = 60 * 1000;
+    else if (mode === '5m') ms = 5 * 60 * 1000;
+    else if (mode === '15m') ms = 15 * 60 * 1000;
+
+    if (ms > 0) {
+      autoSaveIntervalTimer = setInterval(() => {
+        if (state.isDirty && state.filePath) {
+          performSilentAutoSave();
+        }
+      }, ms);
+    }
+  }
+
+  function handleAutoSaveKeystroke() {
+    if (state.autoSaveInterval === 'inactivity') {
+      if (autoSaveDebounceTimer) clearTimeout(autoSaveDebounceTimer);
+      autoSaveDebounceTimer = setTimeout(() => {
+        if (state.isDirty && state.filePath) {
+          performSilentAutoSave();
+        }
+      }, 2500);
+    }
+  }
+
+  function performSilentAutoSave() {
+    if (!state.isDirty || !state.filePath) return;
+    const isTxt = isPlainTextDoc(state.fileName);
+    let contentToSave = '';
+    if (state.isRawMode && el.rawEditor) {
+      contentToSave = el.rawEditor.value;
+    } else if (state.isEditing) {
+      if (isTxt) {
+        contentToSave = getPlainTextFromEditor();
+      } else {
+        contentToSave = turndownService ? turndownService.turndown(el.markdownBody.innerHTML) : (el.markdownBody.innerText || '');
+      }
+    } else {
+      contentToSave = state.rawMarkdown;
+    }
+
+    state.rawMarkdown = contentToSave;
+    state.originalRaw = contentToSave;
+
+    if (state.activeTabId) {
+      const active = state.tabs.find(t => t.id === state.activeTabId);
+      if (active) {
+        active.rawMarkdown = contentToSave;
+        active.originalRaw = contentToSave;
+        active.isDirty = false;
+        updateTabTitle(active);
+      }
+    }
+
+    if (window.chrome && window.chrome.webview) {
+      try {
+        window.chrome.webview.postMessage('save_tab_file:' + state.filePath + '|' + contentToSave);
+      } catch (e) {
+        console.error('Failed to auto-save file:', e);
+      }
+    }
+
+    setDirty(false);
+    calculateStats(contentToSave);
+
     const dict = I18N[state.lang || 'en'] || I18N.en;
-    if (el.externalModeBadge) {
-      el.externalModeBadge.textContent = state.openExternalInTabs
-        ? (dict.external_mode_badge_tab || 'New Tab')
-        : (dict.external_mode_badge_win || 'New Window');
-      el.externalModeBadge.classList.toggle('window-mode', !state.openExternalInTabs);
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    const autoSaveMsg = (dict.autoSavedStatus || 'Auto-saved at') + ' ' + timeStr;
+    if (el.singleDocTitle) {
+      const orig = state.fileName;
+      el.singleDocTitle.textContent = `${orig} (${autoSaveMsg})`;
+      setTimeout(() => {
+        if (el.singleDocTitle) el.singleDocTitle.textContent = orig;
+      }, 2000);
     }
-    if (el.menuExternalModeBtn) {
-      el.menuExternalModeBtn.title = state.openExternalInTabs
-        ? (dict.external_mode_tab || 'External Files: Open as new tab')
-        : (dict.external_mode_window || 'External Files: Open as new window');
+  }
+
+  // ==========================================
+  // Line Numbers Gutter Engine (v2.2.0-beta)
+  // ==========================================
+  function updateLineNumbers() {
+    if (!el.lineNumbersGutter) return;
+    const shouldShow = state.showLineNumbers && (state.isEditing || state.isRawMode);
+    document.body.classList.toggle('show-line-numbers', shouldShow);
+    el.lineNumbersGutter.style.display = shouldShow ? 'block' : 'none';
+
+    if (!shouldShow) {
+      el.lineNumbersGutter.textContent = '';
+      return;
     }
+
+    let lineCount = 1;
+    if (state.isRawMode && el.rawEditor) {
+      lineCount = (el.rawEditor.value.split('\n') || []).length;
+    } else if (state.isEditing && el.markdownBody) {
+      lineCount = ((el.markdownBody.innerText || '').split('\n') || []).length;
+    }
+    lineCount = Math.max(1, lineCount);
+
+    let nums = '';
+    for (let i = 1; i <= lineCount; i++) {
+      nums += i + '\n';
+    }
+    el.lineNumbersGutter.textContent = nums;
+  }
+
+  // ==========================================
+  // Smart Table Inserter (v2.2.0-beta)
+  // ==========================================
+  function initTableInserter() {
+    if (!el.toolTableBtn || !el.toolTablePopover) return;
+
+    el.toolTableBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isVis = el.toolTablePopover.classList.contains('visible');
+      if (el.toolUlPopover) el.toolUlPopover.classList.remove('visible');
+      el.toolTablePopover.classList.toggle('visible', !isVis);
+    });
+
+    if (el.tableConfirmBtn) {
+      el.tableConfirmBtn.addEventListener('click', () => {
+        const cols = Math.max(1, Math.min(10, parseInt(el.tableColsInput ? el.tableColsInput.value : '3', 10) || 3));
+        const rows = Math.max(1, Math.min(25, parseInt(el.tableRowsInput ? el.tableRowsInput.value : '3', 10) || 3));
+
+        insertMarkdownTable(cols, rows);
+        el.toolTablePopover.classList.remove('visible');
+      });
+    }
+
+    document.addEventListener('click', (e) => {
+      if (el.toolTablePopover && !el.toolTablePopover.contains(e.target) && e.target !== el.toolTableBtn) {
+        el.toolTablePopover.classList.remove('visible');
+      }
+    });
+  }
+
+  function insertMarkdownTable(cols, rows) {
+    let tableMd = '\n';
+    let headerRow = '|';
+    let sepRow = '|';
+    for (let c = 1; c <= cols; c++) {
+      headerRow += ` Header ${c} |`;
+      sepRow += ' :--- |';
+    }
+    tableMd += headerRow + '\n' + sepRow + '\n';
+
+    for (let r = 1; r <= rows; r++) {
+      let dataRow = '|';
+      for (let c = 1; c <= cols; c++) {
+        dataRow += ` Cell ${r}.${c} |`;
+      }
+      tableMd += dataRow + '\n';
+    }
+    tableMd += '\n';
+
+    if (state.isRawMode && el.rawEditor) {
+      const start = el.rawEditor.selectionStart;
+      const end = el.rawEditor.selectionEnd;
+      const val = el.rawEditor.value;
+      el.rawEditor.value = val.substring(0, start) + tableMd + val.substring(end);
+      el.rawEditor.selectionStart = el.rawEditor.selectionEnd = start + tableMd.length;
+      el.rawEditor.focus();
+      autoResizeRawEditor();
+      if (!state.isDirty) setDirty(true);
+      handleAutoSaveKeystroke();
+      triggerTypewriterScroll();
+      updateLineNumbers();
+    } else if (state.isEditing && el.markdownBody) {
+      document.execCommand('insertText', false, tableMd);
+      if (!state.isDirty) setDirty(true);
+      handleAutoSaveKeystroke();
+      triggerTypewriterScroll();
+      updateLineNumbers();
+    }
+  }
+
+  // ==========================================
+  // Drag & Drop Engine (v2.2.0-beta)
+  // ==========================================
+  function initDragAndDrop() {
+    const overlay = el.dragDropOverlay;
+    let dragCounter = 0;
+
+    window.addEventListener('dragenter', (e) => {
+      e.preventDefault();
+      dragCounter++;
+      if (overlay) overlay.style.display = 'flex';
+    });
+
+    window.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      if (overlay && overlay.style.display !== 'flex') {
+        overlay.style.display = 'flex';
+      }
+    });
+
+    window.addEventListener('dragleave', (e) => {
+      e.preventDefault();
+      dragCounter--;
+      if (dragCounter <= 0) {
+        dragCounter = 0;
+        if (overlay) overlay.style.display = 'none';
+      }
+    });
+
+    window.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dragCounter = 0;
+      if (overlay) overlay.style.display = 'none';
+
+      const files = e.dataTransfer ? e.dataTransfer.files : null;
+      if (!files || files.length === 0) return;
+
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const filePath = file.path || '';
+        const name = file.name || 'DroppedFile';
+        const isImg = /\.(png|jpe?g|gif|svg|webp|bmp)$/i.test(name);
+
+        if (isImg && state.isEditing) {
+          const imgMd = filePath ? `
+![${name}](${filePath})
+` : `
+![${name}](${file.name})
+`;
+          if (state.isRawMode && el.rawEditor) {
+            const start = el.rawEditor.selectionStart;
+            const end = el.rawEditor.selectionEnd;
+            const val = el.rawEditor.value;
+            el.rawEditor.value = val.substring(0, start) + imgMd + val.substring(end);
+            el.rawEditor.focus();
+            autoResizeRawEditor();
+            if (!state.isDirty) setDirty(true);
+            handleAutoSaveKeystroke();
+            triggerTypewriterScroll();
+            updateLineNumbers();
+          } else if (el.markdownBody) {
+            document.execCommand('insertText', false, imgMd);
+            if (!state.isDirty) setDirty(true);
+            handleAutoSaveKeystroke();
+            triggerTypewriterScroll();
+            updateLineNumbers();
+          }
+        } else {
+          if (filePath && window.chrome && window.chrome.webview) {
+            window.chrome.webview.postMessage('read_file_content:' + filePath);
+          } else {
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+              openFileInTab(filePath || name, name, evt.target.result);
+            };
+            reader.readAsText(file);
+          }
+        }
+      }
+    });
   }
 
   function createNewTab(title, content, filePath) {
@@ -4981,7 +6394,34 @@
     active.isDirty = state.isDirty;
     active.isEditing = state.isEditing;
     active.isRawMode = state.isRawMode;
-    active.scrollTop = el.viewport ? el.viewport.scrollTop : 0;
+    active.scrollTop = (active.isRawMode && el.rawEditor)
+      ? el.rawEditor.scrollTop
+      : (el.viewport ? el.viewport.scrollTop : 0);
+  }
+
+  function restoreTabScroll(targetScroll, isRaw) {
+    const s = Math.max(0, targetScroll || 0);
+    if (isRaw && el.rawEditor) {
+      el.rawEditor.scrollTop = s;
+      requestAnimationFrame(() => {
+        if (el.rawEditor) el.rawEditor.scrollTop = s;
+      });
+      setTimeout(() => {
+        if (el.rawEditor) el.rawEditor.scrollTop = s;
+      }, 50);
+    } else if (el.viewport) {
+      el.viewport.scrollTop = s;
+      requestAnimationFrame(() => {
+        if (el.viewport) el.viewport.scrollTop = s;
+      });
+      // Multi-stage ticks allow for DOM reflow, KaTeX formulas and images loading
+      setTimeout(() => {
+        if (el.viewport) el.viewport.scrollTop = s;
+      }, 40);
+      setTimeout(() => {
+        if (el.viewport) el.viewport.scrollTop = s;
+      }, 120);
+    }
   }
 
   function switchTab(tabId) {
@@ -5009,10 +6449,6 @@
 
     renderMarkdown();
 
-    if (el.viewport) {
-      el.viewport.scrollTop = targetTab.scrollTop || 0;
-    }
-
     toggleEditMode(state.isEditing);
     if (state.isEditing && state.isRawMode) {
       toggleRawMode(true);
@@ -5025,6 +6461,9 @@
       buildTableOfContents();
       requestAnimationFrame(updateHeadingPositions);
     }
+
+    const savedScroll = targetTab.scrollTop || 0;
+    restoreTabScroll(savedScroll, targetTab.isRawMode);
 
     document.querySelectorAll('.tree-row').forEach(row => {
       if (row.dataset.path === state.filePath) {
@@ -5461,6 +6900,7 @@
 
     if (el.openWorkspaceBtn) {
       el.openWorkspaceBtn.addEventListener('click', () => {
+        state.userRequestedFolderSelection = true;
         if (window.chrome && window.chrome.webview) {
           window.chrome.webview.postMessage('open_workspace_folder');
         }
@@ -5469,6 +6909,7 @@
 
     if (el.menuOpenFolderBtn) {
       el.menuOpenFolderBtn.addEventListener('click', () => {
+        state.userRequestedFolderSelection = true;
         if (el.dropdownMenu) el.dropdownMenu.classList.remove('show');
         if (window.chrome && window.chrome.webview) {
           window.chrome.webview.postMessage('open_workspace_folder');
@@ -5533,9 +6974,12 @@
 
       renderWorkspaceTree(state.workspaceTree);
 
-      const filesTabBtn = document.getElementById('tab-btn-files');
-      if (filesTabBtn && !filesTabBtn.classList.contains('active')) {
-        filesTabBtn.click();
+      if (state.userRequestedFolderSelection) {
+        state.userRequestedFolderSelection = false;
+        const filesTabBtn = document.getElementById('tab-btn-files');
+        if (filesTabBtn && !filesTabBtn.classList.contains('active')) {
+          filesTabBtn.click();
+        }
       }
     };
 
@@ -5545,6 +6989,9 @@
     };
 
     window.__NEOTEXT_ON_TAB_SAVED__ = window.__NEOMD_ON_TAB_SAVED__ = function(savedPath) {
+      if (savedPath && savedPath !== 'Introduction.md') {
+        addRecentFile(savedPath);
+      }
       const tab = state.tabs.find(t => t.filePath === savedPath);
       if (tab) {
         tab.isDirty = false;
@@ -5689,6 +7136,9 @@
   }
 
   function openFileInTab(filePath, fileName, content) {
+    if (filePath && filePath !== 'Introduction.md') {
+      addRecentFile(filePath, fileName);
+    }
     const existing = state.tabs.find(t => t.filePath === filePath);
     if (existing) {
       existing.rawMarkdown = content;
@@ -5931,6 +7381,18 @@
         if (!state.isDirty) {
           setDirty(true);
         }
+        handleAutoSaveKeystroke();
+        triggerTypewriterScroll();
+        updateLineNumbers();
+      });
+      el.rawEditor.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter' || e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+          triggerTypewriterScroll();
+          updateLineNumbers();
+        }
+      });
+      el.rawEditor.addEventListener('click', () => {
+        triggerTypewriterScroll();
       });
     }
 
@@ -5940,6 +7402,18 @@
         if (!state.isDirty) {
           setDirty(true);
         }
+        handleAutoSaveKeystroke();
+        triggerTypewriterScroll();
+        updateLineNumbers();
+      });
+      el.markdownBody.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter' || e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+          triggerTypewriterScroll();
+          updateLineNumbers();
+        }
+      });
+      el.markdownBody.addEventListener('click', () => {
+        triggerTypewriterScroll();
       });
     }
 
@@ -6014,6 +7488,37 @@
       state.currentSearchIdx = (state.currentSearchIdx - 1 + state.searchMatches.length) % state.searchMatches.length;
       selectSearchMatch(state.currentSearchIdx);
     });
+
+    if (el.replaceSingleBtn) {
+      el.replaceSingleBtn.addEventListener('click', () => performReplace(false));
+    }
+    if (el.replaceAllBtn) {
+      el.replaceAllBtn.addEventListener('click', () => performReplace(true));
+    }
+    if (el.replaceInput) {
+      el.replaceInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          if (e.ctrlKey || e.altKey) {
+            performReplace(true);
+          } else {
+            performReplace(false);
+          }
+        }
+      });
+    }
+
+    // Interactive Tasklist click in Preview Mode (2C)
+    if (el.markdownBody) {
+      el.markdownBody.addEventListener('change', (e) => {
+        if (state.isEditing || state.isRawMode) return;
+        const cb = e.target;
+        if (!cb || cb.tagName !== 'INPUT' || cb.type !== 'checkbox') return;
+        const taskIdx = parseInt(cb.dataset.taskIndex, 10);
+        if (isNaN(taskIdx)) return;
+        toggleMarkdownTaskItem(taskIdx, cb.checked);
+      });
+    }
 
     // Menu dropdown - Prevent closing when clicking inside!
     el.menuBtn.addEventListener('click', (e) => {
@@ -6255,8 +7760,36 @@
       // Ctrl + F : Open Search tab & focus search bar
       if (e.ctrlKey && (e.key === 'F' || e.key === 'f')) {
         e.preventDefault();
-        openSearchTab();
+        openSearchTab(false);
         return;
+      }
+      if (e.ctrlKey && (e.key === 'H' || e.key === 'h')) {
+        e.preventDefault();
+        openSearchTab(true);
+        return;
+      }
+      if (e.ctrlKey && e.key === ',') {
+        e.preventDefault();
+        openSettingsModal();
+        return;
+      }
+      // F11 : Toggle Fullscreen
+      if (e.key === 'F11') {
+        e.preventDefault();
+        if (window.chrome && window.chrome.webview) {
+          window.chrome.webview.postMessage('toggle_fullscreen');
+        }
+        return;
+      }
+      // Escape : Exit Fullscreen if no modal/popover open
+      if (e.key === 'Escape' && window.__NEOTEXT_IS_FULLSCREEN__) {
+        const modalOpen = (el.settingsModal && el.settingsModal.style.display === 'flex');
+        const popoverOpen = (el.toolTablePopover && el.toolTablePopover.style.display !== 'none');
+        if (!modalOpen && !popoverOpen) {
+          if (window.chrome && window.chrome.webview) {
+            window.chrome.webview.postMessage('toggle_fullscreen');
+          }
+        }
       }
       // Alt + Shift + T : Toggle Theme
       if (e.altKey && e.shiftKey && (e.key === 'T' || e.key === 't')) {

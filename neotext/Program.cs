@@ -37,8 +37,8 @@ using Microsoft.Web.WebView2.WinForms;
 [assembly: AssemblyDescription("NeoText - High-Performance Text and Markdown Workspace")]
 [assembly: AssemblyCompany("The NeoText Project")]
 [assembly: AssemblyCopyright("Copyright © 2026 The NeoText Project (atukay)")]
-[assembly: AssemblyFileVersion("2.1.1.0")]
-[assembly: AssemblyVersion("2.1.1.0")]
+[assembly: AssemblyFileVersion("2.2.0.0")]
+[assembly: AssemblyVersion("2.2.0.0")]
 
 namespace NeoText
 {
@@ -333,6 +333,10 @@ namespace NeoText
         private bool hasExplicitStartPos = false;
         private int tearStartX = -1;
         private int tearStartY = -1;
+        private bool isFullScreen = false;
+        private FormBorderStyle prevBorderStyle = FormBorderStyle.Sizable;
+        private FormWindowState prevWindowState = FormWindowState.Normal;
+        private Rectangle prevBounds = Rectangle.Empty;
 
         public MainWindow(string file, string session = null, int startX = -1, int startY = -1)
         {
@@ -567,12 +571,49 @@ namespace NeoText
                 string stateFile = Path.Combine(profileDir, "window_state.txt");
 
                 bool isMaximized = (this.WindowState == FormWindowState.Maximized);
-                Rectangle bounds = isMaximized ? this.RestoreBounds : this.Bounds;
+                Rectangle bounds = isFullScreen ? (prevBounds != Rectangle.Empty ? prevBounds : this.RestoreBounds) : (isMaximized ? this.RestoreBounds : this.Bounds);
                 string stateData = string.Format("{0},{1},{2},{3},{4}",
                     bounds.X, bounds.Y, bounds.Width, bounds.Height, isMaximized ? "1" : "0");
                 File.WriteAllText(stateFile, stateData);
             }
             catch { }
+        }
+
+        public void ToggleFullScreen()
+        {
+            try
+            {
+                if (!isFullScreen)
+                {
+                    prevBorderStyle = this.FormBorderStyle;
+                    prevWindowState = this.WindowState;
+                    prevBounds = (this.WindowState == FormWindowState.Normal) ? this.Bounds : this.RestoreBounds;
+
+                    this.FormBorderStyle = FormBorderStyle.None;
+                    this.WindowState = FormWindowState.Normal;
+                    this.Bounds = Screen.FromControl(this).Bounds;
+                    isFullScreen = true;
+                }
+                else
+                {
+                    this.FormBorderStyle = (prevBorderStyle != FormBorderStyle.None) ? prevBorderStyle : FormBorderStyle.Sizable;
+                    this.Bounds = (prevBounds != Rectangle.Empty) ? prevBounds : new Rectangle(100, 100, 1100, 750);
+                    this.WindowState = prevWindowState;
+                    isFullScreen = false;
+                    SetDwmTheme(this.isDarkMode ? "dark" : "light");
+                }
+
+                if (webView != null && webView.CoreWebView2 != null)
+                {
+                    webView.CoreWebView2.ExecuteScriptAsync(string.Format(
+                        "(function(){{ window.__NEOTEXT_IS_FULLSCREEN__ = {0}; document.documentElement.classList.toggle('is-fullscreen', {0}); }})();",
+                        isFullScreen ? "true" : "false"));
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("ToggleFullScreen error: " + ex.Message);
+            }
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -683,6 +724,16 @@ namespace NeoText
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
+            if (keyData == Keys.F11)
+            {
+                ToggleFullScreen();
+                return true;
+            }
+            if (keyData == Keys.Escape && isFullScreen)
+            {
+                ToggleFullScreen();
+                return true;
+            }
             if (keyData == (Keys.Alt | Keys.Shift | Keys.T))
             {
                 if (webView != null && webView.CoreWebView2 != null)
@@ -903,12 +954,26 @@ namespace NeoText
                     }
                 };
 
+                webView.CoreWebView2.ContainsFullScreenElementChanged += (s, ev) =>
+                {
+                    if (webView.CoreWebView2.ContainsFullScreenElement != isFullScreen)
+                    {
+                        this.BeginInvoke(new Action(() => ToggleFullScreen()));
+                    }
+                };
+
                 // Sync Theme dynamically from app.js postMessage with smooth transition delay, or open external URLs
                 webView.CoreWebView2.WebMessageReceived += async (s, e) =>
                 {
                     try
                     {
                         string msg = e.TryGetWebMessageAsString();
+                        if (msg == "toggle_fullscreen")
+                        {
+                            this.BeginInvoke(new Action(() => ToggleFullScreen()));
+                            return;
+                        }
+
                         if (msg.StartsWith("lang:"))
                         {
                             currentLang = msg.Substring("lang:".Length).Trim().ToLowerInvariant();

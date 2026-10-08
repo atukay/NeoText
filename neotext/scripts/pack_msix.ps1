@@ -136,7 +136,7 @@ Write-Host "      Payload and resources.pri staged successfully (Channel: Store)
 
 # 4. Compile MSIX Package
 Write-Host "[4/4] Packing MSIX package with MakeAppx (strict validation)..." -ForegroundColor Yellow
-$msixName = "NeoText_v2.1.1_x64.msix"
+$msixName = "NeoText_v2.2.0_x64.msix"
 $msixPath = Join-Path $distDir $msixName
 if (Test-Path $msixPath) {
     Remove-Item $msixPath -Force

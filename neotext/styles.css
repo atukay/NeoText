@@ -444,6 +444,28 @@ html, body {
   align-items: center;
 }
 
+.search-actions-bar {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.search-action-btn {
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border-radius: 5px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.search-action-btn:hover {
+  background: var(--bg-hover);
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
 /* Clickable Context Snippets List (Enlarged fonts) */
 .search-results-list {
   list-style: none;
@@ -746,22 +768,25 @@ html, body {
   box-shadow: var(--shadow-lg);
   padding: calc(6px * var(--ui-scale));
   z-index: 2000;
+  box-sizing: border-box;
 
-  /* Smooth fluid open/close transition */
+  /* GPU Compositor Isolation & Zero-Jitter Transition */
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-8px) scale(0.96);
-  transform-origin: top right;
+  transform: translateY(-6px) translateZ(0);
   pointer-events: none;
-  transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
-              visibility 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: opacity 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.15s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .dropdown-menu.show {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0) scale(1);
+  transform: translateY(0) translateZ(0);
   pointer-events: auto;
 }
 
@@ -781,6 +806,7 @@ html, body {
   text-align: left;
   transition: background 0.12s ease, color 0.12s ease;
   user-select: none;
+  box-sizing: border-box;
 }
 
 .dropdown-item:hover {
@@ -804,9 +830,10 @@ html, body {
   justify-content: space-between;
   padding: 6px 10px;
   border-radius: 5px;
-  cursor: pointer;
+  cursor: default;
   transition: background 0.12s ease;
   user-select: none;
+  box-sizing: border-box;
 }
 
 .dropdown-setting-row:hover {
@@ -1020,9 +1047,9 @@ body.is-editing #content-viewport {
 
 /* KaTeX Mathematical Typesetting Aesthetics */
 .math-block {
-  font-size: 1.22em;
-  padding: 12px 0;
-  margin: 18px 0;
+  font-size: 1.05em;
+  padding: 10px 0;
+  margin: 16px 0;
   overflow-x: auto;
   text-align: center;
 }
@@ -1032,7 +1059,7 @@ body.is-editing #content-viewport {
 }
 
 .math-inline {
-  font-size: 1.06em;
+  font-size: 1.0em;
   padding: 0 2px;
 }
 
@@ -1056,9 +1083,12 @@ body.is-editing #content-viewport {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22), 0 1px 3px rgba(0, 0, 0, 0.1);
   opacity: 0;
   pointer-events: none;
-  transform: translateY(-6px) scale(0.95);
-  transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+  transform: translateY(-6px) translateZ(0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: opacity 0.16s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.16s cubic-bezier(0.16, 1, 0.3, 1),
               background 0.15s ease,
               border-color 0.15s ease,
               color 0.15s ease,
@@ -1069,7 +1099,7 @@ body.is-editing #content-viewport {
 .floating-save-btn.visible {
   opacity: 1;
   pointer-events: auto;
-  transform: translateY(0) scale(1);
+  transform: translateY(0) translateZ(0);
 }
 
 .floating-save-btn:hover {
@@ -1102,9 +1132,12 @@ body.is-editing #content-viewport {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22), 0 1px 3px rgba(0, 0, 0, 0.1);
   opacity: 0;
   pointer-events: none;
-  transform: translateY(-6px) scale(0.95);
-  transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+  transform: translateY(-6px) translateZ(0);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: opacity 0.16s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.16s cubic-bezier(0.16, 1, 0.3, 1),
               background 0.15s ease,
               border-color 0.15s ease;
   user-select: none;
@@ -1113,7 +1146,7 @@ body.is-editing #content-viewport {
 .edit-toolbar.visible {
   opacity: 1;
   pointer-events: auto;
-  transform: translateY(0) scale(1);
+  transform: translateY(0) translateZ(0);
 }
 
 /* Format buttons with strict fixed dimensions to guarantee zero layout shift while maintaining spacious width */
@@ -1418,6 +1451,7 @@ body.is-editing #content-viewport {
   margin-right: 8px;
   vertical-align: middle;
   accent-color: var(--accent-color);
+  cursor: pointer;
 }
 
 /* Inline Code */
@@ -1791,6 +1825,11 @@ mark.search-highlight.current {
   display: none;
   flex-direction: column;
   gap: 1px;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-sizing: border-box;
 }
 
 .custom-dropdown-menu::-webkit-scrollbar {
@@ -1812,12 +1851,12 @@ mark.search-highlight.current {
 
 .custom-dropdown.open .custom-dropdown-menu {
   display: flex;
-  animation: customDropdownFadeIn 0.14s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: customDropdownFadeIn 0.14s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes customDropdownFadeIn {
-  from { opacity: 0; transform: translateY(-4px) scale(0.97); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from { opacity: 0; transform: translateY(-4px) translateZ(0); }
+  to { opacity: 1; transform: translateY(0) translateZ(0); }
 }
 
 .custom-dropdown-item {
@@ -2259,16 +2298,19 @@ html[dir="rtl"] .edit-toolbar {
 @keyframes tabSlideEnter {
   0% {
     opacity: 0;
-    transform: translateY(3px) scale(0.96);
+    transform: translateY(3px) translateZ(0);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0) translateZ(0);
   }
 }
 
 .doc-tab.tab-entering {
-  animation: tabSlideEnter 0.22s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: tabSlideEnter 0.20s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 @keyframes tabsBounceRight {
@@ -2775,4 +2817,547 @@ html[dir="rtl"] .tree-children {
 html[dir="rtl"] .tree-node.expanded > .tree-row > .tree-chevron {
   transform: rotate(-90deg);
 }
+
+/* ==========================================================================
+   v2.2.0-beta New Modules: Recent Files, Settings Modal, Table, Line Numbers, Drag&Drop
+   ========================================================================== */
+
+/* 1. Recent Files Hub (Left Sidebar) */
+.recent-files-section {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--border-color);
+  padding: calc(4px * var(--ui-scale)) 0 calc(8px * var(--ui-scale)) 0;
+  margin-bottom: calc(8px * var(--ui-scale));
+  flex-shrink: 0;
+}
+
+.recent-files-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0 calc(6px * var(--ui-scale)) 0;
+}
+
+.recent-files-title-box {
+  display: flex;
+  align-items: center;
+  gap: calc(5px * var(--ui-scale));
+}
+
+.recent-files-header-icon {
+  color: var(--text-muted);
+}
+
+.recent-files-title {
+  font-size: calc(10.5px * var(--ui-scale));
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-muted);
+  line-height: normal;
+}
+
+.recent-files-clear-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: calc(10px * var(--ui-scale));
+  font-weight: 500;
+  cursor: pointer;
+  padding: 2px 5px;
+  border-radius: 3px;
+  transition: color 0.15s ease, background 0.15s ease;
+  user-select: none;
+}
+
+.recent-files-clear-btn:hover {
+  color: #f85149;
+  background: rgba(248, 81, 73, 0.12);
+}
+
+.recent-files-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: calc(260px * var(--ui-scale));
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.recent-file-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: calc(26px * var(--ui-scale));
+  min-height: calc(26px * var(--ui-scale));
+  max-height: calc(26px * var(--ui-scale));
+  padding: 0 calc(6px * var(--ui-scale));
+  padding-right: calc(26px * var(--ui-scale));
+  border-radius: calc(5px * var(--ui-scale));
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.12s ease;
+  box-sizing: border-box;
+}
+
+.recent-file-item:hover {
+  background: var(--bg-tertiary);
+}
+
+.recent-file-main {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.recent-file-icon {
+  color: var(--text-muted);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.recent-file-item:hover .recent-file-icon {
+  color: var(--accent-color);
+}
+
+.recent-file-name {
+  font-size: calc(12px * var(--ui-scale));
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+  line-height: calc(26px * var(--ui-scale));
+}
+
+.recent-file-remove {
+  position: absolute;
+  right: calc(4px * var(--ui-scale));
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(18px * var(--ui-scale));
+  height: calc(18px * var(--ui-scale));
+  border-radius: 3px;
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.12s ease, background 0.12s ease, color 0.12s ease;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.recent-file-item:hover .recent-file-remove {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.recent-file-remove:hover {
+  color: #f85149;
+  background: rgba(248, 81, 73, 0.18);
+}
+
+html[dir="rtl"] .recent-file-item {
+  padding-left: calc(26px * var(--ui-scale));
+  padding-right: calc(6px * var(--ui-scale));
+}
+
+html[dir="rtl"] .recent-file-remove {
+  left: calc(4px * var(--ui-scale));
+  right: auto;
+}
+
+/* 2. Dedicated Settings Modal */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(2px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: modalFadeIn 0.18s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.settings-modal-dialog {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: calc(10px * var(--ui-scale));
+  width: calc(520px * var(--ui-scale));
+  max-width: 92vw;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-sizing: border-box;
+  animation: modalSlideUp 0.18s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes modalSlideUp {
+  from { transform: translateY(8px) translateZ(0); opacity: 0; }
+  to { transform: translateY(0) translateZ(0); opacity: 1; }
+}
+
+.settings-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(14px * var(--ui-scale)) calc(18px * var(--ui-scale));
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-header);
+}
+
+.settings-modal-title-box {
+  display: flex;
+  align-items: center;
+  gap: calc(8px * var(--ui-scale));
+}
+
+.settings-modal-icon {
+  color: var(--accent-color);
+}
+
+.settings-modal-header h3 {
+  margin: 0;
+  font-size: calc(15px * var(--ui-scale));
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.settings-close-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.settings-close-btn:hover {
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+}
+
+.settings-modal-body {
+  padding: calc(12px * var(--ui-scale)) calc(18px * var(--ui-scale));
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: calc(14px * var(--ui-scale));
+}
+
+.settings-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(16px * var(--ui-scale));
+  padding: calc(10px * var(--ui-scale)) calc(12px * var(--ui-scale));
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: calc(7px * var(--ui-scale));
+}
+
+.settings-item-info {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.settings-item-title {
+  font-size: calc(13px * var(--ui-scale));
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 3px;
+}
+
+.settings-item-desc {
+  font-size: calc(11.5px * var(--ui-scale));
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.settings-item-control {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Pill Group Control */
+.settings-pill-group {
+  display: inline-flex;
+  background: var(--bg-tertiary);
+  padding: 2px;
+  border-radius: calc(6px * var(--ui-scale));
+  border: 1px solid var(--border-color);
+  gap: 2px;
+}
+
+.settings-pill-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: calc(11.5px * var(--ui-scale));
+  font-weight: 500;
+  padding: calc(4px * var(--ui-scale)) calc(8px * var(--ui-scale));
+  border-radius: calc(4px * var(--ui-scale));
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.settings-pill-btn.active {
+  background: var(--accent-color);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Toggle Switch Control */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: calc(38px * var(--ui-scale));
+  height: calc(22px * var(--ui-scale));
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--border-color);
+  transition: 0.2s ease;
+  border-radius: calc(22px * var(--ui-scale));
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: calc(16px * var(--ui-scale));
+  width: calc(16px * var(--ui-scale));
+  left: calc(3px * var(--ui-scale));
+  bottom: calc(3px * var(--ui-scale));
+  background-color: #ffffff;
+  transition: 0.2s ease;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background-color: var(--accent-color);
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+  transform: translateX(calc(16px * var(--ui-scale)));
+}
+
+/* Settings Select */
+.settings-select {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: calc(5px * var(--ui-scale));
+  padding: calc(5px * var(--ui-scale)) calc(8px * var(--ui-scale));
+  font-size: calc(12px * var(--ui-scale));
+  outline: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.settings-select:focus {
+  border-color: var(--accent-color);
+}
+
+.settings-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: calc(10px * var(--ui-scale)) calc(18px * var(--ui-scale));
+  border-top: 1px solid var(--border-color);
+  background: var(--bg-header);
+}
+
+.settings-done-btn {
+  background: var(--accent-color);
+  color: #ffffff;
+  border: none;
+  border-radius: calc(5px * var(--ui-scale));
+  padding: calc(6px * var(--ui-scale)) calc(18px * var(--ui-scale));
+  font-size: calc(12.5px * var(--ui-scale));
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.settings-done-btn:hover {
+  opacity: 0.9;
+}
+
+/* 3. Table Inserter Popover */
+.table-popover {
+  min-width: 170px;
+  padding: 10px 12px;
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.table-popover.visible {
+  display: flex;
+}
+
+.table-popover-title {
+  font-size: calc(12px * var(--ui-scale));
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.table-popover-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.table-popover-row label {
+  font-size: calc(11.5px * var(--ui-scale));
+  color: var(--text-secondary);
+}
+
+.table-popover-row input[type="number"] {
+  width: 52px;
+  padding: 3px 6px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border-radius: 4px;
+  font-size: calc(12px * var(--ui-scale));
+  text-align: center;
+}
+
+.table-insert-btn {
+  margin-top: 4px;
+  background: var(--accent-color);
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: calc(11.5px * var(--ui-scale));
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.table-insert-btn:hover {
+  opacity: 0.9;
+}
+
+/* 4. Line Numbers Gutter */
+.line-numbers-gutter {
+  position: absolute;
+  top: calc(72px * var(--ui-scale));
+  left: 0;
+  width: 44px;
+  text-align: right;
+  padding-right: 8px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  user-select: none;
+  pointer-events: none;
+  opacity: 0.65;
+  border-right: 1px solid var(--border-subtle);
+  box-sizing: border-box;
+  display: none;
+  z-index: 5;
+  white-space: pre;
+}
+
+body.show-line-numbers #line-numbers-gutter {
+  display: block;
+}
+
+/* 5. Drag & Drop Overlay */
+.drag-drop-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(3px);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  animation: modalFadeIn 0.15s ease-out;
+}
+
+.drag-drop-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 36px 48px;
+  background: var(--bg-card);
+  border: 2px dashed var(--accent-color);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  color: var(--accent-color);
+}
+
+.drag-drop-text {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* 6. Typewriter Mode Viewport Padding */
+#markdown-body.typewriter-mode,
+.raw-editor.typewriter-mode {
+  padding-bottom: 50vh !important;
+}
+
 

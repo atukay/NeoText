@@ -46,6 +46,11 @@ Customize your reading experience using the controls in the top-right header:
   - **OLED Mode:** Pure pitch-black background (`#000000`) for OLED panels and maximum battery life.
   - **Light Mode:** Crisp, high-contrast daylight paper aesthetic.
   - *Native Windows Title Bar Synchronization:* Title bar, borders, and caption buttons dynamically sync with your active theme using Windows DWM API.
+- **Edge-to-Edge Fullscreen Mode (`F11`):**
+  - Instant distraction-free immersion for long-form reading and writing. Press `F11` to expand the workspace edge-to-edge, removing all OS titlebars and borders.
+  - Press `F11` or `Escape` to return to windowed mode; your previous window geometry and DWM caption styling are seamlessly restored.
+- **Interactive GFM Tasklists:**
+  - Checkboxes in preview mode (`- [ ]` and `- [x]`) are fully clickable. Toggle tasks on the fly—NeoText non-destructively updates the checkbox in your Markdown source file on disk without page reloads, preserving formatting and code blocks intact.
 
 <div align="center" style="margin: 16px 0; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
   <img src="assets/guide/theme_light.png" alt="Light Theme" width="48%" style="border-radius: 8px; border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
@@ -54,6 +59,14 @@ Customize your reading experience using the controls in the top-right header:
 <div align="center">
   <p><em>High-contrast themes: Daylight Paper Mode (left) and OLED Pure Black Mode (right).</em></p>
 </div>
+
+### 📋 Interactive Tasklist Showcase (Try Clicking!)
+- [x] Launch NeoText and explore the interface
+- [x] Cycle through Dark, OLED, and Light themes (`Alt + Shift + T`)
+- [ ] Press `F11` to enter edge-to-edge distraction-free fullscreen mode
+- [ ] Open the dedicated Settings window with `Ctrl + ,`
+- [ ] Try in-document Find & Replace with `Ctrl + H`
+- [ ] Click checkboxes in this guide to experience zero-flicker task toggling
 
 ---
 
@@ -73,7 +86,8 @@ NeoText includes a high-performance tabbed workflow integrated into the window t
   - **Drag-and-Drop Reordering:** Click and drag any tab horizontally to rearrange your workspace.
   - **Window Tear-Off:** Drag a tab outside the window to detach it into an independent, floating NeoText window.
   - **Overflow Navigation:** When many tabs are open, use the left (`<`) and right (`>`) scroll arrows, horizontal mouse wheel scroll, or click the tabs dropdown (`▼`) to search and jump to any open tab.
-- **External File Behavior:** In the Options menu (`⋮`), configure whether opening files from File Explorer opens them as a **New Tab** or in a **New Window**.
+  - **Scroll Position Memory:** Switching between tabs retains your exact vertical scroll position, returning you precisely where you left off.
+- **External File Behavior:** In Settings (`Ctrl + ,`) or Options (`⋮`), configure whether opening files from File Explorer opens them as a **New Tab** or in a **New Window**.
 - **Unsaved Changes Guard:** Closing a modified tab or exiting the application prompts a safety dialog to Save, Discard, or Cancel.
 
 ---
@@ -92,8 +106,9 @@ Click the pencil icon in the top header or press `Ctrl + E` to toggle live editi
   - **Inline Styles:** Bold (`Ctrl + B`), Italic (`Ctrl + I`).
   - **Lists:** Bulleted list with sub-menu options for Dash (`—`), Dot (`•`), or Numbered (`1.`).
   - **Quotes & Code Blocks:** One-click blockquote and pre-formatted code block insertion.
+  - **Smart Table Inserter:** Click the table grid icon on the toolbar to insert formatted Markdown tables with customizable row and column dimensions.
   - **RAW Editor:** Click **RAW** on the toolbar to switch between WYSIWYG rendered editing and the raw Markdown source code editor.
-- **Saving Your Work:** Press `Ctrl + S` or click the floating save button in the bottom right corner. A confirmation toast will notify you of the successful save.
+- **Saving Your Work:** Press `Ctrl + S` or click the floating save button in the bottom right corner. When configured in Settings (`Ctrl + ,`), the Auto-Save engine will also quietly save modifications in the background.
 - **Clipboard Image Pasting (`Ctrl + V`):** Copy an image from anywhere (web, screenshot tool, Paint) and press `Ctrl + V` in edit mode. NeoText automatically saves the image as a local PNG in your document's folder and inserts the clean Markdown syntax `![image](filename.png)`.
 - **Seamless Plain Text (.txt) Editing:** TXT files open in a full-height, borderless editor with an electric blue caret. Click anywhere on the viewport to place your cursor and start typing.
 
@@ -108,6 +123,7 @@ Click the sidebar icon in the top-left or press `Alt + Shift + B` to toggle the 
   <p><em>Collapsible Sidebar: Workspace folder tree, document statistics, and ScrollSpy Table of Contents.</em></p>
 </div>
 
+- 🕒 **Recent Files Hub:** Quick access to your 10 most recently opened documents directly above the workspace tree, featuring individual removal (`×`) and one-click "Clear All".
 - 📁 **Files / Workspace Tree:**
   - Browse your active folder, expand subdirectories, and open documents.
   - Use **Select Folder** to set your project workspace (defaults to Desktop on clean launch).
@@ -116,14 +132,13 @@ Click the sidebar icon in the top-left or press `Alt + Shift + B` to toggle the 
   - **Live Metrics:** Word count, character count, estimated reading time, and full file path.
   - **Interactive Table of Contents (TOC):** Click any heading (H1–H6) to smoothly jump to that section.
   - **ScrollSpy:** The outline highlights your current reading position as you scroll through the document.
-- 🔍 **In-Document Search (`Ctrl + F`):**
-  - Instant text search across the active document with real-time match counter.
-  - Navigate matches with `Enter` (Next) and `Shift + Enter` (Previous).
-  - Click any search snippet in the sidebar list to jump directly to that occurrence.
+- 🔍 **In-Document Search & Replace (`Ctrl + F` & `Ctrl + H`):**
+  - **Instant Search (`Ctrl + F`):** Instant text search across the active document with real-time match counter. Navigate matches with `Enter` (Next) and `Shift + Enter` (Previous), or click any search snippet in the sidebar list to jump directly to that occurrence.
+  - **In-Document Replace & Replace All (`Ctrl + H`):** Quickly open the Replace panel in the sidebar. Substitute the currently active match with **Replace** or update every single occurrence across the document with **Replace All**—with regex escaping, live search results refresh, and automatic disk persistence.
 
 ---
 
-### 5. Options Menu & Document Tools (Top-Right `⋮`)
+### 5. Options Menu & Settings Window (Top-Right `⋮`)
 
 Access the main options dropdown by clicking the three-dots icon in the top-right:
 
@@ -132,6 +147,13 @@ Access the main options dropdown by clicking the three-dots icon in the top-righ
   <p><em>Options Dropdown: 20-language localized selector, UI zoom sliders, and quick export utilities.</em></p>
 </div>
 
+- ⚙️ **Dedicated Settings Window (`Ctrl + ,`):** Press `Ctrl + ,` or click **Settings** under the Options menu to open the theme-aware dialog. Preferences are automatically persisted across sessions:
+  - **External Files Opening:** Choose between opening external files in a New Tab or New Window.
+  - **Typewriter Scrolling:** Keep your active cursor line vertically centered at eye-level while typing for enhanced ergonomic concentration.
+  - **Auto-Save Engine:** Configurable background save frequency (Off, On Inactivity ~2.5s, 1m, 5m, 15m).
+  - **Line Numbers Gutter:** Display clear monospace line numbers alongside your document in edit mode.
+- 📊 **Smart Table Inserter:** Use the table grid tool on the edit toolbar to generate formatted GFM tables.
+- 📥 **Drag & Drop Integration:** Drop document files (`.md`, `.txt`) into NeoText to open them in tabs, or drop images into the editor to insert Markdown media syntax.
 - 🌐 **20 Languages Localization:** Full native interface translation in English, Turkish, German, French, Spanish, Italian, Portuguese, Dutch, Polish, Russian, Ukrainian, Arabic, Hindi, Japanese, Chinese (Simplified & Traditional), Korean, Vietnamese, Indonesian, and Azerbaijani. Automatically matches your Windows display language.
 - 🔍 **UI Scaling & Typography Size:** Independently adjust UI Scale (80% to 150%) and Text Font Size (12px to 24px) to match your monitor and eyesight.
 - 💾 **Save As... (`Ctrl + Shift + S`):** Save a copy of your document with custom formatting.
@@ -153,8 +175,12 @@ Access the main options dropdown by clicking the three-dots icon in the top-righ
 | **Workspace** | `Ctrl + Shift + Tab` | Switch to previous open tab |
 | **Navigation** | `Alt + Shift + B` | Toggle left navigation sidebar |
 | **Search** | `Ctrl + F` | Focus in-document search box |
+| **Search** | `Ctrl + H` | Open in-document Find & Replace in sidebar |
 | **Search** | `Enter` / `Shift + Enter` | Jump to next / previous search match |
+| **Settings** | `Ctrl + ,` | Open dedicated Settings window |
 | **View** | `Alt + Shift + T` | Cycle theme (Dark ➔ OLED ➔ Light) |
+| **View** | `F11` | Toggle Fullscreen (Edge-to-Edge) |
+| **View** | `Escape` | Exit Fullscreen / Close active dialog |
 | **Edit Mode** | `Ctrl + E` | Toggle Edit Mode on/off |
 | **Editing** | `Ctrl + S` | Save active document changes |
 | **Editing** | `Ctrl + V` | Paste image from clipboard as local file |
@@ -189,7 +215,7 @@ NeoText bundles all mathematical fonts and the KaTeX engine locally. No internet
 $$e^{i\pi} + 1 = 0 \quad \Longleftrightarrow \quad \mathcal{F}\left\{ \frac{d^n x(t)}{dt^n} \right\} = (i\omega)^n X(\omega)$$
 
 ### Maxwell's Electromagnetic Field Equations
-$$\oint\limits_{\partial \Sigma} \mathbf{B} \cdot d\mathbf{l} = \mu_0 \iint\limits_{\Sigma} \mathbf{J} \cdot d\mathbf{A} + \mu_0 \varepsilon_0 \frac{d}{dt}\iint\limits_{\Sigma} \mathbf{E} \cdot d\mathbf{A}$$
+$$\oint_{\partial \Sigma} \mathbf{B} \cdot d\mathbf{l} = \mu_0 \iint_{\Sigma} \mathbf{J} \cdot d\mathbf{A} + \mu_0 \varepsilon_0 \frac{d}{dt} \iint_{\Sigma} \mathbf{E} \cdot d\mathbf{A}$$
 
 $$\nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t}, \quad \nabla \cdot \mathbf{B} = 0$$
 
