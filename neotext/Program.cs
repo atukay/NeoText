@@ -37,8 +37,8 @@ using Microsoft.Web.WebView2.WinForms;
 [assembly: AssemblyDescription("NeoText - High-Performance Text and Markdown Workspace")]
 [assembly: AssemblyCompany("The NeoText Project")]
 [assembly: AssemblyCopyright("Copyright © 2026 The NeoText Project (atukay)")]
-[assembly: AssemblyFileVersion("2.1.0.0")]
-[assembly: AssemblyVersion("2.1.0.0")]
+[assembly: AssemblyFileVersion("2.1.1.0")]
+[assembly: AssemblyVersion("2.1.1.0")]
 
 namespace NeoText
 {

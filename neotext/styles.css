@@ -1018,6 +1018,24 @@ body.is-editing #content-viewport {
   user-select: none;
 }
 
+/* KaTeX Mathematical Typesetting Aesthetics */
+.math-block {
+  font-size: 1.22em;
+  padding: 12px 0;
+  margin: 18px 0;
+  overflow-x: auto;
+  text-align: center;
+}
+
+.math-block .katex-display {
+  margin: 0.5em 0;
+}
+
+.math-inline {
+  font-size: 1.06em;
+  padding: 0 2px;
+}
+
 /* Floating Save Button */
 .floating-save-btn {
   position: fixed;

@@ -14,9 +14,11 @@
 bin/
 obj/
 dist/
+store_releases/
 temp_pack/
 scratch/
 neotext/packaging/
+docs/screenshots/
 sessions/
 neotext/sessions/
 neotext/active_data.js

@@ -189,7 +189,7 @@ NeoText bundles all mathematical fonts and the KaTeX engine locally. No internet
 $$e^{i\pi} + 1 = 0 \quad \Longleftrightarrow \quad \mathcal{F}\left\{ \frac{d^n x(t)}{dt^n} \right\} = (i\omega)^n X(\omega)$$
 
 ### Maxwell's Electromagnetic Field Equations
-$$\oint_{\partial \Sigma} \mathbf{B} \cdot d\mathbf{l} = \mu_0 \iint_{\Sigma} \mathbf{J} \cdot d\mathbf{A} + \mu_0 \varepsilon_0 \frac{d}{dt}\iint_{\Sigma} \mathbf{E} \cdot d\mathbf{A}$$
+$$\oint\limits_{\partial \Sigma} \mathbf{B} \cdot d\mathbf{l} = \mu_0 \iint\limits_{\Sigma} \mathbf{J} \cdot d\mathbf{A} + \mu_0 \varepsilon_0 \frac{d}{dt}\iint\limits_{\Sigma} \mathbf{E} \cdot d\mathbf{A}$$
 
 $$\nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t}, \quad \nabla \cdot \mathbf{B} = 0$$
 
