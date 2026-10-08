@@ -1,6 +1,6 @@
 # ==============================================================================
-# NeoText Official .gitignore
-# Purpose: Maintain pure source repository (Zero-Binary Invariant)
+# NeoText - Git Ignore Configuration
+# Rule: Pure source code only (Zero-Binary Invariant)
 # ==============================================================================
 
 # Compiled Binaries & Executables
