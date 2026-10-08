@@ -4,6 +4,17 @@ The NeoText Project takes software security, memory safety, and user data privac
 
 ---
 
+## Supported Versions
+
+NeoText actively maintains and provides security updates for the current stable release stream:
+
+| Release Stream | Status |
+| :--- | :---: |
+| Latest Stable Release (v2.x) | :white_check_mark: Supported |
+| Legacy Builds (< v2.0.8) | :x: End of Life |
+
+---
+
 ## Security Architecture Overview
 
 NeoText operates as a native desktop application embedding modern web technologies. To prevent local privilege escalation, malicious file execution, and cross-site scripting (XSS), the following defenses are permanently active:

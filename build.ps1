@@ -2,6 +2,7 @@
 .SYNOPSIS
     NeoText Zero-Config Build Pipeline
     Compiles NeoText.exe and ConfigureShell.exe using Windows native csc.exe.
+    100% Offline-First, Zero-CDN, and Dependency-Free Windows Native Build.
     SPDX-License-Identifier: GPL-3.0-or-later
     Copyright (C) 2026 The NeoText Project (atukay) <https://github.com/atukay/NeoText>
 #>

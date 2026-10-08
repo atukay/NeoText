@@ -1,6 +1,6 @@
 # Third-Party Software and Licenses
 
-NeoText incorporates components from the following open-source software and SDKs. We gratefully acknowledge the creators and contributors of these projects.
+NeoText incorporates components from the following open-source software and SDKs, all bundled locally for 100% offline operation. We gratefully acknowledge the creators and contributors of these projects.
 
 ---
 

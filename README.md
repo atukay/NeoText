@@ -64,18 +64,21 @@ NeoText is a lightweight, native Windows document viewer and editor designed wit
 
 ## Key Features
 
-- **Multi-Tab Workspace:** Full tab lifecycle management, horizontal mouse-wheel scrolling, tab overflow indicators, and keyboard navigation (`Ctrl+Tab`, `Ctrl+W`, `Ctrl+N`).
-- **Tab Reordering & Window Tear-Off:** Smooth horizontal drag-and-drop reordering, with the ability to tear any tab off into an independent native host process for multi-monitor setups.
-- **3 Native Themes:** Modern Dark (Anthracite `#1c1c1c` matching Windows 11 Fluent design), Clean Light, and energy-efficient OLED Pure Black (`#000000`).
-- **Subpixel Mathematical Branding:** Vector logo geometrically aligned to subpixel coordinates, rendered across 9 resolutions (16px to 1080px) and compiled into high-DPI icons.
-- **Local LaTeX Mathematics:** Complete `$inline$` and `$$display$$` formula rendering via embedded KaTeX with bundled local webfonts.
-- **Polyglot Syntax Highlighting:** Syntax coloring across 20+ programming languages via Prism.js with integrated one-click clipboard copying.
-- **Vector Diagramming:** Native SVG rendering for flowcharts, sequence diagrams, and system architecture graphs via Mermaid.js.
-- **20-Language Internationalization (i18n):** Custom-designed, theme-aware language selector supporting English, Turkish, German, French, Spanish, Japanese, Chinese, Russian, and 12 additional languages.
-- **Workspace Tree Explorer:** Hierarchical directory navigation with recursive Markdown file discovery.
-- **Document Metrics & Dynamic Outline:** Real-time word count, character count, reading time estimation, and clickable H1-H6 heading navigation.
-- **Hardened Security Architecture:** Strict DOM-based AST HTML sanitization eliminating script injections, bounded 4096-byte IPC buffers, protocol whitelisting (`http://`, `https://`, `mailto:`), and a >2 MB large-file guard that switches to an optimized raw viewer to maintain system responsiveness.
-- **Zero-Install Portability:** Operates without registry dependencies or hardcoded paths; functions smoothly from local folders, removable USB drives, or network locations.
+- **Chrome-like Multi-Tab Workspace:** Full tab lifecycle management, horizontal mouse-wheel scrolling, tab overflow navigation with jump menu, smooth drag-and-drop reordering, and instant tab tear-off into floating windows for multi-monitor setups.
+- **In-Place Live Editing & Seamless Plain Text:** One-click toggle between rendered reading and live editing (`Ctrl+E`) with floating formatting toolbar, RAW markdown source view, and full-viewport plain text (.txt) editing with responsive caret focus.
+- **Interactive GFM Tasklists:** Interactive checklist items (`- [ ]` / `- [x]`) in preview mode can be toggled with a single click, instantly and non-destructively updating the underlying Markdown document on disk.
+- **In-Document Find & Replace:** Fast sidebar search (`Ctrl+F`) and Find & Replace (`Ctrl+H`) with single and global replacement ("Replace All"), regex character escaping, real-time match counters, and instant disk persistence.
+- **Dedicated Settings Window:** Theme-matched preferences panel (`Ctrl+,`) offering customizable Auto-Save intervals (inactivity ~2.5s, 1m, 5m, 15m), Typewriter Scrolling (keeps typing line centered), Monospace Line Numbers gutter, and External Files opening mode (New Tab vs New Window).
+- **Recent Files Hub:** Quick-access stack of your 10 most recently opened documents located directly above the workspace tree, featuring individual removal (`×`) and one-click list clearing.
+- **Edge-to-Edge Fullscreen (`F11`):** Pure distraction-free reading and writing experience with seamless Windows DWM border and titlebar restoration on exit (`F11` / `Esc`).
+- **3 Native Themes with Titlebar Sync:** Modern Dark (Anthracite `#1c1c1c` matching Windows 11 Fluent design), Clean Light (Daylight Paper), and energy-efficient OLED Pure Black (`#000000`) with dynamic Windows DWM titlebar synchronization.
+- **100% Offline LaTeX Mathematics:** Complete `$inline$` and `$$display$$` formula rendering via locally bundled KaTeX engine and local webfonts. Zero network dependencies.
+- **Polyglot Syntax Highlighting & Vector Diagrams:** Syntax highlighting across 20+ programming languages via Prism.js with one-click clipboard copying; native SVG flowchart and sequence diagram rendering via Mermaid.js.
+- **20-Language Internationalization (i18n):** Native interface translations across 20 languages with automatic Windows display language detection and persistent theme-aware language selector.
+- **Smart Drag & Drop & Clipboard Image Pasting:** Drag document files directly into the workspace; paste clipboard screenshots (`Ctrl+V`) in edit mode to automatically save local PNG assets and generate clean markdown syntax.
+- **Workspace Tree Explorer & Real-Time Metrics:** Hierarchical directory tree discovery with `FileSystemWatcher` auto-refresh, ScrollSpy Table of Contents (H1–H6), and real-time word/character/reading-time statistics.
+- **6-Layer Hardened Security Architecture:** Strict DOM AST sanitization stripping scripts and unsafe elements, bounded 4096-character IPC buffers, protocol whitelisting (`http://`, `https://`, `mailto:`), and a >2 MB large-file guard.
+- **Zero-Config Build & Zero-Install Portability:** Built directly with the native Microsoft C# Compiler (`csc.exe`) without heavyweight IDEs; operates cleanly from any folder, USB drive, or network share with zero registry footprint.
 
 ---
 
