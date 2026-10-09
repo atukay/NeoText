@@ -3047,6 +3047,29 @@
       if (el.dropdownMenu) el.dropdownMenu.classList.add('show');
       el.langCustomDropdown.classList.add('open');
     }
+    if (urlParams.get('open_settings') === '1') {
+      setTimeout(() => { if (typeof openSettingsModal === 'function') openSettingsModal(); }, 150);
+    }
+    const searchParam = urlParams.get('search');
+    if (searchParam) {
+      setTimeout(() => {
+        const btnSearch = document.getElementById('tab-btn-search');
+        if (btnSearch) btnSearch.click();
+        const sInput = document.getElementById('search-input');
+        if (sInput) {
+          sInput.value = searchParam;
+          sInput.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+        const replaceParam = urlParams.get('replace');
+        if (replaceParam) {
+          const rInput = document.getElementById('replace-input');
+          if (rInput) {
+            rInput.value = replaceParam;
+            rInput.dispatchEvent(new Event('input', { bubbles: true }));
+          }
+        }
+      }, 250);
+    }
 
     const scrollTarget = urlParams.get('scroll');
     if (scrollTarget) {
