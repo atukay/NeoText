@@ -3765,6 +3765,7 @@
 
   window.addEventListener('resize', () => {
     updateHeadingPositions();
+    updateLineNumbers();
   });
 
   // Lag-Free Scroll Handler & Continuous Tab Scroll Tracking
@@ -5249,10 +5250,6 @@
     }
 
     setDirty(false);
-    if (state.isRawMode) {
-      toggleRawMode(false);
-    }
-    toggleEditMode(false);
     calculateStats(contentToSave);
 
     if (!isTxt) {
@@ -5405,7 +5402,10 @@
       }
     });
 
-    requestAnimationFrame(updateHeadingPositions);
+    requestAnimationFrame(() => {
+      updateHeadingPositions();
+      updateLineNumbers();
+    });
   }
 
   // Font Size
@@ -5414,7 +5414,10 @@
     setStored('font_size', state.fontSize);
     document.documentElement.style.setProperty('--content-font-size', state.fontSize + 'px');
     if (el.fontSizeDisplay) el.fontSizeDisplay.textContent = state.fontSize + 'px';
-    requestAnimationFrame(updateHeadingPositions);
+    requestAnimationFrame(() => {
+      updateHeadingPositions();
+      updateLineNumbers();
+    });
   }
 
   // Sidebar Toggle
@@ -5429,6 +5432,7 @@
     } else {
       el.sidebar.classList.add('collapsed');
     }
+    requestAnimationFrame(updateLineNumbers);
   }
 
 
@@ -6057,7 +6061,7 @@
   }
 
   // ==========================================
-  // Typewriter Scrolling Engine (v2.2.0-beta)
+  // Typewriter Scrolling Engine (v2.3.0-beta)
   // ==========================================
   function applyTypewriterMode() {
     const isTypewriter = !!state.typewriterScrolling;
@@ -6067,6 +6071,54 @@
     if (el.rawEditor) {
       el.rawEditor.classList.toggle('typewriter-mode', isTypewriter && state.isRawMode);
     }
+    if (isTypewriter && state.isEditing) {
+      requestAnimationFrame(triggerTypewriterScroll);
+    }
+  }
+
+  function getCaretClientY() {
+    const sel = window.getSelection();
+    if (!sel || !sel.rangeCount) return null;
+    const range = sel.getRangeAt(0);
+
+    // 1. Direct bounding client rect if height > 0
+    let rect = range.getBoundingClientRect();
+    if (rect && rect.height > 0 && rect.top > 0) {
+      return rect.top;
+    }
+
+    // 2. Client rects list
+    const rects = range.getClientRects();
+    if (rects && rects.length > 0 && rects[0].height > 0 && rects[0].top > 0) {
+      return rects[0].top;
+    }
+
+    // 3. Fallback for collapsed range at line end or trailing newline
+    if (range.startContainer) {
+      if (range.startContainer.nodeType === 3 && range.startOffset > 0) {
+        try {
+          const temp = range.cloneRange();
+          temp.setStart(range.startContainer, range.startOffset - 1);
+          const tRect = temp.getBoundingClientRect();
+          if (tRect && tRect.height > 0) {
+            const charBefore = range.startContainer.textContent[range.startOffset - 1];
+            if (charBefore === '\n') {
+              const computed = window.getComputedStyle(el.markdownBody);
+              const lh = parseFloat(computed.lineHeight) || (parseFloat(computed.fontSize) * 1.7) || 26;
+              return tRect.top + lh;
+            }
+            return tRect.top;
+          }
+        } catch (e) {}
+      } else if (range.startContainer.nodeType === 1) {
+        const elemRect = range.startContainer.getBoundingClientRect();
+        if (elemRect && elemRect.height > 0) {
+          return elemRect.top;
+        }
+      }
+    }
+
+    return null;
   }
 
   function triggerTypewriterScroll() {
@@ -6075,8 +6127,9 @@
     if (state.isRawMode && el.rawEditor) {
       const textBeforeCaret = el.rawEditor.value.substring(0, el.rawEditor.selectionStart);
       const lineIndex = textBeforeCaret.split('\n').length - 1;
-      const lineHeight = 22;
-      const caretY = lineIndex * lineHeight;
+      const computed = window.getComputedStyle(el.rawEditor);
+      const lh = parseFloat(computed.lineHeight) || 24;
+      const caretY = lineIndex * lh;
       const targetScroll = caretY - (el.viewport.clientHeight * 0.45);
       el.viewport.scrollTo({
         top: Math.max(0, targetScroll),
@@ -6085,16 +6138,13 @@
       return;
     }
 
-    const selection = window.getSelection();
-    if (!selection || !selection.rangeCount) return;
-    const range = selection.getRangeAt(0);
-    const rect = range.getBoundingClientRect();
-    if (!rect || rect.height === 0) return;
+    const caretClientY = getCaretClientY();
+    if (caretClientY === null) return;
 
     const vpRect = el.viewport.getBoundingClientRect();
     const targetY = vpRect.top + (vpRect.height * 0.45);
-    const delta = rect.top - targetY;
-    if (Math.abs(delta) > 5) {
+    const delta = caretClientY - targetY;
+    if (Math.abs(delta) > 3) {
       el.viewport.scrollBy({
         top: delta,
         behavior: 'smooth'
@@ -6193,7 +6243,7 @@
   }
 
   // ==========================================
-  // Line Numbers Gutter Engine (v2.2.0-beta)
+  // Line Numbers Gutter Engine (v2.3.0-beta)
   // ==========================================
   function updateLineNumbers() {
     if (!el.lineNumbersGutter) return;
@@ -6202,23 +6252,151 @@
     el.lineNumbersGutter.style.display = shouldShow ? 'block' : 'none';
 
     if (!shouldShow) {
-      el.lineNumbersGutter.textContent = '';
+      el.lineNumbersGutter.innerHTML = '';
       return;
     }
 
-    let lineCount = 1;
-    if (state.isRawMode && el.rawEditor) {
-      lineCount = (el.rawEditor.value.split('\n') || []).length;
-    } else if (state.isEditing && el.markdownBody) {
-      lineCount = ((el.markdownBody.innerText || '').split('\n') || []).length;
-    }
-    lineCount = Math.max(1, lineCount);
+    const target = (state.isRawMode && el.rawEditor) ? el.rawEditor : el.markdownBody;
+    if (!target) return;
 
-    let nums = '';
-    for (let i = 1; i <= lineCount; i++) {
-      nums += i + '\n';
+    // Align gutter horizontally and vertically to the active editor
+    const gutterLeft = Math.max(6, target.offsetLeft - 48);
+    el.lineNumbersGutter.style.left = gutterLeft + 'px';
+    el.lineNumbersGutter.style.top = target.offsetTop + 'px';
+    el.lineNumbersGutter.style.height = target.offsetHeight + 'px';
+
+    if (state.isRawMode && el.rawEditor) {
+      const lines = (el.rawEditor.value || '').split('\n');
+      const count = Math.max(1, lines.length);
+      const computed = window.getComputedStyle(el.rawEditor);
+      const padTop = parseFloat(computed.paddingTop) || 0;
+      const lh = parseFloat(computed.lineHeight) || (parseFloat(computed.fontSize) * 1.65) || 24;
+
+      let html = '';
+      for (let i = 0; i < count; i++) {
+        const y = Math.round(padTop + (i * lh));
+        html += `<div class="gutter-line-num" style="top:${y}px;">${i + 1}</div>`;
+      }
+      el.lineNumbersGutter.innerHTML = html;
+      return;
     }
-    el.lineNumbersGutter.textContent = nums;
+
+    // In markdownBody (plain text or markdown):
+    try {
+      const computedStyle = window.getComputedStyle(target);
+      const padTop = parseFloat(computedStyle.paddingTop) || 0;
+      const lh = parseFloat(computedStyle.lineHeight) || (parseFloat(computedStyle.fontSize) * 1.625) || 26;
+      const cRect = target.getBoundingClientRect();
+
+      // Universal text lines extraction
+      const isTxt = isPlainTextDoc(state.fileName);
+      const raw = isTxt ? (target.innerText || target.textContent || state.rawMarkdown || '') : (target.innerText || state.rawMarkdown || '');
+      const textLines = raw.split('\n');
+      // Normalize Edge trailing \n quirk from innerText on block containers
+      if (textLines.length > 1 && textLines[textLines.length - 1] === '' && target.lastElementChild && target.lastElementChild.tagName === 'DIV' && target.lastElementChild.innerHTML !== '<br>') {
+        textLines.pop();
+      }
+      const lineCount = Math.max(1, textLines.length);
+      const yPositions = new Array(lineCount);
+
+      // Check if target has block children (DIV/P) matching lineCount
+      const children = Array.from(target.childNodes).filter(n => {
+        if (n.nodeType === 1) return true;
+        if (n.nodeType === 3 && n.textContent.trim().length > 0) return true;
+        return false;
+      });
+
+      const allDivs = children.length > 0 && children.every(c => c.nodeType === 1 && (c.tagName === 'DIV' || c.tagName === 'P'));
+
+      if (allDivs && children.length === lineCount) {
+        for (let i = 0; i < lineCount; i++) {
+          const elDiv = children[i];
+          const r = elDiv.getBoundingClientRect();
+          yPositions[i] = Math.round(r.top - cRect.top);
+        }
+      } else {
+        // Collect all text nodes
+        const walker = document.createTreeWalker(target, NodeFilter.SHOW_TEXT, null);
+        const textNodes = [];
+        let tNode;
+        while ((tNode = walker.nextNode())) {
+          textNodes.push(tNode);
+        }
+
+        if (textNodes.length > 0) {
+          const range = document.createRange();
+          let globalCharOffset = 0;
+          const nodeMap = textNodes.map(tn => {
+            const start = globalCharOffset;
+            globalCharOffset += tn.textContent.length;
+            return { node: tn, start: start, end: globalCharOffset };
+          });
+
+          let currentSearchOffset = 0;
+          let lastValidY = padTop;
+
+          for (let i = 0; i < lineCount; i++) {
+            const lineStr = textLines[i];
+            const entry = nodeMap.find(m => currentSearchOffset >= m.start && currentSearchOffset <= m.end) || nodeMap[nodeMap.length - 1];
+            let y = null;
+
+            if (entry) {
+              try {
+                const offsetInNode = Math.min(Math.max(0, currentSearchOffset - entry.start), entry.node.length);
+                range.setStart(entry.node, offsetInNode);
+                range.collapse(true);
+                const r = range.getBoundingClientRect();
+                if (r && r.height > 0) {
+                  y = Math.round(r.top - cRect.top);
+                  lastValidY = y;
+                }
+              } catch (e) {}
+            }
+
+            if (y === null) {
+              y = (i === 0) ? Math.round(padTop) : Math.round(lastValidY + lh);
+              lastValidY = y;
+            }
+
+            yPositions[i] = y;
+            currentSearchOffset += lineStr.length + 1; // +1 for \n
+          }
+        } else {
+          // Pure linear fallback
+          for (let i = 0; i < lineCount; i++) {
+            yPositions[i] = Math.round(padTop + (i * lh));
+          }
+        }
+      }
+
+      // Ensure strictly non-decreasing, non-overlapping Y positions
+      let curY = padTop;
+      for (let i = 0; i < lineCount; i++) {
+        if (typeof yPositions[i] === 'number') {
+          if (i === 0) {
+            curY = yPositions[0];
+          } else {
+            curY = Math.max(curY + lh, yPositions[i]);
+          }
+        } else {
+          if (i > 0) curY = Math.round(curY + lh);
+        }
+        yPositions[i] = Math.round(curY);
+      }
+
+      let html = '';
+      for (let i = 0; i < lineCount; i++) {
+        html += `<div class="gutter-line-num" style="top:${yPositions[i]}px;">${i + 1}</div>`;
+      }
+      el.lineNumbersGutter.innerHTML = html;
+    } catch (err) {
+      const lineCount = Math.max(1, ((target.innerText || '').split('\n')).length);
+      let html = '';
+      for (let i = 0; i < lineCount; i++) {
+        html += `<div class="gutter-line-num" style="top:${Math.round(i * 26)}px;">${i + 1}</div>`;
+      }
+      el.lineNumbersGutter.innerHTML = html;
+    }
   }
 
   // ==========================================
@@ -7375,11 +7553,16 @@
       el.markdownBody.addEventListener('mouseup', updateToolbarActiveStates);
     }
 
-    // Viewport background click in edit mode -> focus document body and place caret
+    // Viewport background click in edit mode -> focus document body only when clicking outside text area
     if (el.viewport) {
       el.viewport.addEventListener('click', (e) => {
-        if (state.isEditing && !state.isRawMode && (e.target === el.viewport || e.target === el.markdownBody)) {
-          focusEditable(el.markdownBody, true);
+        if (state.isEditing && !state.isRawMode && e.target === el.viewport) {
+          const sel = window.getSelection();
+          if (!sel || !sel.rangeCount || !el.markdownBody.contains(sel.anchorNode)) {
+            focusEditable(el.markdownBody, true);
+          } else {
+            el.markdownBody.focus({ preventScroll: true });
+          }
         }
       });
     }
@@ -7405,7 +7588,7 @@
           setDirty(true);
         }
         handleAutoSaveKeystroke();
-        triggerTypewriterScroll();
+        requestAnimationFrame(triggerTypewriterScroll);
         updateLineNumbers();
       });
       el.rawEditor.addEventListener('keyup', (e) => {
@@ -7415,7 +7598,7 @@
         }
       });
       el.rawEditor.addEventListener('click', () => {
-        triggerTypewriterScroll();
+        // Do not auto-scroll on click; caret position is set without moving the viewport
       });
     }
 
@@ -7426,7 +7609,7 @@
           setDirty(true);
         }
         handleAutoSaveKeystroke();
-        triggerTypewriterScroll();
+        requestAnimationFrame(triggerTypewriterScroll);
         updateLineNumbers();
       });
       el.markdownBody.addEventListener('keyup', (e) => {
@@ -7436,7 +7619,7 @@
         }
       });
       el.markdownBody.addEventListener('click', () => {
-        triggerTypewriterScroll();
+        // Do not auto-scroll on click; caret position is set without moving the viewport
       });
     }
 

@@ -58,7 +58,8 @@ class AutomatedStressAndSecurityRunner
     {
         Console.OutputEncoding = Encoding.UTF8;
         Console.WriteLine("==================================================================");
-        Console.WriteLine("        NeoText v2.2.0 — STRESS & SECURITY AUDIT RUNNER           ");
+        Console.WriteLine("        NeoText v2.2.1 — STRESS & SECURITY AUDIT RUNNER           ");
+
         Console.WriteLine("==================================================================");
         Console.WriteLine();
 

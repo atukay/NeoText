@@ -135,9 +135,12 @@ Remove-Item $priConfig -Force -ErrorAction SilentlyContinue
 Write-Host "      Payload and resources.pri staged successfully (Channel: Store)." -ForegroundColor Green
 
 # 4. Compile MSIX Package
-Write-Host "[4/4] Packing MSIX package with MakeAppx (strict validation)..." -ForegroundColor Yellow
-$msixName = "NeoText_v2.2.0_x64.msix"
+[xml]$manifestXml = Get-Content (Join-Path $packagingDir "AppxManifest.xml")
+$verRaw = $manifestXml.Package.Identity.Version
+$cleanVer = $verRaw.Substring(0, $verRaw.LastIndexOf('.'))
+$msixName = "NeoText_v$($cleanVer)_x64.msix"
 $msixPath = Join-Path $distDir $msixName
+
 if (Test-Path $msixPath) {
     Remove-Item $msixPath -Force
 }
